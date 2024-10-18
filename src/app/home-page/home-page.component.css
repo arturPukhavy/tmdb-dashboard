@@ -1,0 +1,179 @@
+body {
+  font-family: 'Arial', sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #87ceeb; /* Light-blue background */
+  position: relative;
+  overflow-x: hidden;
+}
+
+body::before,
+body::after {
+  content: '';
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0.5;
+  z-index: -1; /* Behind the content */
+}
+
+body::before {
+  width: 300px;
+  height: 300px;
+  top: 10%;
+  left: 15%;
+  background-color: rgba(255, 255, 255, 0.6); /* Blurred white spots */
+}
+
+body::after {
+  width: 400px;
+  height: 400px;
+  bottom: 10%;
+  right: 15%;
+  background-color: rgba(255, 106, 0, 0.6); /* Blurred star-like spots */
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: rgba(255, 255, 255, 0.6); /* Slightly blurred white background */
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* Search Section */
+.search-section {
+  margin: 20px 0;
+  display: flex;
+  justify-content: center;
+}
+
+.search-input {
+  width: 60%;
+  padding: 12px;
+  border: 2px solid #ff6a00;
+  border-radius: 6px;
+  background-color: #2f2f4f;
+  color: #fff;
+  font-size: 16px;
+  outline: none;
+}
+
+.search-input::placeholder {
+  color: #aaa;
+}
+
+/* New Movies Section */
+.new-movies {
+  margin-top: 40px;
+}
+
+.new-movies h2 {
+  font-size: 24px;
+  font-weight: bold;
+  color: #fff;
+}
+
+.watch-online {
+  color: #ff6a00;
+  font-size: 14px;
+  text-decoration: none;
+}
+
+.watch-online:hover {
+  text-decoration: underline;
+}
+
+/* Movie Cards */
+.movie-cards {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.movie-card {
+  display: flex;
+  background-color: #2f2f4f; /* Dark-blue background for movie cards */
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  gap: 20px;
+  position: relative;
+  overflow: hidden; /* Hide overflow for blurred star spots */
+}
+
+/* Add blurred star-like spots in movie cards (light from stars) */
+.movie-card::before {
+  content: '';
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(40px); /* Blurred star effect */
+  opacity: 0.3;
+  z-index: -1; /* Behind card content */
+}
+
+.movie-card::before {
+  width: 100px;
+  height: 100px;
+  top: 20px;
+  left: 20px;
+  background-color: rgba(255, 255, 255, 0.9); /* Star-like spot */
+}
+
+.movie-image {
+  width: 150px;
+  height: 200px;
+  border-radius: 8px;
+  object-fit: cover;
+}
+
+.movie-info {
+  flex-grow: 1;
+}
+
+.movie-info h3 {
+  margin: 0 0 10px;
+  font-size: 18px;
+  color: #fff;
+}
+
+.movie-info p {
+  margin: 0 0 10px;
+  color: #bbb;
+  font-size: 14px;
+}
+
+.watch-button {
+  padding: 10px 20px;
+  background-color: #ff6a00;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  color: white;
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+.watch-button:hover {
+  background-color: #ff4d4d;
+  transform: scale(1.05);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .movie-card {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .movie-image {
+    width: 100%;
+    height: auto;
+  }
+
+  .search-input {
+    width: 90%;
+  }
+}
