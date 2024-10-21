@@ -3,7 +3,8 @@ import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
 import { MovieOverview } from '../models/model-response/movie-overview.model';
-import { SearchService } from '../search-page/search-page.service';
+import { SearchService } from './search.service';
+
 
 @Component({
   selector: 'app-home-page',

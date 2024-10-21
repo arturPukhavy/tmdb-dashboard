@@ -9,7 +9,7 @@ import { MovieResponse } from "../models/model-response/movie-response.model";
   })
   export class SearchService {
     private apiUrl = 'http://localhost:4200/3/search/movie';  // API endpoint
-    private apiKey = 'eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJiYThlYmFhMGJhOTFjZTg4ZDE3NTBlZjkwYmU4ZDVkYyIsIm5iZiI6MTcyOTI4NjgzOS40MDk4NzQsInN1YiI6IjY2ZDYxNjM0Y2VkZjIxY2UyZTZhYmE2NCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.Mvy059cJLpNtoiJJk9BQab588nwprLj4ObnrfG49fw4';  // Replace with your actual API token
+    private apiKey = '';  
   
     constructor(private http: HttpClient) {}
   
