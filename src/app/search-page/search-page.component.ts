@@ -1,36 +1,36 @@
-import { CommonModule, NgIf } from '@angular/common';
-import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { Router, RouterModule } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
 import { MovieOverview } from '../models/model-response/movie-overview.model';
-import { SearchService } from '../search-page/search-page.service';
+import { FormsModule } from '@angular/forms';
+import { CommonModule, NgFor, NgIf } from '@angular/common';
+import { SearchService } from './search-page.service';
+import { ActivatedRoute, RouterModule } from '@angular/router';
 
 @Component({
-  selector: 'app-home-page',
+  selector: 'app-search-page',
   standalone: true,
-  imports: [RouterModule, FormsModule, NgIf, CommonModule],
-  templateUrl: './home-page.component.html',
-  styleUrl: './home-page.component.css'
+  imports: [NgIf, NgFor, FormsModule, CommonModule, RouterModule],
+  templateUrl: './search-page.component.html',
+  styleUrl: './search-page.component.css'
 })
-export class HomePageComponent {
+export class SearchPageComponent implements OnInit{
   searchQuery: string = '';
-  searching = false;
   filteredMovies: MovieOverview[] = [];
   isLoading: boolean = false;
   errorMessage: string = '';
 
   private imageUrlBase: string = 'https://image.tmdb.org/t/p/w500';
 
-  constructor(private searchService: SearchService, private router: Router) {}
+  constructor(private searchService: SearchService, private route: ActivatedRoute) {}
 
-  onSearchInput() {
-    if (this.searchQuery.trim() !== '') {
-      this.searching = true;
-    };
-    if (this.searchQuery.trim() == '') {
-      this.searching = false;
-    }
+  ngOnInit() {
+    this.route.queryParams.subscribe(params => {
+      this.searchQuery = params['query'] || '';
+      // Perform your search based on this.searchQuery
+    });
+  }
 
+  // Called whenever the user types in the search input
+  onSearch() {
     if (this.searchQuery.trim() === '') {
       this.filteredMovies = [];
       return;
