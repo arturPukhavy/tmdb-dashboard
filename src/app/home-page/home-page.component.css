@@ -43,21 +43,26 @@ body::after {
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
 }
 
-/* Search Section */
 .search-section {
-  margin: 20px 0;
+  margin: 40px 0;
   display: flex;
   justify-content: center;
 }
 
+.search-container {
+  position: relative;
+  width: 100%;
+  max-width: 600px;
+}
+
 .search-input {
-  width: 60%;
+  width: 80%;
   padding: 12px;
   border: 2px solid #ff6a00;
-  border-radius: 6px;
+  border-radius: 8px;
   background-color: #2f2f4f;
   color: #fff;
-  font-size: 16px;
+  font-size: 18px;
   outline: none;
 }
 
@@ -66,7 +71,10 @@ body::after {
 }
 
 .new-movies {
-  margin-bottom: 70px;
+  margin-bottom: 50px;
+}
+.trending-section {
+  margin-bottom: 50px;
 }
 
 /* Titles and Phrases */
@@ -189,6 +197,11 @@ h2:hover::after {
   font-size: 16px;
   color: #fff;
 }
+.movie-info h5 {
+  margin: 0 0 6px;
+  font-size: 12px;
+  color: #ff6a00;
+}
 
 .movie-info p {
   margin: 0 0 6px;
@@ -212,10 +225,45 @@ h2:hover::after {
   transform: scale(1.05);
 }
 
+.search-button {
+  position: absolute;
+  right: 0;
+  top: 0;
+  height: 100%;
+  padding: 0 35px;
+  background-color: #ff6a00;
+  border: none;
+  border-radius: 8px 8px 8px 8px; 
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  outline: none;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.search-button:hover {
+  background-color: #ff4d4d;
+  transform: scale(1.05);
+}
+
+.search-button:active {
+  background-color: #ff3b3b;
+}
+
 /* Responsive Design */
 @media (max-width: 768px) {
-  .search-input {
+  .search-container {
     width: 90%;
+  }
+
+  .search-input {
+    font-size: 16px;
+    padding-right: 50px; 
+  }
+
+  .search-button {
+    font-size: 14px;
+    padding: 0 5px;
   }
 
   .movie-card {
@@ -230,28 +278,6 @@ h2:hover::after {
     padding: 6px 12px;
     font-size: 10px;
   }
-}
-
-/* Search Section */
-.search-section {
-  margin: 40px 0;
-  display: flex;
-  justify-content: center;
-}
-
-.search-input {
-  width: 80%;
-  padding: 12px;
-  border: 2px solid #ff6a00;
-  border-radius: 8px;
-  background-color: #2f2f4f;
-  color: #fff;
-  font-size: 18px;
-  outline: none;
-}
-
-.search-input::placeholder {
-  color: #aaa;
 }
 
 /* Search Results Section */

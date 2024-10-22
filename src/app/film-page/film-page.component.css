@@ -2,18 +2,16 @@ body {
   font-family: Arial, sans-serif;
   margin: 0;
   padding: 0;
-  background: linear-gradient(135deg, #87ceeb, #add8e6); /* Light-blue gradient background */
+  background: linear-gradient(135deg, #87ceeb, #add8e6); /* Light-blue gradient */
   color: #333;
-  position: relative;
-  overflow-x: hidden;
 }
 
 /* Container */
 .container {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 20px;
-  background-color: rgba(255, 255, 255, 0.6); /* Slightly blurred white background */
+  padding: 15px; /* Reduced padding */
+  background-color: rgba(255, 255, 255, 0.8);
   border-radius: 12px;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
 }
@@ -22,10 +20,9 @@ body {
 .main-content {
   display: flex;
   justify-content: space-between;
-  margin-top: 30px;
-  gap: 20px;
-  align-items: flex-start; /* Align top */
-  position: relative;
+  gap: 15px; /* Reduced gap */
+  margin-top: 20px; /* Reduced margin */
+  align-items: flex-start;
 }
 
 .movie-image-container {
@@ -33,8 +30,9 @@ body {
 }
 
 .movie-image {
-  width: 600px;
-  height: 400px;
+  width: 100%; /* Make it responsive */
+  max-width: 500px; /* Reduced max width */
+  height: auto;
   border-radius: 8px;
   object-fit: cover;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
@@ -44,28 +42,27 @@ body {
   position: absolute;
   top: 10px;
   left: 10px;
-  background-color: white;
-  padding: 8px;
+  background-color: rgba(255, 255, 255, 0.8);
+  padding: 6px; /* Reduced padding */
   border-radius: 50%;
   cursor: pointer;
 }
 
 .wishlist-icon span {
   color: #ff6a6a;
-  font-size: 18px;
+  font-size: 16px; /* Reduced font size */
 }
 
 /* Movie Details Section */
 .movie-details {
-  max-width: 600px;
+  max-width: 500px; /* Reduced max width */
   display: flex;
   flex-direction: column;
-  justify-content: space-between; /* Ensures the bottom aligns */
 }
 
 .movie-details h1 {
-  font-size: 28px;
-  color: #fff;
+  font-size: 28px; /* Reduced font size */
+  color: #200707;
   margin: 0;
 }
 
@@ -73,141 +70,133 @@ body {
   display: inline-block;
   background-color: #d4edda;
   color: #155724;
-  padding: 5px 10px;
+  padding: 5px 8px; /* Reduced padding */
   border-radius: 4px;
-  font-size: 14px;
-  margin: 10px 0;
+  font-size: 13px; /* Reduced font size */
+  margin: 8px 0; /* Reduced margin */
+}
+
+.release-date, .rating {
+  font-size: 12px; /* Reduced font size */
+  color: #160606;
+  margin-top: 5px; /* Reduced margin */
+}
+.rating {
+  display: inline-block;
+  background-color: #d4edda;
+  color: #155724;
+  padding: 5px 8px; /* Reduced padding */
+  border-radius: 4px;
+  font-size: 13px; /* Reduced font size */
+  margin: 8px 0; /* Reduced margin */
 }
 
 .price {
-  font-size: 32px;
+  font-size: 22px; /* Reduced font size */
   font-weight: bold;
-  color: #fff;
-  margin-top: 5px;
+  color: #260808;
+  margin-top: 5px; /* Reduced margin */
 }
 
 .text {
-  color: #ccc;
-  margin: 10px 0;
-}
-
-.dropdowns {
-  display: flex;
-  gap: 20px;
-  margin: 20px 0;
-}
-
-.dropdown {
-  flex: 1;
-}
-
-.dropdown label {
-  display: block;
-  font-size: 14px;
-  margin-bottom: 5px;
-  color: #fff;
-}
-
-.dropdown select {
-  width: 100%;
-  padding: 10px;
-  font-size: 14px;
-  border: 1px solid #ccc;
+  display: inline-block;
+  background-color: #d4edda;
+  color: #155724;
+  padding: 5px 8px; /* Reduced padding */
   border-radius: 4px;
+  font-size: 16px; /* Reduced font size */
+  margin: 8px 0; /* Reduced margin */
+}
+
+.languages {
+  display: inline-block;
+  background-color: #d4edda;
+  color: #155724;
+  padding: 5px 8px; /* Reduced padding */
+  border-radius: 4px;
+  font-size: 13px; /* Reduced font size */
+  margin: 8px 0; /* Reduced margin */
+}
+
+.production-info h4 {
+  font-size: 16px; /* Reduced font size */
+  color: #333;
+  margin-bottom: 5px; /* Reduced margin */
+}
+
+.production-info p {
+  margin: 3px 0; /* Reduced margin */
 }
 
 /* Watch Button */
 .watch-button {
   display: block;
   width: 100%;
-  padding: 12px;
+  padding: 10px; /* Reduced padding */
   background-color: #ff6a00;
   color: white;
   border: none;
-  border-radius: 4px;
+  border-radius: 6px;
   cursor: pointer;
-  font-size: 16px;
+  font-size: 15px; /* Reduced font size */
   text-align: center;
-  margin: 20px 0;
+  margin: 15px 0; /* Reduced margin */
   transition: background-color 0.3s;
 }
 
 .watch-button:hover {
   background-color: #e65c00;
-  transform: scale(1.03);
+  transform: scale(1.03); /* Slightly reduced scale effect */
 }
 
 /* FAQ Section */
 .faq {
   background-color: #2f2f4f;
-  padding: 20px;
+  padding: 15px; /* Reduced padding */
   border-radius: 8px;
-  margin-top: 20px;
-  flex-grow: 1; /* Align bottom with movie image */
+  margin-top: 15px; /* Reduced margin */
+  color: #fff;
 }
 
 .faq h3 {
-  font-size: 18px;
-  color: #fff;
-  margin: 0 0 10px;
+  font-size: 18px; /* Reduced font size */
+  margin-bottom: 5px; /* Reduced margin */
 }
 
 .faq p {
-  font-size: 14px;
+  font-size: 12px; /* Reduced font size */
   color: #ccc;
+  margin-bottom: 5px; /* Reduced margin */
+}
+.faq a {
+  color: #ff6a00;
 }
 
 /* Description Section */
 .description-section {
-  margin-top: 40px;
-  background-color: #f4f4f4; /* Light background */
-  padding: 20px;
+  margin-top: 30px; /* Reduced margin */
+  background-color: #f4f4f4;
+  padding: 15px; /* Reduced padding */
   border-radius: 8px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Light shadow for depth */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
 .description-section h2 {
-  font-size: 24px;
+  font-size: 22px; /* Reduced font size */
   color: #333;
-  margin: 0;
+  margin-bottom: 5px; /* Reduced margin */
 }
 
 .description-section h4 {
-  font-size: 18px;
+  font-size: 16px; /* Reduced font size */
   color: #666;
-  margin: 10px 0;
+  margin: 5px 0; /* Reduced margin */
 }
 
 .description-section p {
-  font-size: 14px;
+  font-size: 12px; /* Reduced font size */
   color: #666;
-}
-
-/* Background Blurred Star-like Spots */
-body::before,
-body::after {
-  content: '';
-  position: absolute;
-  border-radius: 50%;
-  filter: blur(100px);
-  opacity: 0.5;
-  z-index: -2; /* Behind everything */
-}
-
-body::before {
-  width: 300px;
-  height: 300px;
-  top: 10%;
-  left: 15%;
-  background-color: #ffffff;
-}
-
-body::after {
-  width: 400px;
-  height: 400px;
-  bottom: 10%;
-  right: 15%;
-  background-color: #ff6a00;
+  line-height: 1.5; /* Adjusted line height */
 }
 
 /* Responsive Design */
@@ -219,13 +208,5 @@ body::after {
   .movie-image {
     width: 100%;
     height: auto;
-  }
-
-  .dropdowns {
-    flex-direction: column;
-  }
-
-  .description-section {
-    margin-top: 20px;
   }
 }

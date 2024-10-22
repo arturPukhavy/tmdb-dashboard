@@ -6,7 +6,7 @@ import { Top100Component } from './top100/top100.component';
 export const routes: Routes = [
     {path: '', redirectTo: 'home', pathMatch: 'full' },
     {path: 'home', component: HomePageComponent},
-    {path: 'film', component: FilmPageComponent},
-    {path: 'top100', component: Top100Component},
+    {path: 'film/:id', component: FilmPageComponent},
+    {path: 'top100', component: Top100Component}
 ];
 

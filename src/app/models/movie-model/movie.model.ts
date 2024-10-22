@@ -6,7 +6,7 @@ import { Language } from "./language.model";
 export interface Movie {
     adult: boolean;
     backdrop_path: string;
-    belongs_to_collection: any; // Use a specific type if available
+    belongs_to_collection: any; 
     budget: number;
     genres: Genre[];
     homepage: string;
