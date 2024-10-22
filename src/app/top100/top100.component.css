@@ -1,104 +1,113 @@
 body {
-    font-family: 'Arial', sans-serif;
-    margin: 0;
-    padding: 0;
-    position: relative;
-    overflow-x: hidden;
-  }
-  
-  /* Container */
-  .container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 20px;
-    background-color: rgba(255, 255, 255, 0.6); /* Slightly blurred white background */
-    border-radius: 12px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-  }
-  
-  /* Top 100 Movies Section */
-  .top-100-section {
-    margin-top: 40px;
-    text-align: center;
-  }
-  
-  .top-100-section h1 {
-    font-size: 32px;
-    margin-bottom: 10px;
-  }
-  
-  .top-100-section p {
-    font-size: 16px;
-    margin-bottom: 30px;
-    color: #6e6d6d;
-  }
-  
-  /* Top Movies Grid */
-  .top-movies-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 20px;
-  }
-  
-  /* Movie Item */
-  .movie-item {
-    background-color: #2f2f4f;
-    padding: 20px;
-    border-radius: 12px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
-    text-align: center;
-    position: relative;
-  }
+  font-family: 'Arial', sans-serif;
+  margin: 0;
+  padding: 0;
+  position: relative;
+  overflow-x: hidden;
+}
 
-  .movie-item:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
-  }
-  
-  .movie-item.top-rated {
-    grid-column: span 2; /* Top-rated movies take up more space */
-  }
-  
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: rgba(255, 255, 255, 0.9); /* Slightly more opaque background */
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+}
+
+.top-100-section {
+  margin-top: 40px;
+  text-align: center;
+}
+
+.top-100-section h1 {
+  font-size: 32px;
+  margin-bottom: 10px;
+}
+
+.top-100-section p {
+  font-size: 16px;
+  margin-bottom: 30px;
+  color: #6e6d6d;
+}
+
+.top-movies-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); /* Adaptive column count */
+  gap: 15px; /* Reduced gap for tighter spacing */
+}
+
+.size-large {
+  height: 650px;
   .movie-image {
-    width: 100%;
-    height: auto;
-    border-radius: 8px;
-    object-fit: cover;
-  }
+    height: 500px; 
+  } 
+}
 
-  .movie-item:hover .movie-image {
-    transform: scale(1.05);
-  }
-  
-  .movie-info {
-    margin-top: 15px;
-  }
-  
-  .movie-info h3 {
-    font-size: 18px;
-    margin-bottom: 10px;
-    color: #fff;
-  }
-  
-  .rating {
-    font-size: 20px;
-    font-weight: bold;
-    color: #ff6a00;
-    margin-bottom: 10px;
-  }
-  
-  .watch-button {
-    padding: 10px 20px;
-    background-color: #ff6a00;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-    font-size: 14px;
-    color: white;
-    transition: background-color 0.3s, transform 0.2s;
-  }
-  
-  .watch-button:hover {
-    background-color: #ff4d4d;
-    transform: scale(1.05);
-  }
+.size-medium {
+  height: 450px; 
+  .movie-image {
+    height: 320px; 
+  } 
+}
+
+.size-small {
+  height: 300px; 
+  .movie-image {
+    height: 170px; 
+  } 
+}
+
+.movie-item {
+  background-color: #2f2f4f;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  position: relative;
+  transition: transform 0.2s;
+  overflow: hidden; /* Prevent overflow of image */
+}
+
+.movie-image {
+  width: 100%; /* Fill width of the card */
+  border-radius: 12px 12px 0 0; /* Rounded top corners */
+  object-fit: cover; /* Cover the area without distortion */
+}
+
+.movie-info {
+  padding: 15px;
+}
+
+.movie-info h3 {
+  font-size: 18px;
+  margin: 0; /* Remove margin for consistency */
+  color: #fff;
+}
+
+.rating {
+  font-size: 20px;
+  font-weight: bold;
+  color: #ff6a00;
+  margin: 5px 0; /* Adjust margin for spacing */
+}
+
+.watch-button {
+  padding: 10px 20px;
+  background-color: #ff6a00;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  color: white;
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+.watch-button:hover {
+  background-color: #ff4d4d;
+  transform: scale(1.05);
+}
+
+.movie-item:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+}

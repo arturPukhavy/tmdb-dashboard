@@ -1,63 +1,64 @@
 <div class="container">
   <!-- Main Content -->
-  <div class="main-content">
-    <!-- Movie Image Section -->
-    <div class="movie-image-container">
-      <img
-        src="https://i.pinimg.com/originals/be/2a/f7/be2af78bf328cb3baf8855cbd3801cde.jpg"
-        alt="Batman 2025"
-        class="movie-image"
-      />
-      <div class="wishlist-icon">
-        <span>&hearts;</span>
-      </div>
-    </div>
-
-    <!-- Movie Details Section -->
-    <div class="movie-details">
-      <h1>Batman 2025</h1>
-      <div class="tag">Action, Adventure</div>
-      <div class="price">$50</div>
-      <p class="text">An epic story of the dark knight rising once again to save Gotham.</p>
-
-      <!-- Dropdowns -->
-      <div class="dropdowns">
-        <div class="dropdown">
-          <label>Quality</label>
-          <select>
-            <option>HD</option>
-            <option>SD</option>
-            <option>4K</option>
-          </select>
-        </div>
-        <div class="dropdown">
-          <label>Language</label>
-          <select>
-            <option>English</option>
-            <option>Spanish</option>
-            <option>French</option>
-          </select>
+  <div>
+    <div class="main-content">
+      <!-- Movie Image Section -->
+      <div class="movie-image-container">
+        <img
+          [src]="getImageUrl(movie?.poster_path || null)"
+          [alt]="movie?.title"
+          class="movie-image"
+        />
+        <div class="wishlist-icon">
+          <span>&hearts;</span>
         </div>
       </div>
 
-      <!-- Watch Button -->
-      <button class="watch-button">Watch Now</button>
+      <!-- Movie Details Section -->
+      <div class="movie-details">
+        <h1>{{ movie?.title }}</h1>
+        <div class="tag">Genre: {{ getGenresAsString() }}</div>
+        <div class="release-date">Release Date: {{ movie?.release_date }}</div>
+        <div class="rating">Rating: {{ movie?.vote_average }} / 10</div>
+        <div class="price">Budget: {{ movie?.budget | currency }}</div>
+        
+        <div class="languages">
+          <h4>Languages:</h4>
+          <p *ngFor="let lang of movie?.spoken_languages">{{ lang.english_name }} ({{ lang.iso_639_1 }})</p>
+        </div>
 
-      <!-- FAQ Section -->
-      <div class="faq">
-        <h3>Frequently Asked Questions</h3>
-        <p>What is the runtime of the movie? <br> The movie is 2 hours and 45 minutes long.</p>
+        <div class="production-info">
+          <h4>Production Companies:</h4>
+          <p *ngFor="let company of movie?.production_companies">{{ company.name }}</p>
+
+          <h4>Production Countries:</h4>
+          <p *ngFor="let country of movie?.production_countries">{{ country.name }}</p>
+        </div>
+
+        <p class="text">{{ movie?.overview }}</p>
+
+        <!-- Watch Button -->
+        <button class="watch-button">Watch Now</button>
+
+        <!-- FAQ Section -->
+        <div class="faq">
+          <h3>Frequently Asked Questions</h3>
+          <p>What is the runtime of the movie? <br> {{ movie?.runtime }} minutes.</p>
+          <p>What is the movie's status? <br> {{ movie?.status }}</p>
+          <p>Where can I watch it? <br> Visit: <a [href]="movie?.homepage" target="_blank">{{ movie?.homepage }}</a></p>
+        </div>
       </div>
+    </div>
+
+    <!-- Description Section -->
+    <div class="description-section">
+      <h2>Description</h2>
+      <h4>Plot Summary</h4>
+      <p>{{ movie?.overview }}</p>
     </div>
   </div>
 
-  <!-- Description Section -->
-  <div class="description-section">
-    <h2>Description</h2>
-    <h4>Plot Summary</h4>
-    <p>
-      Batman returns to Gotham City to fight against a new wave of crime that has taken control of the streets.
-      But this time, he faces challenges not only from his enemies but also from within himself...
-    </p>
-  </div>
+  <ng-template #loading>
+    <p>Loading movie details...</p>
+  </ng-template>
 </div>

@@ -1,151 +1,25 @@
 <div class="container">
-  <body>  
-    <!-- Top 100 Movies Section -->
-    <section class="top-100-section">
-      <h1>Top 100 Movies</h1>
-      <p>Watch the best movies of all time, ranked by ratings.</p>
+  <section class="top-100-section">
+    <h1>Top 100 Movies</h1>
+    <p>Watch the best movies of all time, ranked by ratings.</p>
 
-      <div class="top-movies-grid">
-        <!-- Movie card 1 -->
-        <div class="movie-item top-rated">
-          <img
-            src="https://i.pinimg.com/736x/c7/59/84/c75984d116cfb363da99a07450f45745.jpg"
-            alt="Batman 2025"
-            class="movie-image"
-          />
-          <div class="movie-info">
-            <h3>Batman 2025</h3>
-            <div class="rating">9.6</div>
-            <button class="watch-button">Watch Now</button>
-          </div>
-        </div>
-
-        <!-- Movie card 2 -->
-        <div class="movie-item">
-          <img
-            src="https://m.media-amazon.com/images/M/MV5BZjhkNjM0ZTMtNGM5MC00ZTQ3LTk3YmYtZTkzYzdiNWE0ZTA2XkEyXkFqcGc@._V1_.jpg"
-            alt="Inception"
-            class="movie-image"
-          />
-          <div class="movie-info">
-            <h3>Inception</h3>
-            <div class="rating">9.2</div>
-            <button class="watch-button">Watch Now</button>
-          </div>
-        </div>
-
-        <!-- Movie card 3 -->
-        <div class="movie-item">
-          <img
-            src="https://res.cloudinary.com/ybmedia/image/upload/c_crop,h_730,w_1300,x_301,y_86/c_fill,f_auto,h_900,q_auto,w_1600/v1/m/5/1/51d3b9cc3b131a010f47d65ab037d38b369a802d/20-facts-might-know-dark-knight.jpg"
-            alt="The Dark Knight"
-            class="movie-image"
-          />
-          <div class="movie-info">
-            <h3>The Dark Knight</h3>
-            <div class="rating">9.0</div>
-            <button class="watch-button">Watch Now</button>
-          </div>
-        </div>
-
-        <!-- Movie card 4 -->
-        <div class="movie-item">
-          <img
-            src="https://i.pinimg.com/originals/be/2a/f7/be2af78bf328cb3baf8855cbd3801cde.jpg"
-            alt="Interstellar"
-            class="movie-image"
-          />
-          <div class="movie-info">
-            <h3>Interstellar</h3>
-            <div class="rating">8.9</div>
-            <button class="watch-button">Watch Now</button>
-          </div>
-        </div>
-
-        <!-- Movie card 5 -->
-        <div class="movie-item">
-          <img
-            src="https://i.pinimg.com/originals/be/2a/f7/be2af78bf328cb3baf8855cbd3801cde.jpg"
-            alt="The Godfather"
-            class="movie-image"
-          />
-          <div class="movie-info">
-            <h3>The Godfather</h3>
-            <div class="rating">9.7</div>
-            <button class="watch-button">Watch Now</button>
-          </div>
-        </div>
-
-        <!-- Movie card 6 -->
-        <div class="movie-item">
-          <img
-            src="https://i.pinimg.com/originals/be/2a/f7/be2af78bf328cb3baf8855cbd3801cde.jpg"
-            alt="The Matrix"
-            class="movie-image"
-          />
-          <div class="movie-info">
-            <h3>The Matrix</h3>
-            <div class="rating">8.7</div>
-            <button class="watch-button">Watch Now</button>
-          </div>
-        </div>
-
-        <!-- Movie card 7 -->
-        <div class="movie-item">
-          <img
-            src="https://i.pinimg.com/originals/2b/3d/90/2b3d9048f9df9e8f9f8d4c1946c2e5d8.jpg"
-            alt="Fight Club"
-            class="movie-image"
-          />
-          <div class="movie-info">
-            <h3>Fight Club</h3>
-            <div class="rating">8.8</div>
-            <button class="watch-button">Watch Now</button>
-          </div>
-        </div>
-
-        <!-- Movie card 8 -->
-        <div class="movie-item">
-          <img
-            src="https://i.pinimg.com/originals/73/45/4f/73454f4f87e5e4b7f436b7b1f2c78063.jpg"
-            alt="Pulp Fiction"
-            class="movie-image"
-          />
-          <div class="movie-info">
-            <h3>Pulp Fiction</h3>
-            <div class="rating">8.9</div>
-            <button class="watch-button">Watch Now</button>
-          </div>
-        </div>
-
-        <!-- Movie card 9 -->
-        <div class="movie-item">
-          <img
-            src="https://i.pinimg.com/originals/8d/9c/01/8d9c01b9b32d0c9f0e8e15d0a7e3f7b7.jpg"
-            alt="Forrest Gump"
-            class="movie-image"
-          />
-          <div class="movie-info">
-            <h3>Forrest Gump</h3>
-            <div class="rating">8.8</div>
-            <button class="watch-button">Watch Now</button>
-          </div>
-        </div>
-
-        <!-- Movie card 10 -->
-        <div class="movie-item">
-          <img
-            src="https://i.pinimg.com/originals/9e/7f/9b/9e7f9b9d6f8b7e9a8e18f8f1ac3e8b8f.jpg"
-            alt="Schindler's List"
-            class="movie-image"
-          />
-          <div class="movie-info">
-            <h3>Schindler's List</h3>
-            <div class="rating">9.5</div>
-            <button class="watch-button">Watch Now</button>
-          </div>
+    <div class="top-movies-grid">
+      <div *ngFor="let movie of topFilms; let i = index" 
+           class="movie-item" 
+           [ngClass]="getSizeClass(i)" 
+           [routerLink]="['/film', movie.id]" 
+           routerLinkActive="active">
+        <img 
+          [src]="getImageUrl(movie.poster_path)" 
+          [alt]="movie.title" 
+          class="movie-image" 
+        />
+        <div class="movie-info">
+          <h3>{{i + 1}}. {{ movie.title }}</h3>
+          <div class="rating">{{ movie.vote_average }}</div>
+          <button class="watch-button">Watch Now</button>
         </div>
       </div>
-    </section>
-  </body>  
+    </div>
+  </section>
 </div>
