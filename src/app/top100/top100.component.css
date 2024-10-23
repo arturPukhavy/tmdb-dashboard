@@ -45,21 +45,22 @@ body {
 }
 
 .size-medium {
-  height: 450px; 
+  height: 420px; 
   .movie-image {
-    height: 320px; 
+    height: 280px; 
   } 
 }
 
 .size-small {
-  height: 300px; 
+  height: 270px; 
   .movie-image {
-    height: 170px; 
+    height: 150px; 
   } 
 }
 
 .movie-item {
   background-color: #2f2f4f;
+  cursor: pointer;
   border-radius: 12px;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
   text-align: center;
