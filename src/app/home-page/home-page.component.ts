@@ -1,10 +1,11 @@
 import { CommonModule, NgIf } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { Router, RouterModule } from '@angular/router';
+import { RouterModule } from '@angular/router';
 import { MovieOverview } from '../models/model-response/movie-overview.model';
 import { SearchService } from './search.service';
 import { MoviesService } from './movies.service';
+import { PersonOverview } from '../models/model-response/person-overview.model';
 
 
 @Component({
@@ -15,9 +16,10 @@ import { MoviesService } from './movies.service';
   styleUrl: './home-page.component.css'
 })
 export class HomePageComponent implements OnInit{
-  listOfMovies: string = '';
+  listOfitems: string = '';
   searching = false;
   filteredMovies: MovieOverview[] = [];
+  filteredPersons: PersonOverview[] = [];
   newMovies: MovieOverview[] = [];
   trendingMovies: MovieOverview[] = [];
   upcomingMovies: MovieOverview[] = [];
@@ -35,23 +37,23 @@ export class HomePageComponent implements OnInit{
   }
 
   onSearchInput() {
-    if (this.listOfMovies.trim() !== '') {
+    if (this.listOfitems.trim() !== '') {
       this.searching = true;
     };
-    if (this.listOfMovies.trim() == '') {
+    if (this.listOfitems.trim() == '') {
       this.searching = false;
     }
 
-    if (this.listOfMovies.trim() === '') {
+    if (this.listOfitems.trim() === '') {
       this.filteredMovies = [];
+      this.filteredPersons = [];
       return;
     }
 
     this.isLoading = true;
     this.errorMessage = '';
 
-    // Call the service to fetch movies based on the search query
-    this.searchService.searchMovies(this.listOfMovies).subscribe(
+    this.searchService.searchMovies(this.listOfitems).subscribe(
       (movies) => {
         this.filteredMovies = movies;
         this.isLoading = false;
@@ -61,10 +63,21 @@ export class HomePageComponent implements OnInit{
         this.isLoading = false;
       }
     );
+
+    this.searchService.searchPersons(this.listOfitems).subscribe(
+      (persons) => {
+        this.filteredPersons = persons;
+        this.isLoading = false;
+      },
+      (error) => {
+        this.errorMessage = 'Error fetching persons. Please try again.';
+        this.isLoading = false;
+      }
+    );
   }
 
   fetchNewMovies() {
-    this.moviesService.getNewMovies(this.listOfMovies).subscribe(
+    this.moviesService.getNewMovies(this.listOfitems).subscribe(
       (movies) => {
         this.newMovies = movies;
         this.isLoading = false;
@@ -77,7 +90,7 @@ export class HomePageComponent implements OnInit{
   }
 
   fetchTrandingMovies() {
-    this.moviesService.getTrendingMovies(this.listOfMovies).subscribe(
+    this.moviesService.getTrendingMovies(this.listOfitems).subscribe(
       (movies) => {
         this.trendingMovies = movies;
         this.isLoading = false;
@@ -90,7 +103,7 @@ export class HomePageComponent implements OnInit{
   }
 
   fetchUpcomingMovies() {
-    this.moviesService.getUpcomingMovies(this.listOfMovies).subscribe(
+    this.moviesService.getUpcomingMovies(this.listOfitems).subscribe(
       (movies) => {
         this.upcomingMovies = movies;
         this.isLoading = false;
@@ -103,7 +116,7 @@ export class HomePageComponent implements OnInit{
   }
 
   getImageUrl(posterPath: string) {
-    return posterPath ? `${this.imageUrlBase}${posterPath}` : 'assets/default-poster.jpg';
+    return posterPath ? `${this.imageUrlBase}${posterPath}` : null;
   }
 
 }

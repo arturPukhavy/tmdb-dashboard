@@ -1,8 +1,9 @@
 import { MovieOverview } from "./movie-overview.model";
+import { PersonOverview } from "./person-overview.model";
 
-export interface MovieResponse {
-    page: number;
-    results: MovieOverview[];
-    total_pages: number;
-    total_results: number;
-  }
+export interface SearchResponse {
+  page: number;
+  results: MovieOverview[] | PersonOverview[];
+  total_pages: number;
+  total_results: number;
+}

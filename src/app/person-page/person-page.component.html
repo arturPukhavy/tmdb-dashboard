@@ -1,0 +1,15 @@
+<div class="movie-image-container">
+    <img
+      [src]="getImageUrl(person?.profile_path || null)"
+      [alt]="person?.name"
+      class="movie-image"
+    />
+    <div class="wishlist-icon" title="Add to Wishlist">
+      <span>&hearts;</span>
+    </div>
+  </div>
+
+  <!-- Movie Details Section -->
+  <div class="movie-details">
+    <!-- Movie Title and Tagline -->
+    <h1>{{ person?.name }}</h1>

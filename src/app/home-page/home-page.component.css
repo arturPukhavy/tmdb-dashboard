@@ -218,7 +218,7 @@ h2:hover::after {
   right: 0;
   top: 0;
   height: 100%;
-  padding: 0 35px;
+  padding: 0 20px;
   background-color: #ff6a00;
   border: none;
   border-radius: 8px 8px 8px 8px;
@@ -325,12 +325,12 @@ h2:hover::after {
 .movie-details h3 {
   font-size: 22px;
   margin: 0 0 10px;
-  color: #ffd700;
+  color: #ff6a00;
 }
 
 .movie-details p.movie-overview {
   font-size: 16px;
-  color: #ddd;
+  color: #909090;
   margin: 0 0 15px;
 }
 
@@ -338,7 +338,7 @@ h2:hover::after {
   display: flex;
   gap: 15px;
   font-size: 14px;
-  color: #bbb;
+  color: #ff6a00;
 }
 
 /* No Results Message */

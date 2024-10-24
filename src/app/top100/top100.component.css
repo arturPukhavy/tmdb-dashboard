@@ -23,12 +23,13 @@ body {
 .top-100-section h1 {
   font-size: 32px;
   margin-bottom: 10px;
+  color: #ff6a00df;
 }
 
 .top-100-section p {
   font-size: 16px;
   margin-bottom: 30px;
-  color: #6e6d6d;
+  color: #555454;
 }
 
 .top-movies-grid {
@@ -38,23 +39,23 @@ body {
 }
 
 .size-large {
-  height: 650px;
+  height: 600px;
   .movie-image {
     height: 500px; 
   } 
 }
 
 .size-medium {
-  height: 420px; 
+  height: 450px; 
   .movie-image {
-    height: 280px; 
+    height: 350px; 
   } 
 }
 
 .size-small {
-  height: 270px; 
+  height: 300px; 
   .movie-image {
-    height: 150px; 
+    height: 200px; 
   } 
 }
 
@@ -80,32 +81,16 @@ body {
 }
 
 .movie-info h3 {
-  font-size: 18px;
+  font-size: 20px;
   margin: 0; /* Remove margin for consistency */
   color: #fff;
 }
 
 .rating {
-  font-size: 20px;
+  font-size: 22px;
   font-weight: bold;
   color: #ff6a00;
-  margin: 5px 0; /* Adjust margin for spacing */
-}
-
-.watch-button {
-  padding: 10px 20px;
-  background-color: #ff6a00;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  font-size: 14px;
-  color: white;
-  transition: background-color 0.3s, transform 0.2s;
-}
-
-.watch-button:hover {
-  background-color: #ff4d4d;
-  transform: scale(1.05);
+  margin: 10px 0; /* Adjust margin for spacing */
 }
 
 .movie-item:hover {
