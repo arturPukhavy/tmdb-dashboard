@@ -2,7 +2,6 @@ import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { forkJoin, map, Observable } from "rxjs";
 import { MovieOverview } from "../models/model-response/movie-overview.model";
-import { MovieResponse } from "../models/model-response/movie-response.model";
 
 @Injectable({
     providedIn: 'root'
@@ -25,7 +24,7 @@ import { MovieResponse } from "../models/model-response/movie-response.model";
         // Loop through pages 1 to 5
         for (let page = 1; page <= totalPages; page++) {
           requests.push(
-            this.http.get<MovieResponse>(`${this.apiUrl}?language=en-US&page=${page}`, { headers })
+            this.http.get<any>(`${this.apiUrl}?language=en-US&page=${page}`, { headers })
           );
         }
 

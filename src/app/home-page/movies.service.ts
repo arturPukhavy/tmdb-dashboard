@@ -2,7 +2,8 @@ import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { map, Observable } from "rxjs";
 import { MovieOverview } from "../models/model-response/movie-overview.model";
-import { MovieResponse } from "../models/model-response/movie-response.model";
+import { SearchResponse } from "../models/model-response/movie-response.model";
+
 
 @Injectable({
     providedIn: 'root'
@@ -20,9 +21,9 @@ import { MovieResponse } from "../models/model-response/movie-response.model";
         'Authorization': `Bearer ${this.apiKey}`,
         'accept': 'application/json'
       });
-      return this.http.get<MovieResponse>(`${this.apiNewMovies}?query=${query}`, { headers }).pipe(
-        // Extract the results array from the MovieResponse
-        map(response => response.results)
+      return this.http.get<SearchResponse>(`${this.apiNewMovies}?query=${query}`, { headers }).pipe(
+        // Extract the results array from the SearchResponse
+        map(response => response.results.filter((result): result is MovieOverview => 'original_title' in result))
       );
     }
 
@@ -31,9 +32,9 @@ import { MovieResponse } from "../models/model-response/movie-response.model";
           'Authorization': `Bearer ${this.apiKey}`,
           'accept': 'application/json'
         });
-        return this.http.get<MovieResponse>(`${this.apiTrendingMovies}?query=${query}`, { headers }).pipe(
-          // Extract the results array from the MovieResponse
-          map(response => response.results)
+        return this.http.get<SearchResponse>(`${this.apiTrendingMovies}?query=${query}`, { headers }).pipe(
+          // Extract the results array from the SearchResponse
+          map(response => response.results.filter((result): result is MovieOverview => 'original_title' in result))
         );
       }
 
@@ -42,9 +43,9 @@ import { MovieResponse } from "../models/model-response/movie-response.model";
           'Authorization': `Bearer ${this.apiKey}`,
           'accept': 'application/json'
         });
-        return this.http.get<MovieResponse>(`${this.apiUpcomingMovies}?query=${query}`, { headers }).pipe(
-          // Extract the results array from the MovieResponse
-          map(response => response.results)
+        return this.http.get<SearchResponse>(`${this.apiUpcomingMovies}?query=${query}`, { headers }).pipe(
+          // Extract the results array from the SearchResponse
+          map(response => response.results.filter((result): result is MovieOverview => 'original_title' in result))
         );
       }
   }
