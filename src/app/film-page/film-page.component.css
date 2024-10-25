@@ -190,9 +190,6 @@ body {
   text-decoration: underline;
 }
 
-/* Icon Font */
-@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css');
-
 /* Description Section */
 .description-section {
   max-width: 400px;

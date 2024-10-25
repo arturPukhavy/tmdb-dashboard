@@ -74,13 +74,12 @@
 
 <!-- Search Results Section -->
 <div class="container" *ngIf="searching">
+  <!-- Movie Search Results Section -->
   <section *ngIf="filteredMovies.length > 0" class="search-results">
-
-    <h2>Search Results</h2>
+    <h2>Movies</h2>
 
     <div class="movie-list">
-      <div class="movie-item" *ngFor="let movie of filteredMovies" [routerLink]="['/film', movie.id]"
-        routerLinkActive="active">
+      <div class="movie-item" *ngFor="let movie of filteredMovies" [routerLink]="['/film', movie.id]" routerLinkActive="active">
         <div class="movie-poster">
           <img [src]="getImageUrl(movie.poster_path)" [alt]="movie.title" class="movie-image" />
         </div>
@@ -94,27 +93,31 @@
           </div>
         </div>
       </div>
-      
-      <div class="movie-item" *ngFor="let person of filteredPersons" [routerLink]="['/person', person.id]"
-        routerLinkActive="active">
-        <div class="movie-poster">
-          <img [src]="getImageUrl(person.profile_path)" [alt]="person.name" class="movie-image" />
+    </div>
+  </section>
+
+  <!-- People Search Results Section -->
+  <section *ngIf="filteredPersons.length > 0" class="search-results people-results">
+    <h2>People</h2>
+
+    <div class="people-list">
+      <div class="person-item" *ngFor="let person of filteredPersons" [routerLink]="['/person', person.id]" routerLinkActive="active">
+        <div class="person-poster">
+          <img [src]="getImageUrl(person.profile_path)" [alt]="person.name" class="person-image" />
         </div>
-        <div class="movie-details">
+        <div class="person-details">
           <h3>{{ person.name }}</h3>
-          <p class="movie-overview" *ngFor="let films of person.known_for">{{ films.title }}</p>
-          <div class="movie-meta">
+          <p class="person-films" *ngFor="let films of person.known_for">{{ films.title }}</p>
+          <div class="person-meta">
             <span>Popularity: {{ person.popularity }}</span>
           </div>
         </div>
       </div>
     </div>
-
   </section>
 
   <!-- No Results Message -->
   <section class="no-results" *ngIf="filteredMovies.length === 0 && listOfitems">
-    <p>No movies found for "{{ listOfitems }}"</p>
+    <p>No results found for "{{ listOfitems }}"</p>
   </section>
-
 </div>
