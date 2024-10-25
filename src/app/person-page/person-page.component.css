@@ -1,0 +1,258 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(135deg, #87ceeb, #add8e6); /* Light blue gradient */
+    color: #333;
+    line-height: 1.6;
+  }
+  
+  /* Container */
+  .container {
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.9);
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Main Content Section */
+  .main-content {
+    display: flex;
+    justify-content: space-around;
+    gap: 20px;
+    margin-top: 20px;
+    align-items: flex-start;
+  }
+  
+  .actor-image-container {
+    position: relative;
+    width: 100%;
+    max-width: 400px;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  }
+  
+  .actor-image {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    object-fit: cover;
+  }
+  
+  .wishlist-icon {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 10px;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+  }
+  
+  .wishlist-icon:hover {
+    transform: scale(1.1);
+  }
+  
+  .wishlist-icon span {
+    color: #ff6a6a;
+    font-size: 24px;
+  }
+  
+  /* Actor Details Section */
+  .actor-details {
+    max-width: 400px;
+    display: flex;
+    flex-direction: column;
+    background: #fefefe;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Actor Name */
+  .actor-details h1 {
+    font-size: 36px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 5px;
+  }
+  
+  /* Tagline (Known for Department) */
+  .tagline {
+    font-size: 18px;
+    color: #666;
+    font-style: italic;
+    margin-bottom: 20px;
+  }
+  
+  /* Popularity Tag */
+  .tag {
+    display: inline-block;
+    font-weight: bold;
+    color: #444;
+    font-size: 14px;
+    margin-bottom: 15px;
+  }
+  
+  /* Birthdate and Deathdate */
+  .birthdate, .deathdate {
+    font-size: 16px;
+    color: #444;
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+  }
+  
+  .birthdate i, .deathdate i {
+    color: #ff6a00;
+    margin-right: 8px;
+  }
+  
+  /* IMDb Link */
+  .imdb, .homepage {
+    font-size: 14px;
+    color: #444;
+    margin-top: 10px;
+  }
+  
+  .imdb i, .homepage i {
+    color: #ff6a00;
+    margin-right: 8px;
+  }
+  
+  .imdb a, .homepage a {
+    color: #ff6a00;
+    text-decoration: none;
+  }
+  
+  .imdb a:hover, .homepage a:hover {
+    text-decoration: underline;
+  }
+  
+  /* Description Section */
+  .description-section {
+    max-width: 400px;
+    margin-top: 30px;
+    background-color: #f4f4f4;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .description-section h2 {
+    text-align: center;
+    font-size: 24px;
+    margin-bottom: 5px;
+  }
+  
+  .description-section p {
+    font-size: 16px;
+    color: #666;
+    line-height: 1.6;
+  }
+
+  .toggle-bio {
+    color: #ff6a00;
+    cursor: pointer;
+    font-weight: bold;
+    margin-left: 5px;
+    text-decoration: underline;
+  }
+  
+  .toggle-bio:hover {
+    text-decoration: none;
+  }
+  
+  /* Films Section */
+  .actor-films-section {
+    margin-top: 40px;
+  }
+  
+  .actor-films-section h2 {
+    font-size: 28px;
+    color: #ff6a00;
+    text-align: center;
+    margin-bottom: 30px;
+  }
+  
+  .film-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 20px;
+  }
+  
+  .film-item {
+    background-color: rgba(255, 255, 255, 0.08);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+  }
+  
+  .film-item:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+  }
+  
+  .film-poster {
+    height: 225px;
+    overflow: hidden;
+    border-radius: 12px 12px 0 0;
+  }
+  
+  .film-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+  }
+  
+  .film-item:hover .film-image {
+    transform: scale(1.05);
+  }
+  
+  .film-title {
+    padding: 10px;
+    text-align: center;
+    color: #ff6a00;
+  }
+  
+  .film-title h4 {
+    font-size: 16px;
+    margin-bottom: 5px;
+  }
+  
+  .film-title p {
+    font-size: 14px;
+    color: #dddddd;
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .main-content {
+      flex-direction: column;
+    }
+  
+    .actor-image-container {
+      max-width: 100%;
+    }
+  
+    .actor-details {
+      max-width: 100%;
+      padding: 15px;
+    }
+  
+    .description-section {
+      max-width: 100%;
+      padding: 15px;
+    }
+  
+    .film-list {
+      grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    }
+  }

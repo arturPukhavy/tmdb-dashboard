@@ -341,6 +341,74 @@ h2:hover::after {
   color: #ff6a00;
 }
 
+/* People Section */
+.people-results {
+  margin-top: 40px;
+}
+
+.people-list {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+/* Person Card */
+.person-item {
+  display: flex;
+  align-items: flex-start;
+  background-color: rgba(255, 255, 255, 0.15); /* Lighter background */
+  border-left: 4px solid #ff6a00; /* Visual difference */
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+}
+
+.person-item:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+}
+
+.person-poster {
+  flex: 0 0 120px;
+  border-radius: 12px;
+  overflow: hidden;
+  margin-right: 20px;
+}
+
+.person-image {
+  width: 120px;
+  height: 180px;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.person-item:hover .person-image {
+  transform: scale(1.05);
+}
+
+.person-details {
+  flex: 1;
+}
+
+.person-details h3 {
+  font-size: 20px;
+  margin: 0 0 10px;
+  color: #ffd700; /* Different color for person name */
+}
+
+.person-details p.person-films {
+  font-size: 16px;
+  color: #909090;
+  margin: 0 0 10px;
+}
+
+.person-meta {
+  font-size: 14px;
+  color: #ff6a00;
+}
+
 /* No Results Message */
 .no-results {
   text-align: center;
@@ -351,21 +419,21 @@ h2:hover::after {
 
 /* Responsive Design */
 @media (max-width: 768px) {
-  .movie-item {
+  .movie-item, .person-item {
     flex-direction: column;
     align-items: center;
   }
 
-  .movie-poster {
+  .movie-poster, .person-poster {
     margin-bottom: 20px;
   }
 
-  .movie-image {
+  .movie-image, .person-image {
     width: 100%;
     height: auto;
   }
 
-  .movie-details {
+  .movie-details, .person-details {
     text-align: center;
   }
 }

@@ -1,15 +1,74 @@
-<div class="movie-image-container">
-    <img
-      [src]="getImageUrl(person?.profile_path || null)"
-      [alt]="person?.name"
-      class="movie-image"
-    />
-    <div class="wishlist-icon" title="Add to Wishlist">
-      <span>&hearts;</span>
+<div class="container">
+  <!-- Main Content -->
+  <div>
+    <div class="main-content">
+      <!-- Actor Image Section -->
+      <div class="actor-image-container">
+        <img
+          [src]="getImageUrl(person?.profile_path || null)"
+          [alt]="person?.name"
+          class="actor-image"
+        />
+        <div class="wishlist-icon" title="Add to Wishlist">
+          <span>&hearts;</span>
+        </div>
+      </div>
+
+      <!-- Actor Details Section -->
+      <div class="actor-details">
+        <!-- Actor Name -->
+        <h1>{{ person?.name }}</h1>
+        <p class="tagline">{{ person?.known_for_department }}</p>
+
+        <!-- Actor Popularity and Birthday -->
+        <div class="tag">Popularity: {{ person?.popularity }}</div>
+        <div class="birthdate">
+          <i class="fas fa-birthday-cake"></i> Born: {{ person?.birthday }} in {{ person?.place_of_birth }}
+        </div>
+
+        <!-- Deathday (if exists) -->
+        <div class="deathdate" *ngIf="person?.deathday">
+          <i class="fas fa-cross"></i> Died: {{ person?.deathday }}
+        </div>
+
+        <!-- IMDb and Homepage Links -->
+        <div class="imdb">
+          <i class="fas fa-link"></i> 
+          IMDb: <a [href]="'https://www.imdb.com/name/' + person?.imdb_id" target="_blank">View on IMDb</a>
+        </div>
+
+        <div class="homepage" *ngIf="person?.homepage">
+          <i class="fas fa-globe"></i> 
+          Official Website: <a [href]="person?.homepage" target="_blank">{{ person?.homepage }}</a>
+        </div>
+      </div>
+
+      <!-- Description Section -->
+      <div class="description-section">
+        <h2>Biography</h2>
+        <p>
+          {{ isBiographyExpanded ? person?.biography : (person?.biography | slice:0:100) + '...' }}
+          <span class="toggle-bio" (click)="toggleBiography()">
+            {{ isBiographyExpanded ? 'Show Less' : 'Show More' }}
+          </span>
+        </p>
+      </div>
+    </div>
+
+    <!-- Actor's Films Section -->
+    <div class="actor-films-section">
+      <h2>Movies Starring {{ person?.name }}</h2>
+      <div class="film-list">
+        <div class="film-item" *ngFor="let movie of actorMovies" [routerLink]="['/film', movie.id]" routerLinkActive="active">
+          <div class="film-poster">
+            <img [src]="getImageUrl(movie.poster_path)" [alt]="movie.title" class="film-image" />
+          </div>
+          <div class="film-title">
+            <h4>{{ movie.title }}</h4>
+            <p>Release Date: {{ movie.release_date }}</p>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
-
-  <!-- Movie Details Section -->
-  <div class="movie-details">
-    <!-- Movie Title and Tagline -->
-    <h1>{{ person?.name }}</h1>
+</div>
