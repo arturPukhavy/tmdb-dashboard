@@ -4,6 +4,7 @@ import { Movie } from '../models/movie-model/movie.model';
 import { CommonModule, NgFor, NgIf } from '@angular/common';
 import { ActivatedRoute, RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
+import { PersonOverview } from '../models/model-response/person-overview.model';
 
 @Component({
   selector: 'app-film-page',
@@ -14,6 +15,7 @@ import { FormsModule } from '@angular/forms';
 })
 export class FilmPageComponent implements OnInit {
   movie: Movie | null = null;
+  movieActors: PersonOverview[] = [];
   errorMessage: string = '';
   id: number;
 
@@ -23,6 +25,7 @@ export class FilmPageComponent implements OnInit {
     this.route.params.subscribe(params => {
       this.id = +params['id']; 
       this.onFetchMovie();
+      this.onFetchActors();
     });
   }
 
@@ -38,8 +41,20 @@ export class FilmPageComponent implements OnInit {
     );
   }
 
+  onFetchActors() {
+    this.filmService.fetchActors(this.id).subscribe(
+      (actor) => {
+        this.movieActors = actor.cast;
+      },
+      (error) => {
+        console.error('Error fetching actors:', error);
+        this.errorMessage = 'Error fetching actors. Please try again.';
+      }
+    );
+  }
+
   getImageUrl(posterPath: string | null) {
-    return posterPath ? `https://image.tmdb.org/t/p/w500${posterPath}` : null;
+    return posterPath ? `https://image.tmdb.org/t/p/w500${posterPath}` : 'https://i.pinimg.com/originals/1f/1c/aa/1f1caa7f017f5b41a7b047309fa75bba.jpg';
   }
 
   getGenresAsString(): string {

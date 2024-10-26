@@ -264,6 +264,11 @@ h2:hover::after {
 }
 
 /* Search Results Section */
+.search-results {
+  flex: 1; /* Allow each section to take equal space */
+  margin: 0 10px; /* Add some margin between the columns */
+}
+
 .search-results h2 {
   font-size: 28px;
   text-align: center;
@@ -274,6 +279,12 @@ h2:hover::after {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   margin-bottom: 20px;
+}
+
+.results-container {
+  display: flex;
+  justify-content: space-between; /* Space between columns */
+  flex-wrap: wrap; /* Allow wrapping for smaller screens */
 }
 
 /* Movie List Styles */
@@ -409,6 +420,40 @@ h2:hover::after {
   color: #ff6a00;
 }
 
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+  gap: 10px;
+}
+
+.pagination button {
+  padding: 8px 16px;
+  background-color: #ff6a00;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.pagination button:hover {
+  background-color: #ff4d4d;
+  transform: scale(1.05);
+}
+
+.pagination button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.pagination span {
+  font-size: 16px;
+  font-weight: bold;
+  color: #333;
+}
+
 /* No Results Message */
 .no-results {
   text-align: center;
@@ -435,5 +480,13 @@ h2:hover::after {
 
   .movie-details, .person-details {
     text-align: center;
+  }
+
+  .results-container {
+    flex-direction: column; /* Stack the sections on smaller screens */
+  }
+
+  .search-results {
+    margin: 20px 0; /* Adjust margin for stacked layout */
   }
 }

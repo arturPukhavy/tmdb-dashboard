@@ -64,5 +64,20 @@
         </div>
       </div>
     </div>
+
+    <div class="actor-section">
+      <h2>Cast</h2>
+      <div class="actor-list">
+        <div class="actor-item" *ngFor="let person of movieActors" [routerLink]="['/person', person.id]" routerLinkActive="active">
+          <div class="actor-poster">
+            <img [src]="getImageUrl(person.profile_path)" [alt]="person.name" class="actor-image" />
+          </div>
+          <div class="actor-title">
+            <h4>{{ person.name }}</h4>
+          </div>
+        </div>
+      </div>
+    </div>
+    
   </div>
 </div>

@@ -32,6 +32,10 @@ export class PersonPageComponent {
   toggleBiography() {
     this.isBiographyExpanded = !this.isBiographyExpanded;
   }
+  shouldShowToggle(person: any): boolean {
+    // Ensure 'Show More' is only displayed if the biography is longer than 1000 characters
+    return person?.biography && person.biography.length > 1000;
+  }
 
   onFetchPerson() {
     this.personService.fetchPerson(this.id).subscribe(
@@ -62,7 +66,7 @@ export class PersonPageComponent {
   }
 
   getImageUrl(posterPath: string | null) {
-    return posterPath ? `https://image.tmdb.org/t/p/w500${posterPath}` : null;
+    return posterPath ? `https://image.tmdb.org/t/p/w500${posterPath}` : 'https://i.pinimg.com/originals/1f/1c/aa/1f1caa7f017f5b41a7b047309fa75bba.jpg';
   }
 
 }
