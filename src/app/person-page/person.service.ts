@@ -9,26 +9,15 @@ import { PersonCast } from "../models/person-model/person.cast.model";
     providedIn: 'root'
   })
   export class PersonService {
-    private apiUrl = 'http://localhost:4200/3/person';  // API endpoint
-    private apiKey = '';  
-  
+    private apiUrl = 'http://localhost:4200/3/person';  
+    
     constructor(private http: HttpClient) {}
   
     fetchPerson(id: number): Observable<Person> {
-      const headers = new HttpHeaders({
-        'Authorization': `Bearer ${this.apiKey}`,
-        'accept': 'application/json'
-      });
-  
-      return this.http.get<Person>(`${this.apiUrl}/${id}`, { headers });
+      return this.http.get<Person>(`${this.apiUrl}/${id}`);
     }
 
     fetchPersonMovie(id: number): Observable<PersonCast> {
-      const headers = new HttpHeaders({
-        'Authorization': `Bearer ${this.apiKey}`,
-        'accept': 'application/json'
-      });
-  
-      return this.http.get<PersonCast>(`${this.apiUrl}/${id}/movie_credits`, { headers });
+      return this.http.get<PersonCast>(`${this.apiUrl}/${id}/movie_credits`);
     }
   }

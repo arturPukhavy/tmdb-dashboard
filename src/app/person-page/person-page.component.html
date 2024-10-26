@@ -47,8 +47,11 @@
       <div class="description-section">
         <h2>Biography</h2>
         <p>
-          {{ isBiographyExpanded ? person?.biography : (person?.biography | slice:0:100) + '...' }}
-          <span class="toggle-bio" (click)="toggleBiography()">
+          <!-- Show the full biography if expanded, otherwise show the first 1000 characters -->
+          {{ isBiographyExpanded ? person?.biography : (person?.biography | slice: 0:1000) + '...' }}
+          
+          <!-- Only display 'Show More' / 'Show Less' if the biography is longer than 1000 characters -->
+          <span *ngIf="shouldShowToggle(person)" class="toggle-bio" (click)="toggleBiography()">
             {{ isBiographyExpanded ? 'Show Less' : 'Show More' }}
           </span>
         </p>

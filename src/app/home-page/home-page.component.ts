@@ -18,13 +18,24 @@ import { PersonOverview } from '../models/model-response/person-overview.model';
 export class HomePageComponent implements OnInit{
   listOfitems: string = '';
   searching = false;
+  isLoading: boolean = false;
+  errorMessage: string = '';
+
   filteredMovies: MovieOverview[] = [];
   filteredPersons: PersonOverview[] = [];
+
+  totalMovies: number = 0;
+  totalPersons: number = 0;
+  
+  totalMoviePages: number = 0;
+  totalPersonPages: number = 0;
+  
+  currentMoviePage: number = 1;
+  currentPersonPage: number = 1;
+
   newMovies: MovieOverview[] = [];
   trendingMovies: MovieOverview[] = [];
   upcomingMovies: MovieOverview[] = [];
-  isLoading: boolean = false;
-  errorMessage: string = '';
 
   private imageUrlBase: string = 'https://image.tmdb.org/t/p/w500';
 
@@ -39,23 +50,24 @@ export class HomePageComponent implements OnInit{
   onSearchInput() {
     if (this.listOfitems.trim() !== '') {
       this.searching = true;
-    };
-    if (this.listOfitems.trim() == '') {
-      this.searching = false;
-    }
+      this.currentMoviePage = 1; // Reset to first page on new search
+      this.currentPersonPage = 1;
+      this.onSearchMovies();
+      this.onSearchPersons();
+    } else {
+        this.filteredMovies = [];
+        this.filteredPersons = [];
+        this.searching = false;
+      }
+  }
 
-    if (this.listOfitems.trim() === '') {
-      this.filteredMovies = [];
-      this.filteredPersons = [];
-      return;
-    }
-
+  onSearchMovies() {
     this.isLoading = true;
-    this.errorMessage = '';
-
-    this.searchService.searchMovies(this.listOfitems).subscribe(
-      (movies) => {
-        this.filteredMovies = movies;
+    this.searchService.searchMovies(this.listOfitems, this.currentMoviePage).subscribe(
+      (response) => {
+        this.filteredMovies = response.results as MovieOverview[];
+        this.totalMovies = response.total_results;
+        this.totalMoviePages = response.total_pages;
         this.isLoading = false;
       },
       (error) => {
@@ -63,10 +75,15 @@ export class HomePageComponent implements OnInit{
         this.isLoading = false;
       }
     );
+  }
 
-    this.searchService.searchPersons(this.listOfitems).subscribe(
-      (persons) => {
-        this.filteredPersons = persons;
+  onSearchPersons() {
+    this.isLoading = true;
+    this.searchService.searchPersons(this.listOfitems, this.currentPersonPage).subscribe(
+      (response) => {
+        this.filteredPersons = response.results as PersonOverview[];
+        this.totalPersons = response.total_results;
+        this.totalPersonPages = response.total_pages;
         this.isLoading = false;
       },
       (error) => {
@@ -74,6 +91,16 @@ export class HomePageComponent implements OnInit{
         this.isLoading = false;
       }
     );
+  }
+
+  onMoviePageChange(page: number) {
+    this.currentMoviePage = page;
+    this.onSearchMovies();
+  }
+
+  onPersonPageChange(page: number) {
+    this.currentPersonPage = page;
+    this.onSearchPersons();
   }
 
   fetchNewMovies() {
@@ -116,7 +143,7 @@ export class HomePageComponent implements OnInit{
   }
 
   getImageUrl(posterPath: string) {
-    return posterPath ? `${this.imageUrlBase}${posterPath}` : null;
+    return posterPath ? `${this.imageUrlBase}${posterPath}` : 'https://i.pinimg.com/originals/1f/1c/aa/1f1caa7f017f5b41a7b047309fa75bba.jpg';
   }
 
 }
