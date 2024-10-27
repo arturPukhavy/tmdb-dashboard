@@ -1,9 +1,8 @@
 import { CommonModule, NgIf } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { MovieOverview } from '../models/model-response/movie-overview.model';
-import { SearchService } from './search.service';
 import { MoviesService } from './movies.service';
 import { PersonOverview } from '../models/model-response/person-overview.model';
 
@@ -15,23 +14,10 @@ import { PersonOverview } from '../models/model-response/person-overview.model';
   templateUrl: './home-page.component.html',
   styleUrl: './home-page.component.css'
 })
-export class HomePageComponent implements OnInit{
-  listOfitems: string = '';
-  searching = false;
+export class HomePageComponent implements OnInit {
   isLoading: boolean = false;
   errorMessage: string = '';
-
-  filteredMovies: MovieOverview[] = [];
-  filteredPersons: PersonOverview[] = [];
-
-  totalMovies: number = 0;
-  totalPersons: number = 0;
-  
-  totalMoviePages: number = 0;
-  totalPersonPages: number = 0;
-  
-  currentMoviePage: number = 1;
-  currentPersonPage: number = 1;
+  listOfitems: string = '';
 
   newMovies: MovieOverview[] = [];
   trendingMovies: MovieOverview[] = [];
@@ -39,68 +25,12 @@ export class HomePageComponent implements OnInit{
 
   private imageUrlBase: string = 'https://image.tmdb.org/t/p/w500';
 
-  constructor(private searchService: SearchService, private moviesService: MoviesService) {}
+  constructor(private moviesService: MoviesService, private router: Router) {}
 
   ngOnInit(): void {
     this.fetchNewMovies();
     this.fetchTrandingMovies();
     this.fetchUpcomingMovies();
-  }
-
-  onSearchInput() {
-    if (this.listOfitems.trim() !== '') {
-      this.searching = true;
-      this.currentMoviePage = 1; // Reset to first page on new search
-      this.currentPersonPage = 1;
-      this.onSearchMovies();
-      this.onSearchPersons();
-    } else {
-        this.filteredMovies = [];
-        this.filteredPersons = [];
-        this.searching = false;
-      }
-  }
-
-  onSearchMovies() {
-    this.isLoading = true;
-    this.searchService.searchMovies(this.listOfitems, this.currentMoviePage).subscribe(
-      (response) => {
-        this.filteredMovies = response.results as MovieOverview[];
-        this.totalMovies = response.total_results;
-        this.totalMoviePages = response.total_pages;
-        this.isLoading = false;
-      },
-      (error) => {
-        this.errorMessage = 'Error fetching movies. Please try again.';
-        this.isLoading = false;
-      }
-    );
-  }
-
-  onSearchPersons() {
-    this.isLoading = true;
-    this.searchService.searchPersons(this.listOfitems, this.currentPersonPage).subscribe(
-      (response) => {
-        this.filteredPersons = response.results as PersonOverview[];
-        this.totalPersons = response.total_results;
-        this.totalPersonPages = response.total_pages;
-        this.isLoading = false;
-      },
-      (error) => {
-        this.errorMessage = 'Error fetching persons. Please try again.';
-        this.isLoading = false;
-      }
-    );
-  }
-
-  onMoviePageChange(page: number) {
-    this.currentMoviePage = page;
-    this.onSearchMovies();
-  }
-
-  onPersonPageChange(page: number) {
-    this.currentPersonPage = page;
-    this.onSearchPersons();
   }
 
   fetchNewMovies() {

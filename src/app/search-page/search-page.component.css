@@ -1,0 +1,236 @@
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+.search-results {
+    flex: 1; /* Allow each section to take equal space */
+    margin: 0 10px; /* Add some margin between the columns */
+  }
+  
+  .search-results h2 {
+    font-size: 28px;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    background: linear-gradient(45deg, #ff6a00, #ffd700);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 20px;
+  }
+  
+  .results-container {
+    display: flex;
+    justify-content: space-between; /* Space between columns */
+    flex-wrap: wrap; /* Allow wrapping for smaller screens */
+  }
+  
+  /* Movie List Styles */
+  .movie-list {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+  }
+  
+  /* Movie Item */
+  .movie-item {
+    display: flex;
+    align-items: flex-start;
+    background-color: rgba(255, 255, 255, 0.08);
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+  }
+  
+  .movie-item:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+  }
+  
+  .movie-poster {
+    flex: 0 0 150px;
+    border-radius: 12px;
+    overflow: hidden;
+    margin-right: 20px;
+  }
+  
+  .movie-image {
+    width: 150px;
+    height: 225px;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+  }
+  
+  .movie-item:hover .movie-image {
+    transform: scale(1.05);
+  }
+  
+  .movie-details {
+    flex: 1;
+  }
+  
+  .movie-details h3 {
+    font-size: 22px;
+    margin: 0 0 10px;
+    color: #ff6a00;
+  }
+  
+  .movie-details p.movie-overview {
+    font-size: 16px;
+    color: #909090;
+    margin: 0 0 15px;
+  }
+  
+  .movie-meta {
+    display: flex;
+    gap: 15px;
+    font-size: 14px;
+    color: #ff6a00;
+  }
+  
+  /* People Section */
+  .people-results {
+    margin-top: 40px;
+  }
+  
+  .people-list {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+  }
+  
+  /* Person Card */
+  .person-item {
+    display: flex;
+    align-items: flex-start;
+    background-color: rgba(255, 255, 255, 0.15); /* Lighter background */
+    border-left: 4px solid #ff6a00; /* Visual difference */
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+  }
+  
+  .person-item:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+  }
+  
+  .person-poster {
+    flex: 0 0 120px;
+    border-radius: 12px;
+    overflow: hidden;
+    margin-right: 20px;
+  }
+  
+  .person-image {
+    width: 120px;
+    height: 180px;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+  }
+  
+  .person-item:hover .person-image {
+    transform: scale(1.05);
+  }
+  
+  .person-details {
+    flex: 1;
+  }
+  
+  .person-details h3 {
+    font-size: 20px;
+    margin: 0 0 10px;
+    color: #ffd700; /* Different color for person name */
+  }
+  
+  .person-details p.person-films {
+    font-size: 16px;
+    color: #909090;
+    margin: 0 0 10px;
+  }
+  
+  .person-meta {
+    font-size: 14px;
+    color: #ff6a00;
+  }
+  
+  .pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+    gap: 10px;
+  }
+  
+  .pagination button {
+    padding: 8px 16px;
+    background-color: #ff6a00;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .pagination button:hover {
+    background-color: #ff4d4d;
+    transform: scale(1.05);
+  }
+  
+  .pagination button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+  }
+  
+  .pagination span {
+    font-size: 16px;
+    font-weight: bold;
+    color: #333;
+  }
+  
+  /* No Results Message */
+  .no-results {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 18px;
+    color: #ff6a00;
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .movie-item, .person-item {
+      flex-direction: column;
+      align-items: center;
+    }
+  
+    .movie-poster, .person-poster {
+      margin-bottom: 20px;
+    }
+  
+    .movie-image, .person-image {
+      width: 100%;
+      height: auto;
+    }
+  
+    .movie-details, .person-details {
+      text-align: center;
+    }
+  
+    .results-container {
+      flex-direction: column; /* Stack the sections on smaller screens */
+    }
+  
+    .search-results {
+      margin: 20px 0; /* Adjust margin for stacked layout */
+    }
+  }
