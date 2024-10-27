@@ -7,7 +7,7 @@ import { MovieOverview } from "../models/model-response/movie-overview.model";
     providedIn: 'root'
   })
   export class top100Service {
-    private apiUrl = 'http://localhost:4200/3/movie/top_rated?language=en-US&page=1';  
+    private apiUrl = '/3/movie/top_rated?language=en-US&page=1';  
   
     constructor(private http: HttpClient) {}
   

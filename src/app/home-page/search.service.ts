@@ -9,8 +9,8 @@ import { SearchResponse } from "../models/model-response/search-response.model";
     providedIn: 'root'
   })
   export class SearchService {
-    private apiUrlMovie = 'http://localhost:4200/3/search/movie';  
-    private apiUrlPerson = 'http://localhost:4200/3/search/person';   
+    private apiUrlMovie = '/3/search/movie';  
+    private apiUrlPerson = '/3/search/person';   
   
     constructor(private http: HttpClient) {}
   
