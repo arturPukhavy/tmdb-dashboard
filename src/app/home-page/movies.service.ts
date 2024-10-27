@@ -9,9 +9,9 @@ import { SearchResponse } from "../models/model-response/search-response.model";
     providedIn: 'root'
   })
   export class MoviesService {
-    private apiNewMovies = 'http://localhost:4200/3/movie/now_playing';  
-    private apiTrendingMovies = 'http://localhost:4200/3/trending/movie/week?language=en-US';
-    private apiUpcomingMovies = 'http://localhost:4200/3/movie/upcoming?language=en-US&page=20';
+    private apiNewMovies = '/3/movie/now_playing';  
+    private apiTrendingMovies = '/3/trending/movie/week?language=en-US';
+    private apiUpcomingMovies = '/3/movie/upcoming?language=en-US&page=20';
     
     constructor(private http: HttpClient) {}
   

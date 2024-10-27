@@ -9,7 +9,7 @@ import { PersonCast } from "../models/person-model/person.cast.model";
     providedIn: 'root'
   })
   export class PersonService {
-    private apiUrl = 'http://localhost:4200/3/person';  
+    private apiUrl = '/3/person';  
     
     constructor(private http: HttpClient) {}
   

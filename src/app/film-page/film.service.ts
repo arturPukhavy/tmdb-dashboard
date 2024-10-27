@@ -8,7 +8,7 @@ import { MovieCast } from "../models/movie-model/movie.cast.model";
     providedIn: 'root'
   })
   export class FilmService {
-    private apiUrl = 'http://localhost:4200/3/movie';  
+    private apiUrl = '/3/movie';  
    
     constructor(private http: HttpClient) {}
    
