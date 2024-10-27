@@ -1,21 +1,27 @@
 <header class="header">
-    <div class="logo">
-      <img
-        src="https://i.pinimg.com/originals/1f/1c/aa/1f1caa7f017f5b41a7b047309fa75bba.jpg"
-        alt="Logo"
-      />
+  <div class="logo">
+    <img
+      src="https://i.pinimg.com/originals/1f/1c/aa/1f1caa7f017f5b41a7b047309fa75bba.jpg"
+      alt="Logo"
+    />
+  </div>
+  
+  <!-- Search Section -->
+  <section class="search-section">
+    <div class="search-container">
+      <input type="text" [(ngModel)]="listOfitems" (keyup.enter)="onSearchInput()" class="search-input"
+        placeholder="Search for movies, persons, etc." />
+      <button class="search-button" (click)="onSearchInput()">Search</button>
     </div>
-    <nav class="nav">
-      <ul>
-        <li><a routerLink="/home" routerLinkActive="active">Movies</a></li>
-        <li><a routerLink="/top100" routerLinkActive="active">Top 100</a></li>
-        <li><a href="#">Online Cinema</a></li>
-        <li><a href="#">Games</a></li>
-        <li><a href="#">Media</a></li>
-      </ul>
-    </nav>
-    <!-- <div class="auth-buttons">
-      <button class="sign-in">Sign In</button>
-      <button class="register">Register</button>
-    </div> -->
-  </header>
+  </section>
+
+  <nav class="nav">
+    <ul>
+      <li><a routerLink="/home" routerLinkActive="active">Movies</a></li>
+      <li><a routerLink="/top100" routerLinkActive="active">Top 100</a></li>
+      <li><a href="#">Online Cinema</a></li>
+      <li><a href="#">Games</a></li>
+      <li><a href="#">Media</a></li>
+    </ul>
+  </nav>
+</header>

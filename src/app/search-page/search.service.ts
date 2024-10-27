@@ -1,8 +1,6 @@
-import { HttpClient, HttpHeaders } from "@angular/common/http";
+import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { map, Observable } from "rxjs";
-import { MovieOverview } from "../models/model-response/movie-overview.model";
-import { PersonOverview } from "../models/model-response/person-overview.model";
 import { SearchResponse } from "../models/model-response/search-response.model";
 
 @Injectable({

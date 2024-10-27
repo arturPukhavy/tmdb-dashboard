@@ -1,16 +1,7 @@
 <div class="container">
 
-  <!-- Search Section -->
-  <section class="search-section">
-    <div class="search-container">
-      <input type="text" [(ngModel)]="listOfitems" (keyup.enter)="onSearchInput()" class="search-input"
-        placeholder="Search for movies, persons, etc." />
-      <button class="search-button" (click)="onSearchInput()">Search</button>
-    </div>
-  </section>
-
   <!-- New Movies Section -->
-  <section class="new-movies" *ngIf="!searching">
+  <section class="new-movies">
 
     <h2>New Movies</h2>
 
@@ -31,7 +22,7 @@
   </section>
 
   <!-- Trending Now Section (Styled like New Movies) -->
-  <section class="trending-section" *ngIf="!searching">
+  <section class="trending-section">
 
     <h2>Trending Now</h2>
 
@@ -51,7 +42,7 @@
     </div>
   </section>
 
-  <section class="upcoming-section" *ngIf="!searching">
+  <section class="upcoming-section">
 
     <h2>Upcoming</h2>
 
@@ -70,68 +61,4 @@
     </div>
   </section>
 
-</div>
-
-<!-- Search Results Section -->
-<div class="container" *ngIf="searching">
-  <div class="results-container">
-    <!-- Movie Search Results Section -->
-    <section *ngIf="filteredMovies.length > 0" class="search-results">
-      <h2>Movies ({{ totalMovies }} results)</h2>
-      <div class="movie-list">
-        <div class="movie-item" *ngFor="let movie of filteredMovies" [routerLink]="['/film', movie.id]" routerLinkActive="active">
-          <div class="movie-poster">
-            <img [src]="getImageUrl(movie.poster_path)" [alt]="movie.title" class="movie-image" />
-          </div>
-          <div class="movie-details">
-            <h3>{{ movie.title }}</h3>
-            <p class="movie-overview">{{ movie.overview }}</p>
-            <div class="movie-meta">
-              <span>Rating: {{ movie.vote_average }}</span>
-              <span>Release Date: {{ movie.release_date }}</span>
-              <span>Language: {{ movie.original_language | uppercase }}</span>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Pagination for Movies -->
-      <div class="pagination" *ngIf="totalMoviePages > 1">
-        <button (click)="onMoviePageChange(currentMoviePage - 1)" [disabled]="currentMoviePage === 1">Previous</button>
-        <span>Page {{ currentMoviePage }} of {{ totalMoviePages }}</span>
-        <button (click)="onMoviePageChange(currentMoviePage + 1)" [disabled]="currentMoviePage === totalMoviePages">Next</button>
-      </div>
-    </section>
-
-    <!-- People Search Results Section -->
-    <section *ngIf="filteredPersons.length > 0" class="search-results">
-      <h2>People ({{ totalPersons }} results)</h2>
-      <div class="people-list">
-        <div class="person-item" *ngFor="let person of filteredPersons" [routerLink]="['/person', person.id]" routerLinkActive="active">
-          <div class="person-poster">
-            <img [src]="getImageUrl(person.profile_path)" [alt]="person.name" class="person-image" />
-          </div>
-          <div class="person-details">
-            <h3>{{ person.name }}</h3>
-            <p class="person-films" *ngFor="let films of person.known_for">{{ films.title }}</p>
-            <div class="person-meta">
-              <span>Popularity: {{ person.popularity }}</span>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Pagination for People -->
-      <div class="pagination" *ngIf="totalPersonPages > 1">
-        <button (click)="onPersonPageChange(currentPersonPage - 1)" [disabled]="currentPersonPage === 1">Previous</button>
-        <span>Page {{ currentPersonPage }} of {{ totalPersonPages }}</span>
-        <button (click)="onPersonPageChange(currentPersonPage + 1)" [disabled]="currentPersonPage === totalPersonPages">Next</button>
-      </div>
-    </section>
-  </div>
-
-  <!-- No Results Message -->
-  <section class="no-results" *ngIf="filteredMovies.length === 0 && listOfitems">
-    <p>No results found for "{{ listOfitems }}"</p>
-  </section>
 </div>
