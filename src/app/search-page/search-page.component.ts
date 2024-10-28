@@ -39,9 +39,11 @@ export class SearchPageComponent implements OnInit, OnDestroy{
   ngOnInit(): void {
     this.paramsSubscription = this.route.paramMap.subscribe(params => {
       this.listOfitems = params.get('result') || ''; // Get the search term from parameters
+      this.currentMoviePage = 1; // Reset to first page when a new search is performed
+      this.currentPersonPage = 1;
+      this.onSearchMovies();
+      this.onSearchPersons();
     });
-    this.onSearchMovies();
-    this.onSearchPersons();
   }
 
   onSearchMovies() {
@@ -87,11 +89,13 @@ export class SearchPageComponent implements OnInit, OnDestroy{
   }
 
   getImageUrl(posterPath: string) {
-    return posterPath ? `${this.imageUrlBase}${posterPath}` : 'https://i.pinimg.com/originals/1f/1c/aa/1f1caa7f017f5b41a7b047309fa75bba.jpg';
+    return posterPath ? `${this.imageUrlBase}${posterPath}` : 'https://www.themoviedb.org/assets/2/v4/logos/v2/blue_square_2-d537fb228cf3ded904ef09b136fe3fec72548ebc1fea3fbbd1ad9e36364db38b.svg';
   }
 
   ngOnDestroy(): void {
-    this.paramsSubscription.unsubscribe();
+    if (this.paramsSubscription) {
+      this.paramsSubscription.unsubscribe();
+    }
   }
 
 }

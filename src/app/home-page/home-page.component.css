@@ -186,6 +186,36 @@ h2:hover::after {
   font-size: 14px;
 }
 
+.disclaimer {
+  background-color: rgba(255, 255, 255, 0.8);
+  color: #333;
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  margin-bottom: 20px;
+  font-size: 14px;
+  text-align: center;
+}
+
+.disclaimer h3 {
+  margin: 0 0 10px;
+  font-size: 18px;
+  color: #ff6a00; /* Match the theme color */
+}
+
+.disclaimer p {
+  margin: 5px 0;
+}
+
+.disclaimer a {
+  color: #ff6a00;
+  text-decoration: underline;
+}
+
+.disclaimer a:hover {
+  color: #ffd700; /* Change color on hover */
+}
+
 /* Responsive Design */
 @media (max-width: 768px) {
   .movie-card {
@@ -195,5 +225,6 @@ h2:hover::after {
   .movie-image {
     height: 180px;
   }
+
 }
 
