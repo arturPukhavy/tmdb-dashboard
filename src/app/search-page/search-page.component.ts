@@ -39,9 +39,11 @@ export class SearchPageComponent implements OnInit, OnDestroy{
   ngOnInit(): void {
     this.paramsSubscription = this.route.paramMap.subscribe(params => {
       this.listOfitems = params.get('result') || ''; // Get the search term from parameters
+      this.currentMoviePage = 1; // Reset to first page when a new search is performed
+      this.currentPersonPage = 1;
+      this.onSearchMovies();
+      this.onSearchPersons();
     });
-    this.onSearchMovies();
-    this.onSearchPersons();
   }
 
   onSearchMovies() {
@@ -91,7 +93,9 @@ export class SearchPageComponent implements OnInit, OnDestroy{
   }
 
   ngOnDestroy(): void {
-    this.paramsSubscription.unsubscribe();
+    if (this.paramsSubscription) {
+      this.paramsSubscription.unsubscribe();
+    }
   }
 
 }
