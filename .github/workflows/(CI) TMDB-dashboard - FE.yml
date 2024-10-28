@@ -34,7 +34,7 @@ jobs:
       
     - name: Build
       run: |        
-        ng build --configuration=development
+        ng build --configuration=production
         ls -l
         echo "Build Completed"
     # - name: Test
