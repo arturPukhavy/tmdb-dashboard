@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { FilmService } from './film.service';
-import { Movie } from '../models/movie-model/movie.model';
+import { FilmService } from '../../core/services/film.service';
+import { Movie } from '../../core/models/movie-model/movie.model';
 import { CommonModule, NgFor, NgIf } from '@angular/common';
 import { ActivatedRoute, RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
-import { PersonOverview } from '../models/model-response/person-overview.model';
+import { PersonOverview } from '../../core/models/model-response/person-overview.model';
 
 @Component({
   selector: 'app-film-page',

@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { HomePageComponent } from './home-page/home-page.component';
-import { HeaderComponent } from './header/header.component';
+import { HomePageComponent } from './pages/home-page/home-page.component';
+import { Location } from '@angular/common';
+import { HeaderComponent } from './shared/header/header.component';
 
 @Component({
   selector: 'app-root',
@@ -11,5 +12,9 @@ import { HeaderComponent } from './header/header.component';
   styleUrl: './app.component.css'
 })
 export class AppComponent {
-  title = 'Movies';
+  constructor(private location: Location) {}
+
+  goBack(): void {
+    this.location.back(); // Navigates to the previous route
+  }
 }
