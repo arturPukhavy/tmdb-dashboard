@@ -51,6 +51,10 @@ body::after {
   margin-bottom: 50px;
 }
 
+.upcoming-section {
+  margin-bottom: 50px;
+}
+
 /* Titles and Phrases */
 h2 {
   font-size: 28px;

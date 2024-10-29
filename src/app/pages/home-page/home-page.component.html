@@ -9,31 +9,10 @@
     <p>More details on the project can be found on GitHub: <a href="https://github.com/arturPukhavy/tmdb-dashboard" target="_blank">GitHub Repository</a>.</p>
   </div>
 
-  <!-- New Movies Section -->
-  <section class="new-movies">
-
-    <h2>New Movies</h2>
-
-    <a href="#" class="watch-online">Watch Online</a>
-
-    <!-- Movie Cards - Horizontal Scroll -->
-    <div class="movie-cards">
-      <div class="movie-card" *ngFor="let movie of newMovies" [routerLink]="['/film', movie.id]"
-        routerLinkActive="active">
-        <img [src]="getImageUrl(movie.poster_path)" [alt]="movie.title" class="movie-image" />
-        <div class="movie-info">
-          <h3>{{movie.title}}</h3>
-          <h5>Rating: {{movie.vote_average}}</h5>
-          <p>{{movie.release_date}}</p>         
-        </div>
-      </div>
-    </div>
-  </section>
-
   <!-- Trending Now Section (Styled like New Movies) -->
   <section class="trending-section">
 
-    <h2>Trending Now</h2>
+    <h2>Trending Movies</h2>
 
     <a href="#" class="watch-online">Watch Online</a>
 
@@ -51,6 +30,47 @@
     </div>
   </section>
 
+  <section class="trending-section">
+
+    <h2>Trending People</h2>
+
+    <a href="#" class="watch-online">Watch Online</a>
+
+    <div class="movie-cards">
+      <div class="movie-card" *ngFor="let person of trendingPeople" [routerLink]="['/person', person.id]"
+        routerLinkActive="active">
+        <img [src]="getImageUrl(person.profile_path)" [alt]="person.name" class="movie-image" />
+        <div class="movie-info">
+          <h3>{{ person.name }}</h3>
+          <div class="person-meta">
+            <h5>Popularity: {{ person.popularity }}</h5>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- New Movies Section -->
+  <section class="new-movies">
+
+    <h2>New</h2>
+
+    <a href="#" class="watch-online">Watch Online</a>
+
+    <!-- Movie Cards - Horizontal Scroll -->
+    <div class="movie-cards">
+      <div class="movie-card" *ngFor="let movie of newMovies" [routerLink]="['/film', movie.id]"
+        routerLinkActive="active">
+        <img [src]="getImageUrl(movie.poster_path)" [alt]="movie.title" class="movie-image" />
+        <div class="movie-info">
+          <h3>{{movie.title}}</h3>
+          <h5>Rating: {{movie.vote_average}}</h5>
+          <p>{{movie.release_date}}</p>         
+        </div>
+      </div>
+    </div>
+  </section>
+
   <section class="upcoming-section">
 
     <h2>Upcoming</h2>
@@ -59,6 +79,25 @@
 
     <div class="movie-cards">
       <div class="movie-card" *ngFor="let movie of upcomingMovies" [routerLink]="['/film', movie.id]"
+        routerLinkActive="active">
+        <img [src]="getImageUrl(movie.poster_path)" [alt]="movie.title" class="movie-image" />
+        <div class="movie-info">
+          <h3>{{movie.title}}</h3>
+          <h5>Rating: {{movie.vote_average || '-'}}</h5>
+          <p>{{movie.release_date}}</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="popular-section">
+
+    <h2>Popular</h2>
+
+    <a href="#" class="watch-online">Watch Online</a>
+
+    <div class="movie-cards">
+      <div class="movie-card" *ngFor="let movie of popularMovies" [routerLink]="['/film', movie.id]"
         routerLinkActive="active">
         <img [src]="getImageUrl(movie.poster_path)" [alt]="movie.title" class="movie-image" />
         <div class="movie-info">

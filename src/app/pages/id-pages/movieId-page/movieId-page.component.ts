@@ -1,19 +1,19 @@
 import { Component, OnInit } from '@angular/core';
-import { FilmService } from '../../core/services/film.service';
-import { Movie } from '../../core/models/movie-model/movie.model';
+import { FilmService } from '../../../core/services/film.service';
+import { Movie } from '../../../core/models/movie-model/movie.model';
 import { CommonModule, NgFor, NgIf } from '@angular/common';
 import { ActivatedRoute, RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
-import { PersonOverview } from '../../core/models/model-response/person-overview.model';
+import { PersonOverview } from '../../../core/models/model-response/person-overview.model';
 
 @Component({
   selector: 'app-film-page',
   standalone: true,
   imports: [NgFor, RouterModule, FormsModule, NgIf, CommonModule],
-  templateUrl: './film-page.component.html',
-  styleUrl: './film-page.component.css'
+  templateUrl: './movieId-page.component.html',
+  styleUrl: './movieId-page.component.css'
 })
-export class FilmPageComponent implements OnInit {
+export class MovieIdPageComponent implements OnInit {
   movie: Movie | null = null;
   movieActors: PersonOverview[] = [];
   errorMessage: string = '';

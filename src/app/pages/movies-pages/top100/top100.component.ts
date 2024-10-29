@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { top100Service } from '../../core/services/top100.service';
-import { MovieOverview } from '../../core/models/model-response/movie-overview.model';
+import { top100Service } from '../../../core/services/top100.service';
+import { MovieOverview } from '../../../core/models/model-response/movie-overview.model';
 import { RouterModule } from '@angular/router';
 import { CommonModule, NgFor } from '@angular/common';
 

@@ -54,28 +54,37 @@ background-color: rgba(255, 255, 255, 0.8); /* Another star-like spot */
   margin: 10px;
 }
 
-.nav ul li a::after {
-  content: '';
-  position: absolute;
-  top: 90px;
-  left: 15px;
-  width: 98%;
-  height: 4px;
-  background-color: #ff6a00;
-  opacity: 0;
-  transform: scaleX(0);
-  transform-origin: right;
-  transition: transform 0.3s ease, opacity 0.3s ease;
-  }
-
 .nav ul li a:hover {
   color: #ff6a00;
 }
 
-.nav ul li a:hover::after {
-  transform: scaleX(1);
-  opacity: 1;
-  transform-origin: left;
+.dropdown {
+  position: relative; /* Position relative for dropdown positioning */
+}
+
+.dropdown-content {
+  display: none; /* Hide dropdown by default */
+  position: absolute; /* Positioning for dropdown */
+  background-color: #24305e; /* Same background as header */
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  z-index: 1; /* Ensure dropdown appears above other elements */
+}
+
+.dropdown:hover .dropdown-content {
+  display: block; /* Show dropdown on hover */
+}
+
+.dropdown-content a {
+  color: #f9f9f9; /* Link color */
+  padding: 12px 16px; /* Padding for links */
+  text-decoration: none; /* Remove underline */
+  display: block; /* Make links block elements */
+  transition: background-color 0.3s; /* Smooth transition for hover */
+}
+
+.dropdown-content a:hover {
+  color: #ff6a00; /* Change background on hover */
 }
 
 /* Search Section */
