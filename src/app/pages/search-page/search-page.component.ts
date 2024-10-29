@@ -1,8 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
-import { SearchService } from './search.service';
-import { MovieOverview } from '../models/model-response/movie-overview.model';
-import { PersonOverview } from '../models/model-response/person-overview.model';
+import { SearchService } from '../../core/services/search.service';
+import { MovieOverview } from '../../core/models/model-response/movie-overview.model';
+import { PersonOverview } from '../../core/models/model-response/person-overview.model';
 import { FormsModule } from '@angular/forms';
 import { CommonModule, NgIf } from '@angular/common';
 import { Subscription } from 'rxjs';

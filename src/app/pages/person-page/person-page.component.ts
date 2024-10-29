@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
-import { Person } from '../models/person-model/person.model';
-import { PersonService } from './person.service';
+import { Person } from '../../core/models/person-model/person.model';
+import { PersonService } from '../../core/services/person.service';
 import { ActivatedRoute, RouterModule } from '@angular/router';
 import { CommonModule, NgFor, NgIf } from '@angular/common';
-import { MovieOverview } from '../models/model-response/movie-overview.model';
+import { MovieOverview } from '../../core/models/model-response/movie-overview.model';
 
 @Component({
   selector: 'app-person-page',

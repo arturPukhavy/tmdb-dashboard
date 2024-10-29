@@ -187,7 +187,7 @@ h2:hover::after {
 }
 
 .disclaimer {
-  background-color: rgba(255, 255, 255, 0.8);
+  background-color: #2f2f4f;
   color: #333;
   padding: 15px;
   border-radius: 8px;
@@ -199,12 +199,14 @@ h2:hover::after {
 
 .disclaimer h3 {
   margin: 0 0 10px;
-  font-size: 18px;
+  font-size: 22px;
   color: #ff6a00; /* Match the theme color */
 }
 
 .disclaimer p {
+  font-size: 16px;
   margin: 5px 0;
+  color: #ffffff;
 }
 
 .disclaimer a {

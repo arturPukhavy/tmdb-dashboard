@@ -2,9 +2,9 @@ import { CommonModule, NgIf } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
-import { MovieOverview } from '../models/model-response/movie-overview.model';
-import { MoviesService } from './movies.service';
-import { PersonOverview } from '../models/model-response/person-overview.model';
+import { MovieOverview } from '../../core/models/model-response/movie-overview.model';
+import { MoviesService } from '../../core/services/movies.service';
+import { PersonOverview } from '../../core/models/model-response/person-overview.model';
 
 
 @Component({
