@@ -1,0 +1,30 @@
+<div class="container">
+    <div class="results-container">
+      <!-- Movie Search Results Section -->
+      <section class="search-results">
+        <h2>Movies </h2>
+        <div class="movie-list">
+          <div class="movie-item" *ngFor="let movie of horrorMovies" [routerLink]="['/film', movie.id]" routerLinkActive="active">
+            <div class="movie-poster">
+              <img [src]="getImageUrl(movie.poster_path)" [alt]="movie.title" class="movie-image" />
+            </div>
+            <div class="movie-details">
+              <h3>{{ movie.title }}</h3>
+              <p class="movie-overview">{{ movie.overview }}</p>
+              <div class="movie-meta">
+                <span>Rating: {{ movie.vote_average }}</span>
+                <span>Release Date: {{ movie.release_date }}</span>
+                <span>Language: {{ movie.original_language | uppercase }}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+  
+        <!-- Pagination for Movies -->
+        <!-- <div class="pagination" *ngIf="totalMoviePages > 1">
+          <button (click)="onMoviePageChange(currentMoviePage - 1)" [disabled]="currentMoviePage === 1">Previous</button>
+          <span>Page {{ currentMoviePage }} of {{ totalMoviePages }}</span>
+          <button (click)="onMoviePageChange(currentMoviePage + 1)" [disabled]="currentMoviePage === totalMoviePages">Next</button>
+        </div> -->
+      </section>
+</div>

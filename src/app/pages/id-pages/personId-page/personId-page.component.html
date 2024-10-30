@@ -55,9 +55,21 @@
     <div class="actor-photos-section">
       <h2>Photos</h2>
       <div class="actor-photos-list">
-        <div class="photo-item" *ngFor="let photo of images">
-          <img [src]="getImageUrl(photo.file_path)" [alt]="person?.name" class="actor-photo" />
+        <div class="photo-item" *ngFor="let photo of images; let i = index">
+          <img 
+            [src]="getImageUrl(photo.file_path)" 
+            [alt]="person?.name" 
+            class="actor-photo" 
+            (click)="openModal(getImageUrl(photo.file_path), i)"
+          />
         </div>
+      </div>   
+      <!-- Modal for displaying larger image -->
+      <div class="modal" *ngIf="isModalOpen">
+        <span class="close" (click)="closeModal()">&times;</span>
+        <button class="arrow left" (click)="prevPhoto()">&#10094;</button>
+        <img class="modal-content" [src]="selectedImage" alt="Large view" />
+        <button class="arrow right" (click)="nextPhoto()">&#10095;</button>
       </div>
     </div>
 

@@ -1,18 +1,28 @@
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { Router, RouterOutlet } from '@angular/router';
 import { HomePageComponent } from './pages/home-page/home-page.component';
-import { Location } from '@angular/common';
+import { CommonModule, Location } from '@angular/common';
 import { HeaderComponent } from './shared/header/header.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, HomePageComponent, HeaderComponent],
+  imports: [RouterOutlet, HeaderComponent, CommonModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
 export class AppComponent {
-  constructor(private location: Location) {}
+  showBackButton = true;
+
+  constructor(private location: Location, private router: Router) {
+    this.router.events.subscribe((event: any) => {
+      if (event.url === '/') {
+        this.showBackButton = false; // Don't show the button on the first page
+      } else {
+        this.showBackButton = true;
+      }
+    });
+  }
 
   goBack(): void {
     this.location.back(); // Navigates to the previous route

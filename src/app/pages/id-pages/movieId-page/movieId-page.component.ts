@@ -20,6 +20,9 @@ export class MovieIdPageComponent implements OnInit {
   images: MovieImages[] = [];
   errorMessage: string = '';
   id: number;
+  currentIndex: number = 0;
+  isModalOpen = false;
+  selectedImage: string | null = null;
 
   constructor(private filmService: FilmService, private route: ActivatedRoute) {}
 
@@ -54,6 +57,31 @@ export class MovieIdPageComponent implements OnInit {
         this.errorMessage = 'Error fetching images. Please try again.';
       }
     );
+  }
+
+  openModal(imageUrl: string, index: number) {
+    this.selectedImage = imageUrl;
+    this.currentIndex = index;
+    this.isModalOpen = true;
+  }
+
+  closeModal() {
+    this.isModalOpen = false;
+    this.selectedImage = null;
+  }
+
+  prevPhoto() {
+    if (this.currentIndex > 0) {
+      this.currentIndex--;
+      this.selectedImage = this.getImageUrl(this.images[this.currentIndex].file_path);
+    }
+  }
+
+  nextPhoto() {
+    if (this.currentIndex < this.images.length - 1) {
+      this.currentIndex++;
+      this.selectedImage = this.getImageUrl(this.images[this.currentIndex].file_path);
+    }
   }
 
   onFetchActors() {

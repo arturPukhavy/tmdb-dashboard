@@ -1,8 +1,11 @@
+import { Genre } from "../movie-model/genre.model";
+
 export interface MovieOverview {
     adult: boolean;
     backdrop_path: string | null;
     genre_ids: number[];
     id: number;
+    genres: Genre[];
     original_language: string;
     original_title: string;
     overview: string;

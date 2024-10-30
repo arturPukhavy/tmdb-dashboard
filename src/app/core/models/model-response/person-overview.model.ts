@@ -6,4 +6,5 @@ export interface PersonOverview {
     profile_path: string;
     known_for: MovieOverview[]; 
     popularity: number;
+    character: string;
   }

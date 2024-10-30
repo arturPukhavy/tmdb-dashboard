@@ -65,13 +65,25 @@
       </div>
     </div>
 
-    <!-- Actor Photos Section -->
+    <!-- Movie Photos Section -->
     <div class="photos-section">
       <h2>Photos</h2>
       <div class="photos-list">
-        <div class="photo-item" *ngFor="let photo of images">
-          <img [src]="getImageUrl(photo.file_path)" [alt]="movie?.title" class="movie-photo" />
+        <div class="photo-item" *ngFor="let photo of images; let i = index">
+          <img 
+            [src]="getImageUrl(photo.file_path)" 
+            [alt]="movie?.title" 
+            class="movie-photo" 
+            (click)="openModal(getImageUrl(photo.file_path), i)"
+          />
         </div>
+      </div>   
+      <!-- Modal for displaying larger image -->
+      <div class="modal" *ngIf="isModalOpen">
+        <span class="close" (click)="closeModal()">&times;</span>
+        <button class="arrow left" (click)="prevPhoto()">&#10094;</button>
+        <img class="modal-content" [src]="selectedImage" alt="Large view" />
+        <button class="arrow right" (click)="nextPhoto()">&#10095;</button>
       </div>
     </div>
 
@@ -83,7 +95,8 @@
             <img [src]="getImageUrl(person.profile_path)" [alt]="person.name" class="actor-image" />
           </div>
           <div class="actor-title">
-            <h4>{{ person.name }}</h4>
+            <h3>{{ person.name }}</h3>
+            <h4>{{ person.character }}</h4>
           </div>
         </div>
       </div>

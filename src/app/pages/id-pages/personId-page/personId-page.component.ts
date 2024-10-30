@@ -19,7 +19,10 @@ export class PersonIdPageComponent {
   images: PersonImages[] = [];
   errorMessage: string = '';
   id: number;
+  currentIndex: number = 0;
   isBiographyExpanded = false;
+  isModalOpen = false;
+  selectedImage: string | null = null;
 
   constructor(private personService: PersonService, private route: ActivatedRoute) {}
 
@@ -78,6 +81,31 @@ export class PersonIdPageComponent {
         this.errorMessage = 'Error fetching movies. Please try again.';
       }
     );
+  }
+
+  openModal(imageUrl: string, index: number) {
+    this.selectedImage = imageUrl;
+    this.currentIndex = index;
+    this.isModalOpen = true;
+  }
+
+  closeModal() {
+    this.isModalOpen = false;
+    this.selectedImage = null;
+  }
+
+  prevPhoto() {
+    if (this.currentIndex > 0) {
+      this.currentIndex--;
+      this.selectedImage = this.getImageUrl(this.images[this.currentIndex].file_path);
+    }
+  }
+
+  nextPhoto() {
+    if (this.currentIndex < this.images.length - 1) {
+      this.currentIndex++;
+      this.selectedImage = this.getImageUrl(this.images[this.currentIndex].file_path);
+    }
   }
 
   getImageUrl(posterPath: string | null) {
