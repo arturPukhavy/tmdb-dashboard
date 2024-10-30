@@ -19,4 +19,8 @@ import { MovieCast } from "../models/movie-model/movie.cast.model";
     fetchActors(id: number): Observable<MovieCast> {  
       return this.http.get<MovieCast>(`${this.apiUrl}/${id}/credits`);
     }
+
+    fetchImages(id: number): Observable<Movie> {  
+      return this.http.get<Movie>(`${this.apiUrl}/${id}/images`);
+    }
   }

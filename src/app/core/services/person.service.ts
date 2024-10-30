@@ -20,4 +20,8 @@ import { PersonCast } from "../models/person-model/person.cast.model";
     fetchPersonMovie(id: number): Observable<PersonCast> {
       return this.http.get<PersonCast>(`${this.apiUrl}/${id}/movie_credits`);
     }
+
+    fetchPersonImages(id: number): Observable<Person> {
+      return this.http.get<Person>(`${this.apiUrl}/${id}/images`);
+    }
   }

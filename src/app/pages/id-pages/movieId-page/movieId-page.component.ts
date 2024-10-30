@@ -5,6 +5,7 @@ import { CommonModule, NgFor, NgIf } from '@angular/common';
 import { ActivatedRoute, RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { PersonOverview } from '../../../core/models/model-response/person-overview.model';
+import { MovieImages } from '../../../core/models/movie-model/movie.images.model';
 
 @Component({
   selector: 'app-film-page',
@@ -16,6 +17,7 @@ import { PersonOverview } from '../../../core/models/model-response/person-overv
 export class MovieIdPageComponent implements OnInit {
   movie: Movie | null = null;
   movieActors: PersonOverview[] = [];
+  images: MovieImages[] = [];
   errorMessage: string = '';
   id: number;
 
@@ -25,6 +27,7 @@ export class MovieIdPageComponent implements OnInit {
     this.route.params.subscribe(params => {
       this.id = +params['id']; 
       this.onFetchMovie();
+      this.onFetchImages();
       this.onFetchActors();
     });
   }
@@ -37,6 +40,18 @@ export class MovieIdPageComponent implements OnInit {
       (error) => {
         console.error('Error fetching movie:', error);
         this.errorMessage = 'Error fetching movies. Please try again.';
+      }
+    );
+  }
+
+  onFetchImages() {
+    this.filmService.fetchImages(this.id).subscribe(
+      (photos) => {
+        this.images = photos.backdrops;
+      },
+      (error) => {
+        console.error('Error fetching images:', error);
+        this.errorMessage = 'Error fetching images. Please try again.';
       }
     );
   }

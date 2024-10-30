@@ -10,7 +10,7 @@ import { PersonOverview } from "../models/model-response/person-overview.model";
     providedIn: 'root'
   })
   export class HomeService {
-    private apiNewMovies = '/3/movie/now_playing';  
+    private apiNewMovies = '/3/movie/now_playing?language=en-US&page=1';  
     private apiTrendingMovies = '/3/trending/movie/week?language=en-US';
     private apiUpcomingMovies = '/3/movie/upcoming?language=en-US&page=20';
     private apiPopularMovies = '/3/movie/popular?language=en-US&page=2';

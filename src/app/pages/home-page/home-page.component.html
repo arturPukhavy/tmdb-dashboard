@@ -12,7 +12,7 @@
   <!-- Trending Now Section (Styled like New Movies) -->
   <section class="trending-section">
 
-    <h2>Trending Movies</h2>
+    <h2>Trending Now</h2>
 
     <a href="#" class="watch-online">Watch Online</a>
 
@@ -28,13 +28,6 @@
         </div>
       </div>
     </div>
-  </section>
-
-  <section class="trending-section">
-
-    <h2>Trending People</h2>
-
-    <a href="#" class="watch-online">Watch Online</a>
 
     <div class="movie-cards">
       <div class="movie-card" *ngFor="let person of trendingPeople" [routerLink]="['/person', person.id]"
@@ -53,7 +46,7 @@
   <!-- New Movies Section -->
   <section class="new-movies">
 
-    <h2>New</h2>
+    <h2>New Movies</h2>
 
     <a href="#" class="watch-online">Watch Online</a>
 
@@ -73,7 +66,7 @@
 
   <section class="upcoming-section">
 
-    <h2>Upcoming</h2>
+    <h2>Upcoming Movies</h2>
 
     <a href="#" class="watch-online">Watch Online</a>
 
@@ -92,7 +85,7 @@
 
   <section class="popular-section">
 
-    <h2>Popular</h2>
+    <h2>Popular Movies</h2>
 
     <a href="#" class="watch-online">Watch Online</a>
 

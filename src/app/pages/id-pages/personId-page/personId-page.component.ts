@@ -4,6 +4,7 @@ import { PersonService } from '../../../core/services/person.service';
 import { ActivatedRoute, RouterModule } from '@angular/router';
 import { CommonModule, NgFor, NgIf } from '@angular/common';
 import { MovieOverview } from '../../../core/models/model-response/movie-overview.model';
+import { PersonImages } from '../../../core/models/person-model/person.images.model';
 
 @Component({
   selector: 'app-person-page',
@@ -15,6 +16,7 @@ import { MovieOverview } from '../../../core/models/model-response/movie-overvie
 export class PersonIdPageComponent {
   person: Person | null = null;
   actorMovies: MovieOverview[] = [];
+  images: PersonImages[] = [];
   errorMessage: string = '';
   id: number;
   isBiographyExpanded = false;
@@ -25,6 +27,7 @@ export class PersonIdPageComponent {
     this.route.params.subscribe(params => {
       this.id = +params['id']; 
       this.onFetchPerson();
+      this.onFetchPersonImages();
       this.onFetchPersonMovies();
     });
   }
@@ -45,6 +48,18 @@ export class PersonIdPageComponent {
       (error) => {
         console.error('Error fetching person:', error);
         this.errorMessage = 'Error fetching person. Please try again.';
+      }
+    );
+  }
+
+  onFetchPersonImages() {
+    this.personService.fetchPersonImages(this.id).subscribe(
+      (photos) => {
+        this.images = photos.profiles;
+      },
+      (error) => {
+        console.error('Error fetching images:', error);
+        this.errorMessage = 'Error fetching images. Please try again.';
       }
     );
   }

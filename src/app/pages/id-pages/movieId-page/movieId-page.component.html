@@ -65,6 +65,16 @@
       </div>
     </div>
 
+    <!-- Actor Photos Section -->
+    <div class="photos-section">
+      <h2>Photos</h2>
+      <div class="photos-list">
+        <div class="photo-item" *ngFor="let photo of images">
+          <img [src]="getImageUrl(photo.file_path)" [alt]="movie?.title" class="movie-photo" />
+        </div>
+      </div>
+    </div>
+
     <div class="actor-section">
       <h2>Cast</h2>
       <div class="actor-list">

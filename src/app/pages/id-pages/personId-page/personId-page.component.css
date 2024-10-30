@@ -165,6 +165,43 @@ body {
   .toggle-bio:hover {
     text-decoration: none;
   }
+
+  .actor-photos-section {
+    margin-top: 40px;
+    margin-bottom: 40px;
+  }
+  
+  .actor-photos-section h2 {
+    font-size: 28px;
+    color: #ff6a00;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .actor-photos-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 15px;
+  }
+  
+  .photo-item {
+    overflow: hidden;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0.2, 0.2, 0.2, 0);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .photo-item:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 20px rgba(0.3, 0.3, 0.3, 0);
+  }
+  
+  .actor-photo {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    object-fit: cover;
+  }
   
   /* Films Section */
   .actor-films-section {
