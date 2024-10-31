@@ -1,23 +1,32 @@
 import { Component } from '@angular/core';
-import { Person } from '../../core/models/person-model/person.model';
-import { PersonService } from '../../core/services/person.service';
+import { Person } from '../../../core/models/person-model/person.model';
+import { PersonService } from '../../../core/services/person.service';
 import { ActivatedRoute, RouterModule } from '@angular/router';
 import { CommonModule, NgFor, NgIf } from '@angular/common';
-import { MovieOverview } from '../../core/models/model-response/movie-overview.model';
+import { MovieOverview } from '../../../core/models/model-response/movie-overview.model';
+import { PersonImages } from '../../../core/models/person-model/person.images.model';
 
 @Component({
   selector: 'app-person-page',
   standalone: true,
   imports: [NgIf, NgFor, RouterModule, CommonModule],
-  templateUrl: './person-page.component.html',
-  styleUrl: './person-page.component.css'
+  templateUrl: './personId-page.component.html',
+  styleUrl: './personId-page.component.css'
 })
-export class PersonPageComponent {
+export class PersonIdPageComponent {
   person: Person | null = null;
   actorMovies: MovieOverview[] = [];
+  images: PersonImages[] = [];
+
   errorMessage: string = '';
   id: number;
-  isBiographyExpanded = false;
+  currentIndex: number = 0;
+  isExpanded = false;
+  isModalOpen = false;
+  selectedImage: string | null = null;
+
+  displayedCount: number = 7; // Number of images to display initially
+  increment: number = 7; // Number of images to add when "Show More" is clicked
 
   constructor(private personService: PersonService, private route: ActivatedRoute) {}
 
@@ -25,16 +34,24 @@ export class PersonPageComponent {
     this.route.params.subscribe(params => {
       this.id = +params['id']; 
       this.onFetchPerson();
+      this.onFetchPersonImages();
       this.onFetchPersonMovies();
     });
   }
 
   toggleBiography() {
-    this.isBiographyExpanded = !this.isBiographyExpanded;
+    this.isExpanded = !this.isExpanded;
   }
   shouldShowToggle(person: any): boolean {
     // Ensure 'Show More' is only displayed if the biography is longer than 1000 characters
     return person?.biography && person.biography.length > 1000;
+  }
+
+  showMore() {
+    this.displayedCount += this.increment;
+  }
+  showLess() {
+    this.displayedCount = Math.max(7, this.displayedCount - this.increment); // Ensure at least 7 images are shown
   }
 
   onFetchPerson() {
@@ -45,6 +62,18 @@ export class PersonPageComponent {
       (error) => {
         console.error('Error fetching person:', error);
         this.errorMessage = 'Error fetching person. Please try again.';
+      }
+    );
+  }
+
+  onFetchPersonImages() {
+    this.personService.fetchPersonImages(this.id).subscribe(
+      (photos) => {
+        this.images = photos.profiles;
+      },
+      (error) => {
+        console.error('Error fetching images:', error);
+        this.errorMessage = 'Error fetching images. Please try again.';
       }
     );
   }
@@ -63,6 +92,31 @@ export class PersonPageComponent {
         this.errorMessage = 'Error fetching movies. Please try again.';
       }
     );
+  }
+
+  openModal(imageUrl: string, index: number) {
+    this.selectedImage = imageUrl;
+    this.currentIndex = index;
+    this.isModalOpen = true;
+  }
+
+  closeModal() {
+    this.isModalOpen = false;
+    this.selectedImage = null;
+  }
+
+  prevPhoto() {
+    if (this.currentIndex > 0) {
+      this.currentIndex--;
+      this.selectedImage = this.getImageUrl(this.images[this.currentIndex].file_path);
+    }
+  }
+
+  nextPhoto() {
+    if (this.currentIndex < this.images.length - 1) {
+      this.currentIndex++;
+      this.selectedImage = this.getImageUrl(this.images[this.currentIndex].file_path);
+    }
   }
 
   getImageUrl(posterPath: string | null) {

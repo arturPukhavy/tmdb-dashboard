@@ -3,11 +3,46 @@
   <div class="disclaimer">
     <h3>Disclaimer</h3>
     <p>
-      The website is a demo (POC) created by <a href="https://www.linkedin.com/in/artur-pukhavoi-7b104b302" target="_blank">Artur Pukhavoi</a>. It is intended for non-commercial use.
+      The website is a demo (POC) created by <a href="https://www.linkedin.com/in/artur-pukhavoi-7b104b302" target="_blank">Artur Pukhavoi</a>. 
+      It is NOT intended for commercial usage.
+      More details on the project can be found on GitHub: <a href="https://github.com/arturPukhavy/tmdb-dashboard" target="_blank">GitHub Repository</a>.
     </p>
     <p><strong>API:</strong> This product uses the TMDB API but is not endorsed or certified by TMDB.</p>
-    <p>More details on the project can be found on GitHub: <a href="https://github.com/arturPukhavy/tmdb-dashboard" target="_blank">GitHub Repository</a>.</p>
   </div>
+
+  <!-- Trending Now Section (Styled like New Movies) -->
+  <section class="trending-section">
+
+    <h2>Trending Now</h2>
+
+    <a href="#" class="watch-online">Watch Online</a>
+
+    <!-- Trending Cards - Horizontal Scroll -->
+    <div class="movie-cards">
+      <div class="movie-card" *ngFor="let movie of trendingMovies" [routerLink]="['/film', movie.id]"
+        routerLinkActive="active">
+        <img [src]="getImageUrl(movie.poster_path)" [alt]="movie.title" class="movie-image" />
+        <div class="movie-info">
+          <h3>{{movie.title}}</h3>
+          <h5>Rating: {{movie.vote_average}}</h5>
+          <p>{{movie.release_date}}</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="movie-cards">
+      <div class="movie-card" *ngFor="let person of trendingPeople" [routerLink]="['/person', person.id]"
+        routerLinkActive="active">
+        <img [src]="getImageUrl(person.profile_path)" [alt]="person.name" class="movie-image" />
+        <div class="movie-info">
+          <h3>{{ person.name }}</h3>
+          <div class="person-meta">
+            <h5>Popularity: {{ person.popularity }}</h5>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
   <!-- New Movies Section -->
   <section class="new-movies">
@@ -30,35 +65,33 @@
     </div>
   </section>
 
-  <!-- Trending Now Section (Styled like New Movies) -->
-  <section class="trending-section">
+  <section class="upcoming-section">
 
-    <h2>Trending Now</h2>
+    <h2>Upcoming Movies</h2>
 
     <a href="#" class="watch-online">Watch Online</a>
 
-    <!-- Trending Cards - Horizontal Scroll -->
     <div class="movie-cards">
-      <div class="movie-card" *ngFor="let movie of trendingMovies" [routerLink]="['/film', movie.id]"
+      <div class="movie-card" *ngFor="let movie of upcomingMovies" [routerLink]="['/film', movie.id]"
         routerLinkActive="active">
         <img [src]="getImageUrl(movie.poster_path)" [alt]="movie.title" class="movie-image" />
         <div class="movie-info">
           <h3>{{movie.title}}</h3>
-          <h5>Rating: {{movie.vote_average}}</h5>
+          <h5>Rating: {{movie.vote_average || '-'}}</h5>
           <p>{{movie.release_date}}</p>
         </div>
       </div>
     </div>
   </section>
 
-  <section class="upcoming-section">
+  <section class="popular-section">
 
-    <h2>Upcoming</h2>
+    <h2>Popular Movies</h2>
 
     <a href="#" class="watch-online">Watch Online</a>
 
     <div class="movie-cards">
-      <div class="movie-card" *ngFor="let movie of upcomingMovies" [routerLink]="['/film', movie.id]"
+      <div class="movie-card" *ngFor="let movie of popularMovies" [routerLink]="['/film', movie.id]"
         routerLinkActive="active">
         <img [src]="getImageUrl(movie.poster_path)" [alt]="movie.title" class="movie-image" />
         <div class="movie-info">

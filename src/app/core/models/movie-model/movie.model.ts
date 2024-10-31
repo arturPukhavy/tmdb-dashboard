@@ -1,11 +1,15 @@
+import { MovieOverview } from "../model-response/movie-overview.model";
 import { Company } from "./company.model";
 import { Country } from "./country.model";
 import { Genre } from "./genre.model";
 import { Language } from "./language.model";
+import { MovieImages } from "./movie.images.model";
+import { Video } from "./video.model";
 
 export interface Movie {
     adult: boolean;
     backdrop_path: string;
+    backdrops: MovieImages[];
     belongs_to_collection: any; 
     budget: number;
     genres: Genre[];
@@ -30,4 +34,5 @@ export interface Movie {
     video: boolean;
     vote_average: number;
     vote_count: number;
+    results: MovieOverview[];
   }

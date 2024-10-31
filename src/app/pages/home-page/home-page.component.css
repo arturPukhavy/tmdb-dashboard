@@ -48,6 +48,11 @@ body::after {
 }
 
 .trending-section {
+  margin-top: 50px;
+  margin-bottom: 50px;
+}
+
+.upcoming-section {
   margin-bottom: 50px;
 }
 
@@ -136,7 +141,7 @@ h2:hover::after {
 
 .movie-card {
   flex: 0 0 150px;
-  height: 320px;
+  height: 360px;
   background-color: #2f2f4f;
   padding: 10px;
   border-radius: 8px;

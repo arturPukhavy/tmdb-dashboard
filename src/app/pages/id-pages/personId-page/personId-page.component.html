@@ -16,27 +16,23 @@
 
       <!-- Actor Details Section -->
       <div class="actor-details">
-        <!-- Actor Name -->
         <h1>{{ person?.name }}</h1>
         <p class="tagline">{{ person?.known_for_department }}</p>
 
-        <!-- Actor Popularity and Birthday -->
         <div class="tag">Popularity: {{ person?.popularity }}</div>
         <div class="birthdate">
           <i class="fas fa-birthday-cake"></i> Born: {{ person?.birthday }} in {{ person?.place_of_birth }}
         </div>
-
-        <!-- Deathday (if exists) -->
+        
         <div class="deathdate" *ngIf="person?.deathday">
           <i class="fas fa-cross"></i> Died: {{ person?.deathday }}
         </div>
-
-        <!-- IMDb and Homepage Links -->
+        
         <div class="imdb">
           <i class="fas fa-link"></i> 
           IMDb: <a [href]="'https://www.imdb.com/name/' + person?.imdb_id" target="_blank">View on IMDb</a>
         </div>
-
+        
         <div class="homepage" *ngIf="person?.homepage">
           <i class="fas fa-globe"></i> 
           Official Website: <a [href]="person?.homepage" target="_blank">{{ person?.homepage }}</a>
@@ -47,14 +43,38 @@
       <div class="description-section">
         <h2>Biography</h2>
         <p>
-          <!-- Show the full biography if expanded, otherwise show the first 1000 characters -->
-          {{ isBiographyExpanded ? person?.biography : (person?.biography | slice: 0:1000) + '...' }}
-          
-          <!-- Only display 'Show More' / 'Show Less' if the biography is longer than 1000 characters -->
+          {{ isExpanded ? person?.biography : (person?.biography | slice: 0:1000) + '...' }}
           <span *ngIf="shouldShowToggle(person)" class="toggle-bio" (click)="toggleBiography()">
-            {{ isBiographyExpanded ? 'Show Less' : 'Show More' }}
+            {{ isExpanded ? 'Show Less' : 'Show More' }}
           </span>
         </p>
+      </div>
+    </div>
+
+    <!-- Actor Photos Section -->
+    <div class="actor-photos-section">
+      <h2>Photos</h2>
+      <div class="actor-photos-list">
+        <div class="photo-item" *ngFor="let photo of images | slice:0:displayedCount; let i = index">
+        <img 
+          [src]="getImageUrl(photo.file_path)" 
+          [alt]="person?.name" 
+          class="actor-photo" 
+          (click)="openModal(getImageUrl(photo.file_path), i)"
+        />
+        </div>
+      </div>  
+      <!-- Show More / Show Less buttons -->
+      <div class="show-more-less">
+        <button *ngIf="displayedCount < images.length" (click)="showMore()">Show More</button>
+        <button *ngIf="displayedCount > 7" (click)="showLess()">Show Less</button>
+      </div>
+      <!-- Modal for displaying larger image -->
+      <div class="modal" *ngIf="isModalOpen">
+        <span class="close" (click)="closeModal()">&times;</span>
+        <button class="arrow left" (click)="prevPhoto()">&#10094;</button>
+        <img class="modal-content" [src]="selectedImage" alt="Large view" />
+        <button class="arrow right" (click)="nextPhoto()">&#10095;</button>
       </div>
     </div>
 

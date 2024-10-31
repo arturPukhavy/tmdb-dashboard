@@ -54,28 +54,8 @@ background-color: rgba(255, 255, 255, 0.8); /* Another star-like spot */
   margin: 10px;
 }
 
-.nav ul li a::after {
-  content: '';
-  position: absolute;
-  top: 90px;
-  left: 15px;
-  width: 98%;
-  height: 4px;
-  background-color: #ff6a00;
-  opacity: 0;
-  transform: scaleX(0);
-  transform-origin: right;
-  transition: transform 0.3s ease, opacity 0.3s ease;
-  }
-
 .nav ul li a:hover {
   color: #ff6a00;
-}
-
-.nav ul li a:hover::after {
-  transform: scaleX(1);
-  opacity: 1;
-  transform-origin: left;
 }
 
 /* Search Section */

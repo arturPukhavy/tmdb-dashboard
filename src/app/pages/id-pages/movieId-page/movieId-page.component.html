@@ -1,0 +1,153 @@
+<div class="container">
+  <!-- Main Content -->
+  <div>
+    <div class="main-content">
+      <!-- Movie Image Section -->
+      <div class="movie-image-container">
+        <img
+          [src]="getImageUrl(movie?.poster_path || null)"
+          [alt]="movie?.title"
+          class="movie-image"
+        />
+        <div class="wishlist-icon" title="Add to Wishlist">
+          <span>&hearts;</span>
+        </div>
+      </div>
+
+      <!-- Movie Details Section -->
+      <div class="movie-details">
+        <!-- Movie Title and Tagline -->
+        <h1>{{ movie?.title }}</h1>
+        <p class="tagline">{{ movie?.tagline }}</p> 
+      
+        <!-- Movie Genre, Release Date, Rating, and Budget -->
+        <div class="tag">Genre: {{ getGenresAsString() }}</div>
+        <div class="release-date">
+          <i class="fas fa-calendar-alt"></i> Release Date: {{ movie?.release_date }}
+        </div>
+        <div class="rating">
+          <i class="fas fa-star"></i> Rating: {{ movie?.vote_average }} ({{ movie?.vote_count }} votes)
+        </div>
+        <div class="price">
+          <i class="fas fa-money-bill-wave"></i> Budget: {{ movie?.budget | currency }}
+        </div>
+      
+        <!-- Production Companies and Countries -->
+        <div class="production-info">
+          <h4><i class="fas fa-globe"></i> Production Countries:</h4>
+          <p *ngFor="let country of movie?.production_countries">{{ country.name }}</p>
+
+          <h4><i class="fas fa-building"></i> Production Companies:</h4>
+          <p *ngFor="let company of movie?.production_companies">{{ company.name }}</p>
+        </div> 
+        <!-- Languages Section -->
+        <div class="languages">
+          <h4><i class="fas fa-language"></i> Languages:</h4>
+          <p *ngFor="let lang of movie?.spoken_languages">{{ lang.english_name }} ({{ lang.iso_639_1 }})</p>
+        </div>       
+      </div>
+
+      <!-- Description Section -->
+      <div class="description-section">    
+        <h2>Plot Summary</h2>
+        <p>{{ movie?.overview }}</p> 
+        <!-- Watch Button -->
+        <button class="watch-button">
+          <i class="fas fa-play"></i> Watch Now
+        </button>
+        <!-- FAQ Section -->
+        <div class="faq">
+          <h3>Frequently Asked Questions</h3>
+          <p><strong>What is the runtime of the movie?</strong><br>{{ movie?.runtime }} minutes.</p>
+          <p><strong>What is the movie's status?</strong><br>{{ movie?.status }}</p>
+          <p><strong>Where can I watch it?</strong><br> Visit: <a [href]="movie?.homepage" target="_blank">{{ movie?.homepage }}</a></p>
+        </div>
+      </div>
+    </div>
+
+    <div class="videos-section">
+      <h2>Trailers</h2>
+      <div class="video-list">
+        <div class="video-item" *ngFor="let video of videos | slice:0:displayedCount.videos">
+          <h4>{{ video.name }}</h4>
+          <iframe 
+            width="560" 
+            height="315" 
+            [src]="'https://www.youtube.com/embed/' + video.key | safeUrl"
+            frameborder="0" 
+            allowfullscreen>
+          </iframe>
+        </div>
+      </div>
+      <div class="show-more-less">
+        <button *ngIf="displayedCount.videos < videos.length" (click)="showMore('videos')">Show More</button>
+        <button *ngIf="displayedCount.videos > 7" (click)="showLess('videos')">Show Less</button>
+      </div>
+    </div>
+
+    <!-- Movie Photos Section -->
+    <div class="photos-section">
+      <h2>Photos</h2>
+      <div class="photos-list">
+        <div class="photo-item" *ngFor="let photo of images | slice:0:displayedCount.photos; let i = index">
+          <img 
+            [src]="getImageUrl(photo.file_path)" 
+            [alt]="movie?.title" 
+            class="movie-photo" 
+            (click)="openModal(getImageUrl(photo.file_path), i)"
+          />
+        </div>
+      </div>
+      <div class="show-more-less">
+        <button *ngIf="displayedCount.photos < images.length" (click)="showMore('photos')">Show More</button>
+        <button *ngIf="displayedCount.photos > 7" (click)="showLess('photos')">Show Less</button>
+      </div>   
+      <!-- Modal for displaying larger image -->
+      <div class="modal" *ngIf="isModalOpen">
+        <span class="close" (click)="closeModal()">&times;</span>
+        <button class="arrow left" (click)="prevPhoto()">&#10094;</button>
+        <img class="modal-content" [src]="selectedImage" alt="Large view" />
+        <button class="arrow right" (click)="nextPhoto()">&#10095;</button>
+      </div>
+    </div>
+
+    <div class="actor-section">
+      <h2>Cast</h2>
+      <div class="actor-list">
+        <div class="actor-item" *ngFor="let person of movieActors | slice:0:displayedCount.actors" [routerLink]="['/person', person.id]" routerLinkActive="active">
+          <div class="actor-poster">
+            <img [src]="getImageUrl(person.profile_path)" [alt]="person.name" class="actor-image" />
+          </div>
+          <div class="actor-title">
+            <h3>{{ person.name }}</h3>
+            <h4>{{ person.character }}</h4>
+          </div>
+        </div>
+      </div>
+      <div class="show-more-less">
+        <button *ngIf="displayedCount.actors < movieActors.length" (click)="showMore('actors')">Show More</button>
+        <button *ngIf="displayedCount.actors > 7" (click)="showLess('actors')">Show Less</button>
+      </div>
+    </div>
+
+    <div class="films-section">
+      <h2>Recommendations</h2>
+      <div class="film-list">
+        <div class="film-item" *ngFor="let movie of recommendations | slice:0:displayedCount.recommendations" [routerLink]="['/film', movie.id]" routerLinkActive="active">
+          <div class="film-poster">
+            <img [src]="getImageUrl(movie.poster_path)" [alt]="movie.title" class="film-image" />
+          </div>
+          <div class="film-title">
+            <h4>{{ movie.title }}</h4>
+            <p>Release Date: {{ movie.release_date }}</p>
+          </div>
+        </div>
+      </div>
+      <div class="show-more-less">
+        <button *ngIf="displayedCount.recommendations < recommendations.length" (click)="showMore('recommendations')">Show More</button>
+        <button *ngIf="displayedCount.recommendations > 7" (click)="showLess('recommendations')">Show Less</button>
+      </div>
+    </div>
+    
+  </div>
+</div>

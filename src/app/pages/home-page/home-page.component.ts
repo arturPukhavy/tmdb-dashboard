@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
 import { MovieOverview } from '../../core/models/model-response/movie-overview.model';
-import { MoviesService } from '../../core/services/movies.service';
+import { HomeService } from '../../core/services/home.service';
 import { PersonOverview } from '../../core/models/model-response/person-overview.model';
 
 
@@ -21,20 +21,24 @@ export class HomePageComponent implements OnInit {
 
   newMovies: MovieOverview[] = [];
   trendingMovies: MovieOverview[] = [];
+  trendingPeople: PersonOverview[] = [];
   upcomingMovies: MovieOverview[] = [];
+  popularMovies: MovieOverview[] = [];
 
   private imageUrlBase: string = 'https://image.tmdb.org/t/p/w500';
 
-  constructor(private moviesService: MoviesService, private router: Router) {}
+  constructor(private homeService: HomeService, private router: Router) {}
 
   ngOnInit(): void {
     this.fetchNewMovies();
     this.fetchTrandingMovies();
     this.fetchUpcomingMovies();
+    this.fetchPopularMovies();
+    this.fetchTrandingPeople();
   }
 
   fetchNewMovies() {
-    this.moviesService.getNewMovies(this.listOfitems).subscribe(
+    this.homeService.getNewMovies(this.listOfitems).subscribe(
       (movies) => {
         this.newMovies = movies;
         this.isLoading = false;
@@ -47,7 +51,7 @@ export class HomePageComponent implements OnInit {
   }
 
   fetchTrandingMovies() {
-    this.moviesService.getTrendingMovies(this.listOfitems).subscribe(
+    this.homeService.getTrendingMovies(this.listOfitems).subscribe(
       (movies) => {
         this.trendingMovies = movies;
         this.isLoading = false;
@@ -59,10 +63,36 @@ export class HomePageComponent implements OnInit {
     )
   }
 
+  fetchTrandingPeople() {
+    this.homeService.getTrendingPeople(this.listOfitems).subscribe(
+      (person) => {
+        this.trendingPeople = person;
+        this.isLoading = false;
+      },
+      (error) => {
+        this.errorMessage = 'Error fetching people. Please try again.';
+        this.isLoading = false;
+      }
+    )
+  }
+
   fetchUpcomingMovies() {
-    this.moviesService.getUpcomingMovies(this.listOfitems).subscribe(
+    this.homeService.getUpcomingMovies(this.listOfitems).subscribe(
       (movies) => {
         this.upcomingMovies = movies;
+        this.isLoading = false;
+      },
+      (error) => {
+        this.errorMessage = 'Error fetching movies. Please try again.';
+        this.isLoading = false;
+      }
+    )
+  }
+
+  fetchPopularMovies() {
+    this.homeService.getPopularMovies(this.listOfitems).subscribe(
+      (movies) => {
+        this.popularMovies = movies;
         this.isLoading = false;
       },
       (error) => {
