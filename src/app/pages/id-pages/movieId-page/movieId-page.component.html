@@ -65,11 +65,31 @@
       </div>
     </div>
 
+    <div class="videos-section">
+      <h2>Trailers</h2>
+      <div class="video-list">
+        <div class="video-item" *ngFor="let video of videos | slice:0:displayedCount.videos">
+          <h4>{{ video.name }}</h4>
+          <iframe 
+            width="560" 
+            height="315" 
+            [src]="'https://www.youtube.com/embed/' + video.key | safeUrl"
+            frameborder="0" 
+            allowfullscreen>
+          </iframe>
+        </div>
+      </div>
+      <div class="show-more-less">
+        <button *ngIf="displayedCount.videos < videos.length" (click)="showMore('videos')">Show More</button>
+        <button *ngIf="displayedCount.videos > 7" (click)="showLess('videos')">Show Less</button>
+      </div>
+    </div>
+
     <!-- Movie Photos Section -->
     <div class="photos-section">
       <h2>Photos</h2>
       <div class="photos-list">
-        <div class="photo-item" *ngFor="let photo of images; let i = index">
+        <div class="photo-item" *ngFor="let photo of images | slice:0:displayedCount.photos; let i = index">
           <img 
             [src]="getImageUrl(photo.file_path)" 
             [alt]="movie?.title" 
@@ -77,6 +97,10 @@
             (click)="openModal(getImageUrl(photo.file_path), i)"
           />
         </div>
+      </div>
+      <div class="show-more-less">
+        <button *ngIf="displayedCount.photos < images.length" (click)="showMore('photos')">Show More</button>
+        <button *ngIf="displayedCount.photos > 7" (click)="showLess('photos')">Show Less</button>
       </div>   
       <!-- Modal for displaying larger image -->
       <div class="modal" *ngIf="isModalOpen">
@@ -90,7 +114,7 @@
     <div class="actor-section">
       <h2>Cast</h2>
       <div class="actor-list">
-        <div class="actor-item" *ngFor="let person of movieActors" [routerLink]="['/person', person.id]" routerLinkActive="active">
+        <div class="actor-item" *ngFor="let person of movieActors | slice:0:displayedCount.actors" [routerLink]="['/person', person.id]" routerLinkActive="active">
           <div class="actor-poster">
             <img [src]="getImageUrl(person.profile_path)" [alt]="person.name" class="actor-image" />
           </div>
@@ -99,6 +123,29 @@
             <h4>{{ person.character }}</h4>
           </div>
         </div>
+      </div>
+      <div class="show-more-less">
+        <button *ngIf="displayedCount.actors < movieActors.length" (click)="showMore('actors')">Show More</button>
+        <button *ngIf="displayedCount.actors > 7" (click)="showLess('actors')">Show Less</button>
+      </div>
+    </div>
+
+    <div class="films-section">
+      <h2>Recommendations</h2>
+      <div class="film-list">
+        <div class="film-item" *ngFor="let movie of recommendations | slice:0:displayedCount.recommendations" [routerLink]="['/film', movie.id]" routerLinkActive="active">
+          <div class="film-poster">
+            <img [src]="getImageUrl(movie.poster_path)" [alt]="movie.title" class="film-image" />
+          </div>
+          <div class="film-title">
+            <h4>{{ movie.title }}</h4>
+            <p>Release Date: {{ movie.release_date }}</p>
+          </div>
+        </div>
+      </div>
+      <div class="show-more-less">
+        <button *ngIf="displayedCount.recommendations < recommendations.length" (click)="showMore('recommendations')">Show More</button>
+        <button *ngIf="displayedCount.recommendations > 7" (click)="showLess('recommendations')">Show Less</button>
       </div>
     </div>
     

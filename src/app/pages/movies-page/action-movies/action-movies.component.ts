@@ -12,7 +12,6 @@ import { MovieOverview } from '../../../core/models/model-response/movie-overvie
   styleUrl: './action-movies.component.css'
 })
 export class ActionMoviesComponent implements OnInit{
-  isLoading: boolean = false;
   errorMessage: string = '';
   listOfitems: string = '';
   movies: MovieOverview[] = [];
@@ -27,12 +26,10 @@ export class ActionMoviesComponent implements OnInit{
   fetchActionMovies() {
     this.moviesService.getActionMovies(this.listOfitems).subscribe(
       (movies) => {
-        this.movies = movies;
-        this.isLoading = false;
+        this.movies = movies.sort((a: any, b: any) => b.vote_average - a.vote_average);
       },
       (error) => {
         this.errorMessage = 'Error fetching movies. Please try again.';
-        this.isLoading = false;
       }
     )
   }

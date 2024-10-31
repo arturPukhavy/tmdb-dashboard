@@ -17,12 +17,16 @@ export class PersonIdPageComponent {
   person: Person | null = null;
   actorMovies: MovieOverview[] = [];
   images: PersonImages[] = [];
+
   errorMessage: string = '';
   id: number;
   currentIndex: number = 0;
-  isBiographyExpanded = false;
+  isExpanded = false;
   isModalOpen = false;
   selectedImage: string | null = null;
+
+  displayedCount: number = 7; // Number of images to display initially
+  increment: number = 7; // Number of images to add when "Show More" is clicked
 
   constructor(private personService: PersonService, private route: ActivatedRoute) {}
 
@@ -36,11 +40,18 @@ export class PersonIdPageComponent {
   }
 
   toggleBiography() {
-    this.isBiographyExpanded = !this.isBiographyExpanded;
+    this.isExpanded = !this.isExpanded;
   }
   shouldShowToggle(person: any): boolean {
     // Ensure 'Show More' is only displayed if the biography is longer than 1000 characters
     return person?.biography && person.biography.length > 1000;
+  }
+
+  showMore() {
+    this.displayedCount += this.increment;
+  }
+  showLess() {
+    this.displayedCount = Math.max(7, this.displayedCount - this.increment); // Ensure at least 7 images are shown
   }
 
   onFetchPerson() {

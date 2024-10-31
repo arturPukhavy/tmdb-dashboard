@@ -326,6 +326,25 @@ body {
     font-size: 14px;
     color: #dddddd;
   }
+
+  .show-more-less {
+    text-align: center;
+    margin-top: 20px;
+  }
+  
+  .show-more-less button {
+    background-color: #ff6a00;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 15px;
+    cursor: pointer;
+    margin: 0 5px;
+  }
+  
+  .show-more-less button:hover {
+    background-color: #e55a00;
+  }
   
   /* Responsive Design */
   @media (max-width: 768px) {

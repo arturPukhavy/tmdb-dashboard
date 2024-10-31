@@ -43,9 +43,9 @@
       <div class="description-section">
         <h2>Biography</h2>
         <p>
-          {{ isBiographyExpanded ? person?.biography : (person?.biography | slice: 0:1000) + '...' }}
+          {{ isExpanded ? person?.biography : (person?.biography | slice: 0:1000) + '...' }}
           <span *ngIf="shouldShowToggle(person)" class="toggle-bio" (click)="toggleBiography()">
-            {{ isBiographyExpanded ? 'Show Less' : 'Show More' }}
+            {{ isExpanded ? 'Show Less' : 'Show More' }}
           </span>
         </p>
       </div>
@@ -55,15 +55,20 @@
     <div class="actor-photos-section">
       <h2>Photos</h2>
       <div class="actor-photos-list">
-        <div class="photo-item" *ngFor="let photo of images; let i = index">
-          <img 
-            [src]="getImageUrl(photo.file_path)" 
-            [alt]="person?.name" 
-            class="actor-photo" 
-            (click)="openModal(getImageUrl(photo.file_path), i)"
-          />
+        <div class="photo-item" *ngFor="let photo of images | slice:0:displayedCount; let i = index">
+        <img 
+          [src]="getImageUrl(photo.file_path)" 
+          [alt]="person?.name" 
+          class="actor-photo" 
+          (click)="openModal(getImageUrl(photo.file_path), i)"
+        />
         </div>
-      </div>   
+      </div>  
+      <!-- Show More / Show Less buttons -->
+      <div class="show-more-less">
+        <button *ngIf="displayedCount < images.length" (click)="showMore()">Show More</button>
+        <button *ngIf="displayedCount > 7" (click)="showLess()">Show Less</button>
+      </div>
       <!-- Modal for displaying larger image -->
       <div class="modal" *ngIf="isModalOpen">
         <span class="close" (click)="closeModal()">&times;</span>
