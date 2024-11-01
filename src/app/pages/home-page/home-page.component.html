@@ -10,12 +10,69 @@
     <p><strong>API:</strong> This product uses the TMDB API but is not endorsed or certified by TMDB.</p>
   </div>
 
+  <!-- New Movies Section -->
+  <section class="new-movies">
+
+    <h2>New Movies</h2>
+
+    <a href="#" class="watch-online" [routerLink]="['/new']">View More</a>
+
+    <!-- Movie Cards - Horizontal Scroll -->
+    <div class="movie-cards">
+      <div class="movie-card" *ngFor="let movie of newMovies" [routerLink]="['/film', movie.id]"
+        routerLinkActive="active">
+        <img [src]="getImageUrl(movie.poster_path)" [alt]="movie.title" class="movie-image" />
+        <div class="movie-info">
+          <h3>{{movie.title}}</h3>
+          <h5>Rating: {{movie.vote_average}}</h5>
+          <p>{{movie.release_date}}</p>         
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="popular-section">
+
+    <h2>Popular Movies</h2>
+
+    <a href="#" class="watch-online" [routerLink]="['/popular']">View More</a>
+
+    <div class="movie-cards">
+      <div class="movie-card" *ngFor="let movie of popularMovies" [routerLink]="['/film', movie.id]"
+        routerLinkActive="active">
+        <img [src]="getImageUrl(movie.poster_path)" [alt]="movie.title" class="movie-image" />
+        <div class="movie-info">
+          <h3>{{movie.title}}</h3>
+          <h5>Rating: {{movie.vote_average || '-'}}</h5>
+          <p>{{movie.release_date}}</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="upcoming-section">
+
+    <h2>Upcoming Movies</h2>
+
+    <a href="#" class="watch-online" [routerLink]="['/upcoming']">View More</a>
+
+    <div class="movie-cards">
+      <div class="movie-card" *ngFor="let movie of upcomingMovies" [routerLink]="['/film', movie.id]"
+        routerLinkActive="active">
+        <img [src]="getImageUrl(movie.poster_path)" [alt]="movie.title" class="movie-image" />
+        <div class="movie-info">
+          <h3>{{movie.title}}</h3>
+          <h5>Rating: {{movie.vote_average || '-'}}</h5>
+          <p>{{movie.release_date}}</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- Trending Now Section (Styled like New Movies) -->
   <section class="trending-section">
 
     <h2>Trending Now</h2>
-
-    <a href="#" class="watch-online">Watch Online</a>
 
     <!-- Trending Cards - Horizontal Scroll -->
     <div class="movie-cards">
@@ -39,65 +96,6 @@
           <div class="person-meta">
             <h5>Popularity: {{ person.popularity }}</h5>
           </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- New Movies Section -->
-  <section class="new-movies">
-
-    <h2>New Movies</h2>
-
-    <a href="#" class="watch-online">Watch Online</a>
-
-    <!-- Movie Cards - Horizontal Scroll -->
-    <div class="movie-cards">
-      <div class="movie-card" *ngFor="let movie of newMovies" [routerLink]="['/film', movie.id]"
-        routerLinkActive="active">
-        <img [src]="getImageUrl(movie.poster_path)" [alt]="movie.title" class="movie-image" />
-        <div class="movie-info">
-          <h3>{{movie.title}}</h3>
-          <h5>Rating: {{movie.vote_average}}</h5>
-          <p>{{movie.release_date}}</p>         
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="upcoming-section">
-
-    <h2>Upcoming Movies</h2>
-
-    <a href="#" class="watch-online">Watch Online</a>
-
-    <div class="movie-cards">
-      <div class="movie-card" *ngFor="let movie of upcomingMovies" [routerLink]="['/film', movie.id]"
-        routerLinkActive="active">
-        <img [src]="getImageUrl(movie.poster_path)" [alt]="movie.title" class="movie-image" />
-        <div class="movie-info">
-          <h3>{{movie.title}}</h3>
-          <h5>Rating: {{movie.vote_average || '-'}}</h5>
-          <p>{{movie.release_date}}</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="popular-section">
-
-    <h2>Popular Movies</h2>
-
-    <a href="#" class="watch-online">Watch Online</a>
-
-    <div class="movie-cards">
-      <div class="movie-card" *ngFor="let movie of popularMovies" [routerLink]="['/film', movie.id]"
-        routerLinkActive="active">
-        <img [src]="getImageUrl(movie.poster_path)" [alt]="movie.title" class="movie-image" />
-        <div class="movie-info">
-          <h3>{{movie.title}}</h3>
-          <h5>Rating: {{movie.vote_average || '-'}}</h5>
-          <p>{{movie.release_date}}</p>
         </div>
       </div>
     </div>

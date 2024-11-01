@@ -46,14 +46,15 @@ body::after {
 .new-movies {
   margin-bottom: 50px;
 }
-
-.trending-section {
-  margin-top: 50px;
+.popular-section {
+  margin-bottom: 50px;
+}
+.upcoming-section {
   margin-bottom: 50px;
 }
 
-.upcoming-section {
-  margin-bottom: 50px;
+.trending-section {
+  margin-top: 100px;
 }
 
 /* Titles and Phrases */

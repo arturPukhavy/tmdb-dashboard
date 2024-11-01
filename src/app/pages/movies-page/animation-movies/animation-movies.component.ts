@@ -14,7 +14,6 @@ import { MoviesService } from '../../../core/services/movies.service';
 export class AnimationMoviesComponent implements OnInit{
   isLoading: boolean = false;
   errorMessage: string = '';
-  listOfitems: string = '';
   movies: MovieOverview[] = [];
   private imageUrlBase: string = 'https://image.tmdb.org/t/p/w500';
 
@@ -25,7 +24,7 @@ export class AnimationMoviesComponent implements OnInit{
   }
 
   fetchAnimationMovies() {
-    this.moviesService.getAnimationMovies(this.listOfitems).subscribe(
+    this.moviesService.getAnimationMovies().subscribe(
       (movies) => {
         this.movies = movies;
         this.isLoading = false;

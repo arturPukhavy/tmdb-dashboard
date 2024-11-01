@@ -4,7 +4,6 @@ import { Country } from "./country.model";
 import { Genre } from "./genre.model";
 import { Language } from "./language.model";
 import { MovieImages } from "./movie.images.model";
-import { Video } from "./video.model";
 
 export interface Movie {
     adult: boolean;

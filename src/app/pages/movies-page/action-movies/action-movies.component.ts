@@ -13,7 +13,6 @@ import { MovieOverview } from '../../../core/models/model-response/movie-overvie
 })
 export class ActionMoviesComponent implements OnInit{
   errorMessage: string = '';
-  listOfitems: string = '';
   movies: MovieOverview[] = [];
   private imageUrlBase: string = 'https://image.tmdb.org/t/p/w500';
 
@@ -24,14 +23,14 @@ export class ActionMoviesComponent implements OnInit{
   }
 
   fetchActionMovies() {
-    this.moviesService.getActionMovies(this.listOfitems).subscribe(
+    this.moviesService.getActionMovies().subscribe(
       (movies) => {
-        this.movies = movies.sort((a: any, b: any) => b.vote_average - a.vote_average);
+        this.movies = movies
       },
       (error) => {
         this.errorMessage = 'Error fetching movies. Please try again.';
       }
-    )
+    );
   }
 
   getImageUrl(posterPath: string) {
