@@ -171,11 +171,34 @@ body {
     margin-bottom: 40px;
   }
   
-  .actor-photos-section h2 {
-    font-size: 28px;
-    color: #ff6a00;
+  .details-section h2 {
     text-align: center;
+    font-size: 28px;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    background: linear-gradient(45deg, #ff6a00, #ffd700);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    position: relative;
+    overflow: hidden;
     margin-bottom: 20px;
+  }
+  
+  .details-section h2::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 3px;
+    background-color: #ff6a00;
+    transition: width 0.3s ease;
+  }
+  
+  .details-section h2:hover::after {
+    width: 100%;
   }
   
   .actor-photos-list {
@@ -265,13 +288,6 @@ body {
   /* Films Section */
   .actor-films-section {
     margin-top: 40px;
-  }
-  
-  .actor-films-section h2 {
-    font-size: 28px;
-    color: #ff6a00;
-    text-align: center;
-    margin-bottom: 30px;
   }
   
   .film-list {

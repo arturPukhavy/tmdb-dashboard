@@ -7,4 +7,5 @@ export interface PersonOverview {
     known_for: MovieOverview[]; 
     popularity: number;
     character: string;
+    vote_count: number;
   }

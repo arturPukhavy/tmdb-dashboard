@@ -16,10 +16,10 @@ export class AppComponent {
 
   constructor(private location: Location, private router: Router) {
     this.router.events.subscribe((event: any) => {
-      if (event.url === '/') {
-        this.showBackButton = false; // Don't show the button on the first page
+      if (event.url !== '/' && event.url !== '/home') {
+        this.showBackButton = true; // Don't show the button on the first page
       } else {
-        this.showBackButton = true;
+        this.showBackButton = false;
       }
     });
   }

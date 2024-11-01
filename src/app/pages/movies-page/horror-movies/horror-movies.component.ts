@@ -14,7 +14,6 @@ import { CommonModule, NgFor } from '@angular/common';
 export class HorrorMoviesComponent implements OnInit {
   isLoading: boolean = false;
   errorMessage: string = '';
-  listOfitems: string = '';
   horrorMovies: MovieOverview[] = [];
   private imageUrlBase: string = 'https://image.tmdb.org/t/p/w500';
 
@@ -25,7 +24,7 @@ export class HorrorMoviesComponent implements OnInit {
   }
 
   fetchHorrorMovies() {
-    this.moviesService.getHorrorMovies(this.listOfitems).subscribe(
+    this.moviesService.getHorrorMovies().subscribe(
       (movies) => {
         this.horrorMovies = movies;
         this.isLoading = false;

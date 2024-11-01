@@ -215,11 +215,34 @@ body {
   margin-bottom: 40px;
 }
 
-.photos-section h2 {
-  font-size: 28px;
-  color: #ff6a00;
+.details-section h2 {
   text-align: center;
+  font-size: 28px;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  background: linear-gradient(45deg, #ff6a00, #ffd700);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  position: relative;
+  overflow: hidden;
   margin-bottom: 20px;
+}
+
+.details-section h2::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 3px;
+  background-color: #ff6a00;
+  transition: width 0.3s ease;
+}
+
+.details-section h2:hover::after {
+  width: 100%;
 }
 
 .photos-list {
@@ -311,13 +334,6 @@ body {
   margin-top: 40px;
 }
 
-.actor-section h2 {
-  font-size: 28px;
-  color: #ff6a00;
-  text-align: center;
-  margin-bottom: 30px;
-}
-
 .actor-list {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
@@ -369,20 +385,6 @@ body {
 
 .films-section {
   margin-top: 40px;
-}
-
-.films-section h2 {
-  font-size: 28px;
-  color: #ff6a00;
-  text-align: center;
-  margin-bottom: 20px;
-}
-
-.actor-films-section h2 {
-  font-size: 28px;
-  color: #ff6a00;
-  text-align: center;
-  margin-bottom: 30px;
 }
 
 .film-list {
@@ -440,13 +442,6 @@ body {
 
 .videos-section {
   margin-top: 40px;
-}
-
-.videos-section h2 {
-  font-size: 28px;
-  color: #ff6a00;
-  text-align: center;
-  margin-bottom: 20px;
 }
 
 .video-list {
