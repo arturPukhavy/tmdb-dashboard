@@ -1,11 +1,11 @@
 # TMDB dashboard
 This is a web application built using Angular (version 18.1.3) that serves as a demo (POC) project to explore frontend and CI/CD technologies. The application is currently deployed and running on the Glitch platform at https://tmdb-dashboard.glitch.me.
 
-## Used technology
+## Used Technologies
 * FE: Angular (18.1.3)
 * BE: TMDB API
 
-#### Used Angular fetures
+#### Angular Features Used
 * Standalone Components
 * HTTP Client
 * Interceptors
