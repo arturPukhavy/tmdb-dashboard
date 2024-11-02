@@ -51,7 +51,7 @@ jobs:
         cp browser/* tmdb-dashboard/browser
         cd tmdb-dashboard
         ls -l
-        # touch readme.tmp
+        touch readme.tmp
         pwd
         git status
         echo "git status next"
