@@ -67,6 +67,7 @@ jobs:
       run: |
         echo "There are uncommitted changes. Running Deploy to glitch"
         cd dist/figma/tmdb-dashboard
+        ls -l
         git add .
         echo "add done"
         git commit -m "deploy new version"
