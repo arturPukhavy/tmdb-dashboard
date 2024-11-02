@@ -66,6 +66,8 @@ jobs:
       if: steps.git-status.outputs.status != ''
       run: |
         echo "There are uncommitted changes. Running Deploy to glitch"
+        git config --global user.email "arturpuhice@gmail.com"
+        git config --global user.name "Artur"
         cd dist/figma/tmdb-dashboard
         ls -l
         git add .
