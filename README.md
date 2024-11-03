@@ -1,4 +1,5 @@
 # TMDB dashboard
+[![(CI) TMDB-dashboard - FE](https://github.com/arturPukhavy/tmdb-dashboard/actions/workflows/(CI)%20TMDB-dashboard%20-%20FE.yml/badge.svg)](https://github.com/arturPukhavy/tmdb-dashboard/actions/workflows/(CI)%20TMDB-dashboard%20-%20FE.yml)
 [![(CD) TMDB-dashboard - FE](https://github.com/arturPukhavy/tmdb-dashboard/actions/workflows/(CD)%20TMDB-dashboard%20-%20FE.yml/badge.svg)](https://github.com/arturPukhavy/tmdb-dashboard/actions/workflows/(CD)%20TMDB-dashboard%20-%20FE.yml)
 
 This is a web application built using Angular (version 18.1.3) that serves as a demo (POC) project to explore frontend and CI/CD technologies. The application is currently deployed and running on the Glitch platform at https://tmdb-dashboard.glitch.me.
