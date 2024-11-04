@@ -1,32 +1,50 @@
 .back-btn {
-    position: fixed;
-    background-color: #ff6a00;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    padding: 10px 20px;
-    font-size: 16px;
-    cursor: pointer;
-    z-index: 1000;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-  }
-  
-  .back-btn:hover {
-    background-color: #ff4d00;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-  }
-  
-  /* Back button at the top-left of the screen */
-  .back-btn.top-left {
-    top: 100px;
-    left: 20px;
-  }
-  
-  /* Make sure buttons are responsive on smaller screens */
-  @media (max-width: 768px) {
-    .back-btn {
+  position: fixed;
+  background-color: #ff6a00;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  z-index: 1000;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.back-btn:hover {
+  background-color: #ff4d00;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Back button at the top-left of the screen */
+.back-btn.top-left {
+  top: 100px; /* Adjusted for visibility */
+  left: 20px;
+}
+
+/* Make sure buttons are responsive on smaller screens */
+@media (max-width: 768px) {
+  .back-btn {
       padding: 8px 16px;
       font-size: 14px;
-    }
   }
+
+  /* Positioning adjustments for mobile */
+  .back-btn.top-left {
+      top: 80px; /* Lower position for better visibility on smaller screens */
+      left: 10px; /* Slightly adjust left margin */
+  }
+}
+
+@media (max-width: 480px) {
+  .back-btn {
+      padding: 6px 12px; /* Further reduce padding for very small screens */
+      font-size: 12px; /* Smaller font size */
+  }
+
+  .back-btn.top-left {
+      top: 70px; /* Further adjust position */
+      left: 5px; /* Further adjust left margin */
+  }
+}
