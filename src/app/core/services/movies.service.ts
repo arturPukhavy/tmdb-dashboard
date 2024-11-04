@@ -8,7 +8,7 @@ import { SearchResponse } from "../models/model-response/search-response.model";
     providedIn: 'root'
   })
   export class MoviesService {
-    private apiNewMovies = '/3/movie/now_playing';  
+    private apiNewMovies = '/3/discover/movie';  
     private apiUpcomingMovies = '/3/movie/upcoming';
     private apiPopularMovies = '/3/movie/popular';
 
@@ -21,12 +21,34 @@ import { SearchResponse } from "../models/model-response/search-response.model";
     private apiScienceFictionMovies = '/3/discover/movie?with_genres=878';
     
     constructor(private http: HttpClient) {}
-  
-    getNewMovies(query: string): Observable<MovieOverview[]> {     
-      return this.http.get<SearchResponse>(`${this.apiNewMovies}?query=${query}`).pipe(
-        // Extract the results array from the SearchResponse
-        map(response => response.results.filter((result): result is MovieOverview => 'title' in result))
+
+    getNewMovies(query: string): Observable<MovieOverview[]> {
+      const apiUrl = `${this.apiNewMovies}`;
+      const today = new Date().toISOString().slice(0, 10);
+    
+      const queryParams = {
+        'primary_release_date.lte': today,
+        'sort_by': 'primary_release_date.desc',
+        'page': 1
+      };
+    
+      let allMovies: MovieOverview[] = [];
+    
+      return this.fetchNewMoviesPage(apiUrl, queryParams).pipe(
+        expand((response) => {
+          allMovies = [...allMovies, ...response.results] as MovieOverview[];
+          if (response.page < response.total_pages) {
+            queryParams.page++;
+            return this.fetchNewMoviesPage(apiUrl, queryParams);
+          }
+          return EMPTY;
+        }),
+        map(() => allMovies)
       );
+    }
+    private fetchNewMoviesPage(apiUrl: string, queryParams: { [key: string]: string | number }): Observable<SearchResponse> {
+      const params = new HttpParams({ fromObject: queryParams });
+      return this.http.get<SearchResponse>(apiUrl, { params });
     }
 
     getUpcomingMovies(): Observable<MovieOverview[]> {

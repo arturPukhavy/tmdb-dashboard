@@ -52,9 +52,11 @@
         <h2>Plot Summary</h2>
         <p>{{ movie?.overview }}</p> 
         <!-- Watch Button -->
-        <button class="watch-button">
-          <i class="fas fa-play"></i> Watch Now
-        </button>
+        <a [href]="movie?.homepage" target="_blank"> 
+          <button class="watch-button" *ngIf="movie?.homepage"> 
+            Watch Now
+          </button>
+        </a> 
         <!-- FAQ Section -->
         <div class="faq">
           <h3>Frequently Asked Questions</h3>
@@ -68,7 +70,7 @@
     <div class="details-section">
 
     <div class="videos-section">
-      <h2>Trailers</h2>
+      <h2 *ngIf="videos.length > 0">Trailers</h2>
       <div class="video-list">
         <div class="video-item" *ngFor="let video of videos | slice:0:displayedCount.videos">
           <h4>{{ video.name }}</h4>
@@ -89,7 +91,7 @@
 
     <!-- Movie Photos Section -->
     <div class="photos-section">
-      <h2>Photos</h2>
+      <h2 *ngIf="images.length > 0">Photos</h2>
       <div class="photos-list">
         <div class="photo-item" *ngFor="let photo of images | slice:0:displayedCount.photos; let i = index">
           <img 
@@ -133,7 +135,7 @@
     </div>
 
     <div class="films-section">
-      <h2>Recommendations</h2>
+      <h2 *ngIf="recommendations.length > 0">Recommendations</h2>
       <div class="film-list">
         <div class="film-item" *ngFor="let movie of recommendations | slice:0:displayedCount.recommendations" [routerLink]="['/film', movie.id]" routerLinkActive="active">
           <div class="film-poster">

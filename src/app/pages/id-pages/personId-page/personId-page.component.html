@@ -54,7 +54,7 @@
     <div class="details-section">
     <!-- Actor Photos Section -->
     <div class="actor-photos-section">
-      <h2>Photos</h2>
+      <h2 *ngIf="images.length > 0">Photos</h2>
       <div class="actor-photos-list">
         <div class="photo-item" *ngFor="let photo of images | slice:0:displayedCount; let i = index">
         <img 
