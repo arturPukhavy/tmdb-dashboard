@@ -226,13 +226,41 @@ h2:hover::after {
 
 /* Responsive Design */
 @media (max-width: 768px) {
-  .movie-card {
-    flex: 0 0 150px;
-  }
-
   .movie-image {
-    height: 180px;
+    height: 130px;
   }
 
+  .movie-cards {
+    gap: 10px; /* Reduced gap on smaller screens */
+  }
+
+  .movie-card {
+    flex: 0 0 120px; /* Smaller width for smaller screens */
+    height: 300px; /* Adjusted height */
+  }
+
+}
+
+@media (max-width: 480px) {
+  .movie-cards {
+    gap: 5px; /* Even smaller gap */
+  }
+
+  .movie-card {
+    flex: 0 0 100px; /* Even smaller width */
+    height: 240px; /* Adjusted height */
+  }
+
+  .movie-info h3 {
+    font-size: 16px; /* Smaller title */
+  }
+
+  .movie-info h5 {
+    font-size: 12px; /* Smaller rating */
+  }
+
+  .movie-info p {
+    font-size: 12px; /* Smaller release date */
+  }
 }
 
