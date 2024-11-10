@@ -53,6 +53,10 @@ import { SearchResponse } from "../models/model-response/search-response.model";
 
     getUpcomingMovies(): Observable<MovieOverview[]> {
       const apiUrl = `${this.apiUpcomingMovies}`;
+      const tomorrow = new Date();
+      tomorrow.setDate(tomorrow.getDate() + 1);
+      const formattedDate = tomorrow.toISOString().split('T')[0]; // Format: YYYY-MM-DD
+    
       const queryParams = {
         sort_by: 'release_date.desc',
         page: 1
@@ -69,13 +73,17 @@ import { SearchResponse } from "../models/model-response/search-response.model";
           }
           return EMPTY;
         }),
-        map(() => allMovies.sort((a, b) => new Date(b.release_date).getTime() - new Date(a.release_date).getTime()))
+        map(() => {
+          // Filter movies to only include those releasing on or after tomorrow
+          return allMovies.filter(movie => new Date(movie.release_date) >= tomorrow);
+        })
       );
-    }    
+    }
     private fetchUpcomingMoviesPage(apiUrl: string, queryParams: { [key: string]: string | number }): Observable<SearchResponse> {
       const params = new HttpParams({ fromObject: queryParams });
       return this.http.get<SearchResponse>(apiUrl, { params });
     }
+
 
     getPopularMovies(query: string): Observable<MovieOverview[]> {     
       return this.http.get<SearchResponse>(`${this.apiPopularMovies}?query=${query}`).pipe(
