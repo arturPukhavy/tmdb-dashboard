@@ -14,10 +14,16 @@ import { AnimationMoviesComponent } from './pages/movies-page/animation-movies/a
 import { ActionMoviesComponent } from './pages/movies-page/action-movies/action-movies.component';
 import { FantasyMoviesComponent } from './pages/movies-page/fantasy-movies/fantasy-movies.component';
 import { ScienceFictionMoviesComponent } from './pages/movies-page/science-fiction-movies/science-fiction-movies.component';
+import { GamesPageComponent } from './pages/games-page/games-page.component';
+import { ActorGameComponent } from './pages/games-page/actor-game/actor-game.component';
+import { MovieGameComponent } from './pages/games-page/movie-game/movie-game.component';
 
 export const routes: Routes = [
     {path: '', redirectTo: 'home', pathMatch: 'full' },
     {path: 'home', component: HomePageComponent},
+
+    {path: 'search/:result', component: SearchPageComponent},
+
     {path: 'movies', component: MoviesPageComponent},    
     {path: 'new', component: NewMoviesComponent},
     {path: 'upcoming', component: UpcomingMoviesComponent},
@@ -27,10 +33,15 @@ export const routes: Routes = [
     {path: 'animation', component: AnimationMoviesComponent},
     {path: 'action', component: ActionMoviesComponent},
     {path: 'fantasy', component: FantasyMoviesComponent},
-    {path: 'science-fiction', component: ScienceFictionMoviesComponent},        
+    {path: 'science-fiction', component: ScienceFictionMoviesComponent},  
+
+    {path: 'top100', component: Top100Component},
+
+    {path: 'games', component: GamesPageComponent},
+    {path: 'actorgame', component: ActorGameComponent},
+    {path: 'moviegame', component: MovieGameComponent},
+
     {path: 'film/:id', component: MovieIdPageComponent},
     {path: 'person/:id', component: PersonIdPageComponent},
-    {path: 'top100', component: Top100Component},
-    {path: 'search/:result', component: SearchPageComponent}
 ];
 

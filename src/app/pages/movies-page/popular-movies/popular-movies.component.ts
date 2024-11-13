@@ -14,18 +14,18 @@ import { MovieOverview } from '../../../core/models/model-response/movie-overvie
 export class PopularMoviesComponent implements OnInit{
   isLoading: boolean = false;
   errorMessage: string = '';
-  listOfitems: string = '';
+  currentMoviePage: number = 1;
   movies: MovieOverview[] = [];
   private imageUrlBase: string = 'https://image.tmdb.org/t/p/w500';
 
   constructor(private moviesService: MoviesService, private router: Router) {}
 
   ngOnInit(): void {
-    this.fetchPopularMovies();
+    this.fetchPopularMovies(this.currentMoviePage);
   }
 
-  fetchPopularMovies() {
-    this.moviesService.getPopularMovies(this.listOfitems).subscribe(
+  fetchPopularMovies(page: number) {
+    this.moviesService.getPopularMovies(page).subscribe(
       (movies) => {
         this.movies = movies;
         this.isLoading = false;
@@ -35,6 +35,15 @@ export class PopularMoviesComponent implements OnInit{
         this.isLoading = false;
       }
     )
+  }
+
+  onMoviePageChange(page: number) {
+    this.currentMoviePage = page;
+    this.fetchPopularMovies(this.currentMoviePage);
+  }
+
+  get totalMoviePages(): number {
+    return this.moviesService.totalMoviePages;
   }
 
   getImageUrl(posterPath: string) {

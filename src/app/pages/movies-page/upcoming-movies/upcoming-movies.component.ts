@@ -14,17 +14,18 @@ import { MoviesService } from '../../../core/services/movies.service';
 export class UpcomingMoviesComponent implements OnInit{
   isLoading: boolean = false;
   errorMessage: string = '';
+  currentMoviePage: number = 1;
   movies: MovieOverview[] = [];
   private imageUrlBase: string = 'https://image.tmdb.org/t/p/w500';
 
   constructor(private moviesService: MoviesService, private router: Router) {}
 
   ngOnInit(): void {
-    this.fetchUpcomingMovies();
+    this.fetchUpcomingMovies(this.currentMoviePage);
   }
 
-  fetchUpcomingMovies() {
-    this.moviesService.getUpcomingMovies().subscribe(
+  fetchUpcomingMovies(page: number) {
+    this.moviesService.getUpcomingMovies(page).subscribe(
       (movies) => {
         this.movies = movies;
         this.isLoading = false;
@@ -34,6 +35,15 @@ export class UpcomingMoviesComponent implements OnInit{
         this.isLoading = false;
       }
     )
+  }
+
+  onMoviePageChange(page: number) {
+    this.currentMoviePage = page;
+    this.fetchUpcomingMovies(this.currentMoviePage);
+  }
+
+  get totalMoviePages(): number {
+    return this.moviesService.totalMoviePages;
   }
 
   getImageUrl(posterPath: string) {

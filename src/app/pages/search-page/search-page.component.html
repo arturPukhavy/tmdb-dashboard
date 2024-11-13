@@ -22,9 +22,15 @@
   
         <!-- Pagination for Movies -->
         <div class="pagination" *ngIf="totalMoviePages > 1">
-          <button (click)="onMoviePageChange(currentMoviePage - 1)" [disabled]="currentMoviePage === 1">Previous</button>
-          <span>Page {{ currentMoviePage }} of {{ totalMoviePages }}</span>
-          <button (click)="onMoviePageChange(currentMoviePage + 1)" [disabled]="currentMoviePage === totalMoviePages">Next</button>
+          <button (click)="onMoviePageChange(currentMoviePage - 1)" [disabled]="currentMoviePage === 1" class="pagination-button">
+            <i class="fas fa-chevron-left"></i> Previous
+          </button>
+          <span class="pagination-info">
+            Page {{ currentMoviePage }} of {{ totalMoviePages }}
+          </span>
+          <button (click)="onMoviePageChange(currentMoviePage + 1)" [disabled]="currentMoviePage === totalMoviePages" class="pagination-button">
+            Next <i class="fas fa-chevron-right"></i>
+          </button>
         </div>
       </section>
   
@@ -48,9 +54,15 @@
   
         <!-- Pagination for People -->
         <div class="pagination" *ngIf="totalPersonPages > 1">
-          <button (click)="onPersonPageChange(currentPersonPage - 1)" [disabled]="currentPersonPage === 1">Previous</button>
-          <span>Page {{ currentPersonPage }} of {{ totalPersonPages }}</span>
-          <button (click)="onPersonPageChange(currentPersonPage + 1)" [disabled]="currentPersonPage === totalPersonPages">Next</button>
+          <button (click)="onPersonPageChange(currentPersonPage - 1)" [disabled]="currentPersonPage === 1" class="pagination-button">
+            <i class="fas fa-chevron-left"></i> Previous
+          </button>
+          <span class="pagination-info">
+            Page {{ currentPersonPage }} of {{ totalPersonPages }}
+          </span>
+          <button (click)="onPersonPageChange(currentPersonPage + 1)" [disabled]="currentPersonPage === totalPersonPages" class="pagination-button">
+            Next <i class="fas fa-chevron-right"></i>
+          </button>
         </div>
       </section>
     </div>

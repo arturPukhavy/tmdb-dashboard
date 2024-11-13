@@ -15,16 +15,17 @@ export class ScienceFictionMoviesComponent implements OnInit{
   isLoading: boolean = false;
   errorMessage: string = '';
   movies: MovieOverview[] = [];
+  currentMoviePage: number = 1;
   private imageUrlBase: string = 'https://image.tmdb.org/t/p/w500';
 
   constructor(private moviesService: MoviesService, private router: Router) {}
 
   ngOnInit(): void {
-    this.fetchScienceFictionMovies();
+    this.fetchScienceFictionMovies(this.currentMoviePage);
   }
 
-  fetchScienceFictionMovies() {
-    this.moviesService.getScienceFictionMovies().subscribe(
+  fetchScienceFictionMovies(page: number) {
+    this.moviesService.getScienceFictionMovies(page).subscribe(
       (movies) => {
         this.movies = movies;
         this.isLoading = false;
@@ -34,6 +35,15 @@ export class ScienceFictionMoviesComponent implements OnInit{
         this.isLoading = false;
       }
     )
+  }
+
+  onMoviePageChange(page: number) {
+    this.currentMoviePage = page;
+    this.fetchScienceFictionMovies(this.currentMoviePage);
+  }
+
+  get totalMoviePages(): number {
+    return this.moviesService.totalMoviePages;
   }
 
   getImageUrl(posterPath: string) {

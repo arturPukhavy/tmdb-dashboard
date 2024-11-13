@@ -15,16 +15,17 @@ export class ComedyMoviesComponent implements OnInit{
   isLoading: boolean = false;
   errorMessage: string = '';
   movies: MovieOverview[] = [];
+  currentMoviePage: number = 1;
   private imageUrlBase: string = 'https://image.tmdb.org/t/p/w500';
 
   constructor(private moviesService: MoviesService, private router: Router) {}
 
   ngOnInit(): void {
-    this.fetchComedyMovies();
+    this.fetchComedyMovies(this.currentMoviePage);
   }
 
-  fetchComedyMovies() {
-    this.moviesService.getComedyMovies().subscribe(
+  fetchComedyMovies(page: number) {
+    this.moviesService.getComedyMovies(page).subscribe(
       (movies) => {
         this.movies = movies;
         this.isLoading = false;
@@ -34,6 +35,15 @@ export class ComedyMoviesComponent implements OnInit{
         this.isLoading = false;
       }
     )
+  }
+
+  onMoviePageChange(page: number) {
+    this.currentMoviePage = page;
+    this.fetchComedyMovies(this.currentMoviePage);
+  }
+
+  get totalMoviePages(): number {
+    return this.moviesService.totalMoviePages;
   }
 
   getImageUrl(posterPath: string) {

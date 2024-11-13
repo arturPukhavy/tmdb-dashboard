@@ -15,16 +15,17 @@ export class HorrorMoviesComponent implements OnInit {
   isLoading: boolean = false;
   errorMessage: string = '';
   horrorMovies: MovieOverview[] = [];
+  currentMoviePage: number = 1;
   private imageUrlBase: string = 'https://image.tmdb.org/t/p/w500';
 
   constructor(private moviesService: MoviesService, private router: Router) {}
 
   ngOnInit(): void {
-    this.fetchHorrorMovies();
+    this.fetchHorrorMovies(this.currentMoviePage);
   }
 
-  fetchHorrorMovies() {
-    this.moviesService.getHorrorMovies().subscribe(
+  fetchHorrorMovies(page: number) {
+    this.moviesService.getHorrorMovies(page).subscribe(
       (movies) => {
         this.horrorMovies = movies;
         this.isLoading = false;
@@ -34,6 +35,15 @@ export class HorrorMoviesComponent implements OnInit {
         this.isLoading = false;
       }
     )
+  }
+
+  onMoviePageChange(page: number) {
+    this.currentMoviePage = page;
+    this.fetchHorrorMovies(this.currentMoviePage);
+  }
+
+  get totalMoviePages(): number {
+    return this.moviesService.totalMoviePages;
   }
 
   getImageUrl(posterPath: string) {
