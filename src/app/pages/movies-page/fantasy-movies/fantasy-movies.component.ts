@@ -15,16 +15,17 @@ export class FantasyMoviesComponent implements OnInit{
   isLoading: boolean = false;
   errorMessage: string = '';
   movies: MovieOverview[] = [];
+  currentMoviePage: number = 1;
   private imageUrlBase: string = 'https://image.tmdb.org/t/p/w500';
 
   constructor(private moviesService: MoviesService, private router: Router) {}
 
   ngOnInit(): void {
-    this.fetchFantasyMovies();
+    this.fetchFantasyMovies(this.currentMoviePage);
   }
 
-  fetchFantasyMovies() {
-    this.moviesService.getFantasyMovies().subscribe(
+  fetchFantasyMovies(page: number) {
+    this.moviesService.getFantasyMovies(page).subscribe(
       (movies) => {
         this.movies = movies;
         this.isLoading = false;
@@ -34,6 +35,15 @@ export class FantasyMoviesComponent implements OnInit{
         this.isLoading = false;
       }
     )
+  }
+
+  onMoviePageChange(page: number) {
+    this.currentMoviePage = page;
+    this.fetchFantasyMovies(this.currentMoviePage);
+  }
+
+  get totalMoviePages(): number {
+    return this.moviesService.totalMoviePages;
   }
 
   getImageUrl(posterPath: string) {

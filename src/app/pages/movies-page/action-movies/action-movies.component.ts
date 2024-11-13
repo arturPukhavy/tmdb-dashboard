@@ -14,16 +14,17 @@ import { MovieOverview } from '../../../core/models/model-response/movie-overvie
 export class ActionMoviesComponent implements OnInit{
   errorMessage: string = '';
   movies: MovieOverview[] = [];
+  currentMoviePage: number = 1;
   private imageUrlBase: string = 'https://image.tmdb.org/t/p/w500';
 
   constructor(private moviesService: MoviesService, private router: Router) {}
 
   ngOnInit(): void {
-    this.fetchActionMovies();
+    this.fetchActionMovies(this.currentMoviePage);
   }
 
-  fetchActionMovies() {
-    this.moviesService.getActionMovies().subscribe(
+  fetchActionMovies(page: number) {
+    this.moviesService.getActionMovies(page).subscribe(
       (movies) => {
         this.movies = movies
       },
@@ -31,6 +32,15 @@ export class ActionMoviesComponent implements OnInit{
         this.errorMessage = 'Error fetching movies. Please try again.';
       }
     );
+  }
+
+  onMoviePageChange(page: number) {
+    this.currentMoviePage = page;
+    this.fetchActionMovies(this.currentMoviePage);
+  }
+
+  get totalMoviePages(): number {
+    return this.moviesService.totalMoviePages;
   }
 
   getImageUrl(posterPath: string) {

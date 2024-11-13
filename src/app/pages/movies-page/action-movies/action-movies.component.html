@@ -20,11 +20,17 @@
           </div>
         </div>
   
-        <!-- Pagination for Movies -->
-        <!-- <div class="pagination" *ngIf="totalMoviePages > 1">
-          <button (click)="onMoviePageChange(currentMoviePage - 1)" [disabled]="currentMoviePage === 1">Previous</button>
-          <span>Page {{ currentMoviePage }} of {{ totalMoviePages }}</span>
-          <button (click)="onMoviePageChange(currentMoviePage + 1)" [disabled]="currentMoviePage === totalMoviePages">Next</button>
-        </div> -->
+        <!-- Pagination for Movies  -->
+        <div class="pagination" *ngIf="totalMoviePages > 1">
+          <button (click)="onMoviePageChange(currentMoviePage - 1)" [disabled]="currentMoviePage === 1" class="pagination-button">
+            <i class="fas fa-chevron-left"></i> Previous
+          </button>
+          <span class="pagination-info">
+            Page {{ currentMoviePage }} of {{ totalMoviePages }}
+          </span>
+          <button (click)="onMoviePageChange(currentMoviePage + 1)" [disabled]="currentMoviePage === totalMoviePages" class="pagination-button">
+            Next <i class="fas fa-chevron-right"></i>
+          </button>
+        </div>
       </section>
 </div>

@@ -1,6 +1,6 @@
 import { HttpClient, HttpParams } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { EMPTY, expand, map, Observable } from "rxjs";
+import { EMPTY, expand, map, Observable, tap } from "rxjs";
 import { MovieOverview } from "../models/model-response/movie-overview.model";
 import { SearchResponse } from "../models/model-response/search-response.model";
 
@@ -8,6 +8,8 @@ import { SearchResponse } from "../models/model-response/search-response.model";
     providedIn: 'root'
   })
   export class MoviesService {
+    totalMoviePages: number = 0;
+
     private apiNewMovies = '/3/discover/movie';  
     private apiUpcomingMovies = '/3/movie/upcoming';
     private apiPopularMovies = '/3/movie/popular';
@@ -22,204 +24,175 @@ import { SearchResponse } from "../models/model-response/search-response.model";
     
     constructor(private http: HttpClient) {}
 
-    getNewMovies(query: string): Observable<MovieOverview[]> {
-      const apiUrl = `${this.apiNewMovies}`;
+    getNewMovies(page: number = 1): Observable<MovieOverview[]> {
+      let allMovies: MovieOverview[] = [];
       const today = new Date().toISOString().slice(0, 10);
     
-      const queryParams = {
-        'primary_release_date.lte': today,
-        'sort_by': 'primary_release_date.desc',
-        'page': 1
-      };
-    
-      let allMovies: MovieOverview[] = [];
-    
-      return this.fetchNewMoviesPage(apiUrl, queryParams).pipe(
-        expand((response) => {
-          allMovies = [...allMovies, ...response.results] as MovieOverview[];
-          if (response.page < response.total_pages) {
-            queryParams.page++;
-            return this.fetchNewMoviesPage(apiUrl, queryParams);
-          }
-          return EMPTY;
+      return this.fetchNewMoviesPage(page).pipe(
+        map(response => {
+          this.totalMoviePages = response.total_pages;
+          return response.results.filter((result): result is MovieOverview => 'release_date' in result && new Date(result.release_date) <= new Date(today));
         }),
+        tap(movies => allMovies = [...allMovies, ...movies] as MovieOverview[]),
         map(() => allMovies)
       );
-    }
-    private fetchNewMoviesPage(apiUrl: string, queryParams: { [key: string]: string | number }): Observable<SearchResponse> {
+    }  
+    private fetchNewMoviesPage(page: number = 1): Observable<SearchResponse> {
+      const queryParams = {
+        'primary_release_date.lte': new Date().toISOString().slice(0, 10),
+        'sort_by': 'primary_release_date.desc',
+        'page': page
+      };
       const params = new HttpParams({ fromObject: queryParams });
-      return this.http.get<SearchResponse>(apiUrl, { params });
+      return this.http.get<SearchResponse>(this.apiNewMovies, { params });
     }
 
-    getUpcomingMovies(): Observable<MovieOverview[]> {
-      const apiUrl = `${this.apiUpcomingMovies}`;
+
+    getUpcomingMovies(page: number = 1): Observable<MovieOverview[]> {
+      let allMovies: MovieOverview[] = [];
       const tomorrow = new Date();
       tomorrow.setDate(tomorrow.getDate() + 1);
-      const formattedDate = tomorrow.toISOString().split('T')[0]; // Format: YYYY-MM-DD
     
+      return this.fetchUpcomingMoviesPage(page).pipe(
+        map(response => {
+          this.totalMoviePages = response.total_pages;
+          return response.results.filter((result): result is MovieOverview => 'release_date' in result);
+        }),
+        tap(movies => allMovies = [...allMovies, ...movies] as MovieOverview[]),
+        map(() => allMovies)
+      );
+    }  
+    private fetchUpcomingMoviesPage(page: number = 1): Observable<SearchResponse> {
       const queryParams = {
         sort_by: 'release_date.desc',
-        page: 1
+        page: page
       };
-    
-      let allMovies: MovieOverview[] = [];
-    
-      return this.fetchUpcomingMoviesPage(apiUrl, queryParams).pipe(
-        expand((response) => {
-          allMovies = [...allMovies, ...response.results] as MovieOverview[];
-          if (response.page < response.total_pages) {
-            queryParams.page++;
-            return this.fetchUpcomingMoviesPage(apiUrl, queryParams);
-          }
-          return EMPTY;
-        }),
-        map(() => {
-          // Filter movies to only include those releasing on or after tomorrow
-          return allMovies.filter(movie => new Date(movie.release_date) >= tomorrow);
-        })
-      );
-    }
-    private fetchUpcomingMoviesPage(apiUrl: string, queryParams: { [key: string]: string | number }): Observable<SearchResponse> {
       const params = new HttpParams({ fromObject: queryParams });
-      return this.http.get<SearchResponse>(apiUrl, { params });
+      return this.http.get<SearchResponse>(this.apiUpcomingMovies, { params });
     }
 
 
-    getPopularMovies(query: string): Observable<MovieOverview[]> {     
-      return this.http.get<SearchResponse>(`${this.apiPopularMovies}?query=${query}`).pipe(
-        // Extract the results array from the SearchResponse
-        map(response => response.results.filter((result): result is MovieOverview => 'title' in result))
-      );
-    }
-
-
-
-    getHorrorMovies(): Observable<MovieOverview[]> {     
-      const apiUrl = `${this.apiHorrorMovies}&sort_by=vote_average.desc&vote_count.gte=5000`;
+    getPopularMovies(page: number = 1): Observable<MovieOverview[]> {
       let allMovies: MovieOverview[] = [];
-      let page = 1;
+    
+      return this.fetchPopularMoviesPage(page).pipe(
+        map(response => {
+          this.totalMoviePages = response.total_pages;
+          return response.results;
+        }),
+        tap(movies => allMovies = [...allMovies, ...movies] as MovieOverview[]),
+        map(() => allMovies)
+      );
+    }   
+    private fetchPopularMoviesPage(page: number = 1): Observable<SearchResponse> {
+      return this.http.get<SearchResponse>(`${this.apiPopularMovies}?page=${page}`);
+    }
+
+
+
+    getHorrorMovies(page: number = 1): Observable<MovieOverview[]> {     
+      const apiUrl = `${this.apiHorrorMovies}&sort_by=vote_average.desc&vote_count.gte=3000`;
+      let allMovies: MovieOverview[] = [];
     
       return this.fetchHorrorMoviesPage(apiUrl, page).pipe(
-        expand((response) => {
-          allMovies = [...allMovies, ...response.results.filter((movie) => movie.vote_count >= 5000)] as MovieOverview[];
-          if (response.page < response.total_pages) {
-            page++;
-            return this.fetchHorrorMoviesPage(apiUrl, page);
-          }
-          return EMPTY;
+        map(response => {
+          this.totalMoviePages = response.total_pages;
+          return response.results.filter((movie) => movie.vote_count >= 5000);
         }),
+        tap(movies => allMovies = [...allMovies, ...movies] as MovieOverview[]),
         map(() => allMovies)
       );
     }    
-    private fetchHorrorMoviesPage(apiUrl: string, page: number): Observable<SearchResponse> {
+    private fetchHorrorMoviesPage(apiUrl: string, page: number = 1): Observable<SearchResponse> {
       return this.http.get<SearchResponse>(`${apiUrl}&page=${page}`);
     }
 
-    getComedyMovies(): Observable<MovieOverview[]> {     
-      const apiUrl = `${this.apiComedyMovies}&sort_by=vote_average.desc&vote_count.gte=5000`;
+    getComedyMovies(page: number = 1): Observable<MovieOverview[]> {     
+      const apiUrl = `${this.apiComedyMovies}&sort_by=vote_average.desc&vote_count.gte=3000`;
       let allMovies: MovieOverview[] = [];
-      let page = 1;
     
       return this.fetchComedyMoviesPage(apiUrl, page).pipe(
-        expand((response) => {
-          allMovies = [...allMovies, ...response.results.filter((movie) => movie.vote_count >= 5000)] as MovieOverview[];
-          if (response.page < response.total_pages) {
-            page++;
-            return this.fetchComedyMoviesPage(apiUrl, page);
-          }
-          return EMPTY;
+        map(response => {
+          this.totalMoviePages = response.total_pages;
+          return response.results.filter((movie) => movie.vote_count >= 5000);
         }),
+        tap(movies => allMovies = [...allMovies, ...movies] as MovieOverview[]),
         map(() => allMovies)
       );
     }    
-    private fetchComedyMoviesPage(apiUrl: string, page: number): Observable<SearchResponse> {
+    private fetchComedyMoviesPage(apiUrl: string, page: number = 1): Observable<SearchResponse> {
       return this.http.get<SearchResponse>(`${apiUrl}&page=${page}`);
     }
 
-    getAnimationMovies(): Observable<MovieOverview[]> {     
-      const apiUrl = `${this.apiAnimationMovies}&sort_by=vote_average.desc&vote_count.gte=5000`;
+    getAnimationMovies(page: number = 1): Observable<MovieOverview[]> {     
+      const apiUrl = `${this.apiAnimationMovies}&sort_by=vote_average.desc&vote_count.gte=3000`;
       let allMovies: MovieOverview[] = [];
-      let page = 1;
     
       return this.fetchAnimationMoviesPage(apiUrl, page).pipe(
-        expand((response) => {
-          allMovies = [...allMovies, ...response.results.filter((movie) => movie.vote_count >= 5000)] as MovieOverview[];
-          if (response.page < response.total_pages) {
-            page++;
-            return this.fetchAnimationMoviesPage(apiUrl, page);
-          }
-          return EMPTY;
+        map(response => {
+          this.totalMoviePages = response.total_pages;
+          return response.results.filter((movie) => movie.vote_count >= 5000);
         }),
+        tap(movies => allMovies = [...allMovies, ...movies] as MovieOverview[]),
         map(() => allMovies)
       );
     }    
-    private fetchAnimationMoviesPage(apiUrl: string, page: number): Observable<SearchResponse> {
+    private fetchAnimationMoviesPage(apiUrl: string, page: number = 1): Observable<SearchResponse> {
       return this.http.get<SearchResponse>(`${apiUrl}&page=${page}`);
     }
 
 
     
 
-    getActionMovies(): Observable<MovieOverview[]> {
-      const apiUrl = `${this.apiActionMovies}&sort_by=vote_average.desc&vote_count.gte=5000`;
+    getActionMovies(page: number = 1): Observable<MovieOverview[]> {
+      const apiUrl = `${this.apiActionMovies}&sort_by=vote_average.desc&vote_count.gte=3000`;
       let allMovies: MovieOverview[] = [];
-      let page = 1;
     
       return this.fetchActionMoviesPage(apiUrl, page).pipe(
-        expand((response) => {
-          allMovies = [...allMovies, ...response.results.filter((movie) => movie.vote_count >= 5000)] as MovieOverview[];
-          if (response.page < response.total_pages) {
-            page++;
-            return this.fetchActionMoviesPage(apiUrl, page);
-          }
-          return EMPTY;
+        map(response => {
+          this.totalMoviePages = response.total_pages;
+          return response.results.filter((movie) => movie.vote_count >= 5000);
         }),
+        tap(movies => allMovies = [...allMovies, ...movies] as MovieOverview[]),
         map(() => allMovies)
       );
-    }    
-    private fetchActionMoviesPage(apiUrl: string, page: number): Observable<SearchResponse> {
+    }   
+    private fetchActionMoviesPage(apiUrl: string, page: number = 1): Observable<SearchResponse> {
       return this.http.get<SearchResponse>(`${apiUrl}&page=${page}`);
     }
+    
 
-    getFantasyMovies(): Observable<MovieOverview[]> {     
-      const apiUrl = `${this.apiFantasyMovies}&sort_by=vote_average.desc&vote_count.gte=5000`;
+    getFantasyMovies(page: number = 1): Observable<MovieOverview[]> {     
+      const apiUrl = `${this.apiFantasyMovies}&sort_by=vote_average.desc&vote_count.gte=3000`;
       let allMovies: MovieOverview[] = [];
-      let page = 1;
     
       return this.fetchFantasyMoviesPage(apiUrl, page).pipe(
-        expand((response) => {
-          allMovies = [...allMovies, ...response.results.filter((movie) => movie.vote_count >= 5000)] as MovieOverview[];
-          if (response.page < response.total_pages) {
-            page++;
-            return this.fetchFantasyMoviesPage(apiUrl, page);
-          }
-          return EMPTY;
+        map(response => {
+          this.totalMoviePages = response.total_pages;
+          return response.results.filter((movie) => movie.vote_count >= 5000);
         }),
+        tap(movies => allMovies = [...allMovies, ...movies] as MovieOverview[]),
         map(() => allMovies)
       );
     }    
-    private fetchFantasyMoviesPage(apiUrl: string, page: number): Observable<SearchResponse> {
+    private fetchFantasyMoviesPage(apiUrl: string, page: number = 1): Observable<SearchResponse> {
       return this.http.get<SearchResponse>(`${apiUrl}&page=${page}`);
     }
 
-    getScienceFictionMovies(): Observable<MovieOverview[]> {     
-      const apiUrl = `${this.apiScienceFictionMovies}&sort_by=vote_average.desc&vote_count.gte=5000`;
+    getScienceFictionMovies(page: number = 1): Observable<MovieOverview[]> {     
+      const apiUrl = `${this.apiScienceFictionMovies}&sort_by=vote_average.desc&vote_count.gte=3000`;
       let allMovies: MovieOverview[] = [];
-      let page = 1;
     
       return this.fetchScienceFictionMoviesPage(apiUrl, page).pipe(
-        expand((response) => {
-          allMovies = [...allMovies, ...response.results.filter((movie) => movie.vote_count >= 5000)] as MovieOverview[];
-          if (response.page < response.total_pages) {
-            page++;
-            return this.fetchScienceFictionMoviesPage(apiUrl, page);
-          }
-          return EMPTY;
+        map(response => {
+          this.totalMoviePages = response.total_pages;
+          return response.results.filter((movie) => movie.vote_count >= 5000);
         }),
+        tap(movies => allMovies = [...allMovies, ...movies] as MovieOverview[]),
         map(() => allMovies)
       );
     }    
-    private fetchScienceFictionMoviesPage(apiUrl: string, page: number): Observable<SearchResponse> {
+    private fetchScienceFictionMoviesPage(apiUrl: string, page: number = 1): Observable<SearchResponse> {
       return this.http.get<SearchResponse>(`${apiUrl}&page=${page}`);
     }     
   }    

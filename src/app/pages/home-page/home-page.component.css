@@ -193,7 +193,7 @@ h2:hover::after {
 }
 
 .disclaimer {
-  background-color: #2f2f4f;
+  background-color: #72b1f4;
   color: #333;
   padding: 15px;
   border-radius: 8px;
@@ -206,22 +206,22 @@ h2:hover::after {
 .disclaimer h3 {
   margin: 0 0 10px;
   font-size: 22px;
-  color: #ff6a00; /* Match the theme color */
+  color: #2f2f4f;
 }
 
 .disclaimer p {
   font-size: 16px;
   margin: 5px 0;
-  color: #ffffff;
+  color:#2f2f4f;
 }
 
 .disclaimer a {
-  color: #ff6a00;
+  color: #2f2f4f;
   text-decoration: underline;
 }
 
 .disclaimer a:hover {
-  color: #ffd700; /* Change color on hover */
+  color: #1b1b2e; /* Change color on hover */
 }
 
 /* Responsive Design */
