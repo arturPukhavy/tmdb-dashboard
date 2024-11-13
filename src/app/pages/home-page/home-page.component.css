@@ -193,14 +193,14 @@ h2:hover::after {
 }
 
 .disclaimer {
-  background-color: #72b1f4;
+  background-color: #cff4fc;
   color: #333;
-  padding: 15px;
+  padding: 5px;
   border-radius: 8px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
   margin-bottom: 20px;
-  font-size: 14px;
   text-align: center;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
 .disclaimer h3 {
