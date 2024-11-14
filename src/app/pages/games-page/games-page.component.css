@@ -93,18 +93,17 @@ body {
     filter: blur(0); /* Remove blur on hover */
   }
   
-  .movie-block h2 {
+  .movie-block h2{
     position: absolute; /* Position text over the image */
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     color: #ffffff; /* Text color */
-    font-size: 40px; /* Increased font size */
+    font-size: 25px; /* Increased font size */
     text-align: center; /* Center the text */
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8); /* Darker shadow for better contrast */
     padding: 10px 20px; /* Add padding for better aesthetics */
     border-radius: 8px; /* Rounded corners for the background */
-  
     transition: transform 0.3s ease, background-color 0.3s ease; /* Smooth transition */
   }
   

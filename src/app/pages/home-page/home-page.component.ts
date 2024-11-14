@@ -10,7 +10,7 @@ import { PersonOverview } from '../../core/models/model-response/person-overview
 @Component({
   selector: 'app-home-page',
   standalone: true,
-  imports: [RouterModule, FormsModule, NgIf, CommonModule],
+  imports: [RouterModule, FormsModule, CommonModule],
   templateUrl: './home-page.component.html',
   styleUrl: './home-page.component.css'
 })

@@ -14,7 +14,7 @@ import { PersonOverview } from "../models/model-response/person-overview.model";
     private apiTrendingMovies = '/3/trending/movie/week?language=en-US';
     private apiUpcomingMovies = '/3/movie/upcoming?language=en-US&page=20';
     private apiPopularMovies = '/3/movie/popular?language=en-US&page=2';
-    private apiTrendingPeople = '/3/trending/person/week?language=en-US';
+    private apiTrendingPeople = '/3/trending/person/day?language=en-US';
     
     constructor(private http: HttpClient) {}
   
