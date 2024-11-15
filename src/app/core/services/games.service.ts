@@ -32,7 +32,7 @@ import { Movie } from "../models/movie-model/movie.model";
           const allActors = responses.flatMap(response => response.results);
   
           // Filter actors based on popularity (e.g., only actors with popularity >= 10)
-          const filteredActors = allActors.filter(actor => actor.popularity >= 73);
+          const filteredActors = allActors.filter(actor => actor.popularity >= 30);
   
           // Pick a random actor from the filtered list
           const randomIndex = Math.floor(Math.random() * filteredActors.length);
@@ -63,7 +63,7 @@ import { Movie } from "../models/movie-model/movie.model";
           const allMovies = responses.flatMap(response => response.results);
     
           // Filter movies based on the vote count (in this case, it's redundant since the API already filters)
-          const filteredMovies = allMovies.filter(movie => movie.vote_count >= 1000);
+          const filteredMovies = allMovies.filter(movie => movie.vote_count >= 2500);
     
           // Pick a random movie from the filtered list
           const randomIndex = Math.floor(Math.random() * filteredMovies.length);
