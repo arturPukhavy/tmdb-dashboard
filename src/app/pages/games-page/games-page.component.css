@@ -2,7 +2,7 @@ body {
   font-family: 'Poppins', Arial, sans-serif;
   margin: 0;
   padding: 0;
-  background: linear-gradient(135deg, #87CEFA, #E0FFFF); /* Softer blue gradient */
+  background: linear-gradient(135deg, #87CEFA, #E0FFFF);
   color: #333;
 }
 
@@ -23,7 +23,7 @@ h1 {
 h1::after {
   content: '';
   position: absolute;
-  bottom: -5px; /* Adjusted to avoid cutting off */
+  bottom: -5px;
   left: 50%;
   transform: translateX(-50%);
   width: 0;
@@ -49,7 +49,7 @@ h1:hover::after {
 .categories-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 40px; /* More space between blocks */
+  gap: 40px;
   margin-top: 30px;
 }
 
@@ -62,7 +62,7 @@ h1:hover::after {
 }
 
 .category-item:hover {
-  transform: translateY(-5px); /* Lift effect on hover */
+  transform: translateY(-5px);
 }
 
 .movie-blocks {
@@ -92,7 +92,7 @@ h1:hover::after {
   width: 100%;
   height: 400px;
   object-fit: cover;
-  filter: blur(4px); /* Increased blur for a more dramatic effect */
+  filter: blur(4px);
   transition: filter 0.4s ease;
   border-radius: 12px;
 }
@@ -112,20 +112,20 @@ h1:hover::after {
   text-align: center;
   text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.8);
   padding: 10px 20px;
-  background: rgba(0, 0, 0, 0.5); /* Darken background to make text more readable */
+  background: rgba(0, 0, 0, 0.5);
   border-radius: 10px;
   transition: transform 0.4s ease, background-color 0.4s ease;
 }
 
 .movie-block:hover h2 {
-  transform: translate(-50%, -50%) scale(1.1); /* Slightly larger on hover */
-  background: rgba(0, 0, 0, 0.7); /* Background darkens on hover */
+  transform: translate(-50%, -50%) scale(1.1);
+  background: rgba(0, 0, 0, 0.7);
 }
 
 /* Responsive Design */
 @media (max-width: 768px) {
   .categories-grid {
-    grid-template-columns: repeat(1, 1fr); /* Stack items vertically on smaller screens */
+    grid-template-columns: 1fr; /* Stack items vertically on smaller screens */
   }
 
   h1 {
@@ -133,11 +133,11 @@ h1:hover::after {
   }
 
   .movie-block h2 {
-    font-size: 20px; /* Adjust h2 size for smaller devices */
+    font-size: 16px; /* Adjust h2 size for smaller devices */
   }
 
   .movie-block img {
-    height: 300px; /* Adjust image height for smaller screens */
+    height: 250px; /* Adjust image height for smaller screens */
   }
 }
 
@@ -147,10 +147,11 @@ h1:hover::after {
   }
 
   .movie-block img {
-    height: 250px; /* Smaller image for mobile */
+    height: 200px; /* Smaller image for mobile */
   }
 
   .movie-block h2 {
-    font-size: 18px; /* Further reduction in font size for mobile */
+    font-size: 14px; /* Further reduction in font size for mobile */
+    padding: 5px 10px; /* Adjust padding for mobile */
   }
 }

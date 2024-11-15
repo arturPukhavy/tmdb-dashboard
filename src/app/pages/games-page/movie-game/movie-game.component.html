@@ -28,9 +28,9 @@
 
   <div class="result-window" *ngIf="showResultWindow && !gameWon">
     <div class="result" [ngClass]="{ 'correct': isCorrect, 'incorrect': !isCorrect }">
-      <p *ngIf="isCorrect">Correct! The movie is {{ movie.title }}.</p>
-      <p *ngIf="!isCorrect && hasAttempts">Incorrect. The movie was {{ movie.title }}.</p>
-      <p *ngIf="!hasAttempts">Incorrect. The movie was {{ movie.title }}. Your attempts are over. Try again!</p>
+      <p *ngIf="isCorrect">Correct! The movie is <strong>{{ movie.title }}</strong>.</p>
+      <p *ngIf="!isCorrect && hasAttempts">Incorrect. The movie was <strong>{{ movie.title }}</strong>.</p>
+      <p *ngIf="!hasAttempts">Incorrect. The movie was <strong>{{ movie.title }}</strong>. Your attempts are over. Try again!</p>
     </div>
     <button (click)="getNextMovie()">{{hasAttempts ? 'Next Movie' : 'Start Again'}}</button>
   </div>
