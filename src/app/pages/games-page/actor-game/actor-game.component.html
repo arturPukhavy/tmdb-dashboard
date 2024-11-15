@@ -1,39 +1,37 @@
 <div class="game-container">
-    <h1>Guess the Actor</h1>
-  
-    <div class="score-display">
-      Score: {{ score }} / {{ maxScore }}
-      <br>
-      Attempts: {{ maxAttempts - incorrectAttempts }}
+  <h1>Guess the Actor</h1>
+
+  <div class="score-display">
+    <span class="score-indicator">Score: {{ score }} / {{ maxScore }}</span>
+    <span class="attempts-indicator">Attempts Left: {{ maxAttempts - incorrectAttempts }}</span>
+  </div>
+
+  <!-- Show game won message -->
+  <div *ngIf="gameWon" class="win-message">
+    🎉 Congratulations! You've guessed 30 actors correctly! 🎉
+  </div>
+
+  <div class="actor-image" *ngIf="!gameWon">
+    <img [src]="imageUrl" alt="Actor Photo" />
+  </div>
+
+  <input
+    *ngIf="!gameWon" 
+    type="text" 
+    [(ngModel)]="userGuess" 
+    (keyup.enter)="submitGuess()" 
+    [disabled]="isGuessSubmitted" 
+    placeholder="Enter the actor's name" 
+  />
+
+  <button (click)="submitGuess()" [disabled]="isGuessSubmitted || gameWon">Guess</button>
+
+  <div class="result-window" *ngIf="showResultWindow && !gameWon">
+    <div class="result" [ngClass]="{ 'correct': isCorrect, 'incorrect': !isCorrect }">
+      <p *ngIf="isCorrect">Correct! The actor is {{ person.name }}.</p>
+      <p *ngIf="!isCorrect && hasAttempts">Incorrect. The actor was {{ person.name }}.</p>
+      <p *ngIf="!hasAttempts">Incorrect. The actor was {{ person.name }}. Your attempts are over. Try again!</p>
     </div>
-  
-    <!-- Show game won message -->
-    <div *ngIf="gameWon" class="win-message">
-      🎉 Congratulations! You've guessed 30 actors correctly! 🎉
-    </div>
-    <br>
-  
-    <div class="actor-image" *ngIf="!gameWon">
-      <img [src]="imageUrl" alt="Actor Photo" />
-    </div>
-  
-    <input
-      *ngIf="!gameWon" 
-      type="text" 
-      [(ngModel)]="userGuess" 
-      (keyup.enter)="submitGuess()" 
-      [disabled]="isGuessSubmitted" 
-      placeholder="Enter the actor's name" 
-    />
-  
-    <button (click)="submitGuess()" [disabled]="isGuessSubmitted || gameWon">Guess</button>
-  
-    <div class="result-window" *ngIf="showResultWindow && !gameWon">
-      <div class="result" [ngClass]="{ 'correct': isCorrect, 'incorrect': !isCorrect }">
-        <p *ngIf="isCorrect">Correct! The actor is {{ person.name }}.</p>
-        <p *ngIf="!isCorrect && hasAttempts">Incorrect. The actor was {{ person.name }}.</p>
-        <p *ngIf="!hasAttempts">Incorrect. The actor was {{ person.name }}. Your attempts are over. Try again!</p>
-      </div>
-      <button (click)="getNextPerson()">{{hasAttempts ? 'Next Actor' : 'Start Again'}}</button>
-    </div>
+    <button (click)="getNextPerson()">{{hasAttempts ? 'Next Actor' : 'Start Again'}}</button>
+  </div>
 </div>
