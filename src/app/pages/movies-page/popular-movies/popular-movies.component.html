@@ -3,6 +3,18 @@
       <!-- Movie Search Results Section -->
       <section class="search-results">
         <h2>Popular</h2>
+        <!-- Pagination for Movies (at the top) -->
+      <div class="pagination" *ngIf="totalMoviePages > 1">
+        <button (click)="onMoviePageChange(currentMoviePage - 1)" [disabled]="currentMoviePage === 1" class="pagination-button">
+          <i class="fas fa-chevron-left"></i> Previous
+        </button>
+        <span class="pagination-info">
+          Page {{ currentMoviePage }} of {{ totalMoviePages }}
+        </span>
+        <button (click)="onMoviePageChange(currentMoviePage + 1)" [disabled]="currentMoviePage === totalMoviePages" class="pagination-button">
+          Next <i class="fas fa-chevron-right"></i>
+        </button>
+      </div>
         <div class="movie-list">
           <div class="movie-item" *ngFor="let movie of movies" [routerLink]="['/film', movie.id]" routerLinkActive="active">
             <div class="movie-poster">
