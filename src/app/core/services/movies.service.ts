@@ -91,7 +91,7 @@ import { SearchResponse } from "../models/model-response/search-response.model";
 
 
     getHorrorMovies(page: number = 1): Observable<MovieOverview[]> {     
-      const apiUrl = `${this.apiHorrorMovies}&sort_by=vote_average.desc&vote_count.gte=3000`;
+      const apiUrl = `${this.apiHorrorMovies}&sort_by=vote_average.desc&vote_count.gte=5000`;
       let allMovies: MovieOverview[] = [];
     
       return this.fetchHorrorMoviesPage(apiUrl, page).pipe(

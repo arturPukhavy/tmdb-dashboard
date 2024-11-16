@@ -90,19 +90,42 @@ export class ActorGameComponent {
     const normalizedInput = input.toLowerCase().trim();
     const normalizedTarget = target.toLowerCase().trim();
     
-    const inputLength = normalizedInput.length;
-    const targetLength = normalizedTarget.length;
-    
-    // Calculate the number of matching characters
-    let matches = 0;
-    for (let i = 0; i < Math.min(inputLength, targetLength); i++) {
-      if (normalizedInput[i] === normalizedTarget[i]) {
-        matches++;
-      }
-    }
+    const distance = this.levenshteinDistance(normalizedInput, normalizedTarget);
+    const maxLength = Math.max(normalizedInput.length, normalizedTarget.length);
     
     // Calculate the match percentage
-    const percentageMatch = matches / Math.max(inputLength, targetLength);
+    const percentageMatch = 1 - (distance / maxLength); // 1 - (distance / maxLength) gives us the similarity ratio
     return percentageMatch >= threshold;
+  }
+
+  levenshteinDistance(a: string, b: string): number {
+    const matrix = [];
+
+    // Initialize the matrix
+    for (let i = 0; i <= b.length; i++) {
+        matrix[i] = [i];
+    }
+    for (let j = 0; j <= a.length; j++) {
+        matrix[0][j] = j;
+    }
+
+    // Compute the distances
+    for (let i = 1; i <= b.length; i++) {
+        for (let j = 1; j <= a.length; j++) {
+            if (b.charAt(i - 1) === a.charAt(j - 1)) {
+                matrix[i][j] = matrix[i - 1][j - 1]; // No operation needed
+            } else {
+                matrix[i][j] = Math.min(
+                    matrix[i - 1][j - 1] + 1, // Substitution
+                    Math.min(
+                        matrix[i][j - 1] + 1, // Insertion
+                        matrix[i - 1][j] + 1  // Deletion
+                    )
+                );
+            }
+        }
+    }
+
+    return matrix[b.length][a.length];
   }
 }

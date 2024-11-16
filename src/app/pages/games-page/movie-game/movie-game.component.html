@@ -1,39 +1,37 @@
 <div class="game-container">
-    <h1>Guess the Movie</h1>
-  
-    <div class="score-display">
-      Score: {{ score }} / {{ maxScore }}
-      <br>
-      Attempts: {{ maxAttempts - incorrectAttempts }}
+  <h1>Guess the Movie</h1>
+
+  <div class="score-display">
+    <span class="score-indicator">Score: {{ score }} / {{ maxScore }}</span>
+    <span class="attempts-indicator">Attempts Left: {{ maxAttempts - incorrectAttempts }}</span>
+  </div>
+
+  <!-- Show game won message -->
+  <div *ngIf="gameWon" class="win-message">
+    🎉 Congratulations! You've guessed 30 movies correctly! 🎉
+  </div>
+
+  <div class="actor-image" *ngIf="!gameWon">
+    <img [src]="imageUrl" alt="Movie Photo" />
+  </div>
+
+  <input
+    *ngIf="!gameWon" 
+    type="text" 
+    [(ngModel)]="userGuess" 
+    (keyup.enter)="submitGuess()" 
+    [disabled]="isGuessSubmitted" 
+    placeholder="Enter the movie title" 
+  />
+
+  <button (click)="submitGuess()" [disabled]="isGuessSubmitted || gameWon">Guess</button>
+
+  <div class="result-window" *ngIf="showResultWindow && !gameWon">
+    <div class="result" [ngClass]="{ 'correct': isCorrect, 'incorrect': !isCorrect }">
+      <p *ngIf="isCorrect">Correct! The movie is <strong>{{ movie.title }}</strong>.</p>
+      <p *ngIf="!isCorrect && hasAttempts">Incorrect. The movie was <strong>{{ movie.title }}</strong>.</p>
+      <p *ngIf="!hasAttempts">Incorrect. The movie was <strong>{{ movie.title }}</strong>. Your attempts are over. Try again!</p>
     </div>
-  
-    <!-- Show game won message -->
-    <div *ngIf="gameWon" class="win-message">
-      🎉 Congratulations! You've guessed 30 movies correctly! 🎉
-    </div>
-    <br>
-  
-    <div class="actor-image" *ngIf="!gameWon">
-      <img [src]="imageUrl" alt="Movie Image" />
-    </div>
-  
-    <input
-      *ngIf="!gameWon" 
-      type="text" 
-      [(ngModel)]="userGuess" 
-      (keyup.enter)="submitGuess()" 
-      [disabled]="isGuessSubmitted" 
-      placeholder="Enter the movie title" 
-    />
-  
-    <button (click)="submitGuess()" [disabled]="isGuessSubmitted || gameWon">Guess</button>
-  
-    <div class="result-window" *ngIf="showResultWindow && !gameWon">
-      <div class="result" [ngClass]="{ 'correct': isCorrect, 'incorrect': !isCorrect }">
-        <p *ngIf="isCorrect">Correct! The movie is {{ movie.title }}.</p>
-        <p *ngIf="!isCorrect && hasAttempts">Incorrect. The movie was {{ movie.title }}.</p>
-        <p *ngIf="!hasAttempts">Incorrect. The movie was {{ movie.title }}. Your attempts are over. Try again!</p>
-      </div>
-      <button (click)="getNextMovie()">{{hasAttempts ? 'Next Movie' : 'Start Again'}}</button>
-    </div>
+    <button (click)="getNextMovie()">{{hasAttempts ? 'Next Movie' : 'Start Again'}}</button>
+  </div>
 </div>
