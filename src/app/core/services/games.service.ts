@@ -14,26 +14,29 @@ import { Movie } from "../models/movie-model/movie.model";
     constructor(private http: HttpClient) {}
   
     getRandomPerson(): Observable<Person> {
-      const requests = [];
       const totalPages = 30; 
-  
-      // Loop through pages 1 to `totalPages` and add the requests
-      for (let page = 1; page <= totalPages; page++) {
-        requests.push(
-          this.http.get<{ results: Person[] }>(`${this.apiUrlPerson}?language=en-US&page=${page}`)
-        );
-      }
-  
-      // Combine all requests using forkJoin
+      const pagesToFetch = 2; // Number of pages to fetch
+    
+      // Generate an array of random page numbers to fetch
+      const randomPages = Array.from({ length: pagesToFetch }, () => 
+        Math.floor(Math.random() * totalPages) + 1
+      );
+    
+      // Create the requests for the random pages
+      const requests = randomPages.map(page =>
+        this.http.get<{ results: Person[] }>(`${this.apiUrlPerson}?language=en-US&page=${page}`)
+      );
+    
+      // Combine all the requests using forkJoin
       return forkJoin(requests).pipe(
-        // Combine results from all pages into a single array and filter by popularity
+        // Combine results from all fetched pages
         map((responses) => {
           // Flatten the results from all pages into one array
           const allActors = responses.flatMap(response => response.results);
-  
-          // Filter actors based on popularity (e.g., only actors with popularity >= 10)
+    
+          // Filter actors based on popularity (e.g., only actors with popularity >= 30)
           const filteredActors = allActors.filter(actor => actor.popularity >= 30);
-  
+    
           // Pick a random actor from the filtered list
           const randomIndex = Math.floor(Math.random() * filteredActors.length);
           return filteredActors[randomIndex];
@@ -42,18 +45,18 @@ import { Movie } from "../models/movie-model/movie.model";
     }
 
     getRandomMovie(): Observable<Movie> {
-      const requests = [];
       const totalPages = 50; // You want to fetch up to 50 pages
+      const pagesToFetch = 2; // Number of pages to fetch
     
-      // The `vote_count.gte=1000` filter ensures that only movies with at least 1000 votes are returned
-      const filterParams = 'language=en-US&vote_count.gte=1000';
+      // Generate an array of random page numbers to fetch
+      const randomPages = Array.from({ length: pagesToFetch }, () => 
+        Math.floor(Math.random() * totalPages) + 1
+      );
     
-      // Loop through pages 1 to `totalPages` and add the requests
-      for (let page = 1; page <= totalPages; page++) {
-        requests.push(
-          this.http.get<{ results: Movie[] }>(`${this.apiUrlMovie}?${filterParams}&page=${page}`)
-        );
-      }
+      // Create the requests for the random pages
+      const requests = randomPages.map(page =>
+        this.http.get<{ results: Movie[] }>(`${this.apiUrlMovie}?language=en-US&page=${page}`)
+      );
     
       // Combine all requests using forkJoin
       return forkJoin(requests).pipe(
